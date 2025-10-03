@@ -1,0 +1,103 @@
+.section-white { background: #fff; }
+.page-header { margin-bottom: 1.25rem; }
+.lead { font-size: 1.1rem; color: #444; }
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: 56vh; /* comfy for header sections */
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('../../../../../../public/assets/img/pages/what-we-do/vsaprep-what-we-do-hero-sports-development.png'); /* fallback */
+  background-size: cover;
+  background-position: center;
+  filter: saturate(0.9) contrast(1.05);
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(10,33,68,.55) 0%, rgba(10,33,68,.35) 40%, rgba(10,33,68,.15) 100%);
+}
+
+/* Content */
+.section-white { background: #fff; }
+.page-header { margin: 1.25rem 0; }
+.lead { font-size: 1.1rem; color: #444; max-width: 62ch; }
+
+/* Lists */
+.icon-list,
+.checklist,
+.steps {
+  margin: 1rem 0 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.icon-list li,
+.checklist li,
+.steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: .5rem;
+  padding: .25rem 0;
+}
+
+.icon-list .icon {
+  width: 1.15rem; height: 1.15rem;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  margin-top: .25rem;
+}
+
+.steps { counter-reset: step; }
+.steps li::before {
+  counter-increment: step;
+  content: counter(step) ".";
+  font-weight: 700;
+  margin-right: .5rem;
+}
+
+/* CTA */
+.cta { margin-top: 2rem; }
+.cta-card {
+  border-radius: .75rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(180deg, #0a2144 0%, #0a2144 60%, #0e2a57 100%);
+  color: #fff;
+}
+.cta-card .btn { margin-top: .5rem; }
+
+
+
+.callouts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: .75rem;
+  margin-top: 1rem;
+}
+.callout {
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: .75rem;
+  padding: .75rem;
+  background: #fafafa;
+}
+
+
+/* light layout helpers */
+.grid-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2.5vw, 28px);
+}
+.grid-features article {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+.grid-features h3 { margin: 0 0 6px; }
+
+@media (max-width: 992px) { .grid-features { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) { .grid-features { grid-template-columns: 1fr; } }
+
+.cta-row { margin-top: 24px; display: flex; justify-content: center; }

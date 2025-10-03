@@ -1,0 +1,90 @@
+{
+  "trailingSlash": "auto",
+  "routes": [
+    { 
+      "route": "/index"
+    },
+    { 
+      "route": "/sports-technology-agency"
+    },
+    { 
+      "route": "/sports-technology-services"
+    },
+    { 
+      "route": "/athletes"
+    },
+    { 
+      "route": "/coaches"
+    },
+    { 
+      "route": "/privacy"
+    },
+    { 
+      "route": "/data-deletion"
+    },
+    { 
+      "route": "/contact"
+    },
+    { 
+      "route": "/consultation"
+    },
+    { 
+      "route": "/membership"
+    },
+    { 
+      "route": "/login-failed"
+    },
+
+      { 
+        "route": "/dashboard"
+      },
+      { 
+        "route": "/summary"
+      },
+      { 
+        "route": "/settings"
+      },
+      { 
+        "route": "/after-signup-flow"
+      },
+ 
+    {
+      "route": "/api/*",
+      "methods": ["GET"]
+    },
+    {
+      "route": "/api/*",
+      "methods": ["PUT", "POST", "PATCH", "DELETE"]
+    },
+    {
+      "route": "/api/*"
+    }
+
+  ],
+  "navigationFallback": {
+    "rewrite": "index.html",
+    "exclude": ["/images/*.{png,jpg,gif}", "/scss/*"]
+  },
+  "responseOverrides": {
+    "400": {
+      "rewrite": "/invalid-invitation-error.html"
+    },
+    "401": {
+      "redirect": "/login",
+      "statusCode": 302
+    },
+    "403": {
+      "rewrite": "/custom-forbidden-page.html"
+    },
+    "404": {
+      "rewrite": "/404.html"
+    }
+  },
+  "globalHeaders": {},
+  "mimeTypes": {
+    ".json": "text/json"
+  },
+  "platform": {
+    "apiRuntime": "dotnet-isolated:8.0"
+  }
+}
