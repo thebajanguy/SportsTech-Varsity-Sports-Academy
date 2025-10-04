@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
-import Rellax from 'rellax';
+
 import { RouterLink } from '@angular/router';
 import { SocialPluginComponent } from '../../~common/components/social-plugin/social-plugin.component';
 import { FixedSocialPluginComponent } from "../../~common/components/fixed-social-plugin/fixed-social-plugin.component";
@@ -82,8 +82,6 @@ export class NcaaCompliancePage {
       { property: 'og:type', content: 'article' }
     ]);
 
-    var rellaxHeader = new Rellax('.rellax-header');
-    // var rellaxText = new Rellax('.rellax-text');
     var body = document.getElementsByTagName('body')[0];
     body.classList.add('vsa-page');
     var navbar = document.getElementsByTagName('nav')[0];

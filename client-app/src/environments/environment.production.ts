@@ -22,7 +22,6 @@ export const environment = {
             redirectUri: '/en/user-workspace/dashboard',
             postLogoutRedirectUri: '/en/membership',
             loginFailedRoute: '/login-failed',
-            secret: 'U.s8Q~81612jF4p-UOwa8tkqHAkxEjtpIik-ra-M',
         }
     },
     apiConfig: {

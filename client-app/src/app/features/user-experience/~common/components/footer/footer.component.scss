@@ -19,7 +19,7 @@ $link-default-color:        $white-color !default;
   .footer .btn { margin-bottom: 0;  }
 
   /* Footer headings */
-  .footer .footer-heading { color: $main-color !important; /* yellow */}
+  .footer .footer-heading { color: $main-color !important; /* yellow */ font-weight: 400;}
 
   /* Footer links */
   .footer .links a { color: #ffffff !important; /* white */ text-decoration: none; transition: color 0.3s ease;}

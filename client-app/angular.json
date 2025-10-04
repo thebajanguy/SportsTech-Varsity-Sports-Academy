@@ -22,7 +22,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/ng2-uxp/browser",
+            "outputPath": "dist/ng2-uxp",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -54,7 +54,6 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/rellax/rellax.min.js"
             ]
           },
           "configurations": {

@@ -134,7 +134,8 @@ export class ConsultationPage {
       .pipe(
         catchError(err => {
           this.serverMessage.set({ type: 'error', text: err?.error?.message ?? 'Sorry, something went wrong. Please try again.' });
-          this.notifications.showError('Error - Consultation form', this.serverMessage()?.text ?? 'Sorry, something went wrong. Please try again.');
+          // --- TEMP success for stubbed API path (keep/remove as needed) ---
+          // this.notifications.showError('Error - Consultation form', this.serverMessage()?.text ?? 'Sorry, something went wrong. Please try again.');
 
           // --- TEMP success for stubbed API path (keep/remove as needed) ---
           this.serverMessage.set({ type: 'success', text: 'Thanks! We will get back to you ASAP.' });

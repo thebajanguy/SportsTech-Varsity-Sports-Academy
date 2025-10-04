@@ -175,13 +175,14 @@
               <span>{{ submitting() ? 'Sending…' : 'Request Consultation' }}</span>
             </button>
           </div>
-
+          <!-- 
           <div *ngIf="serverMessage()" class="mt-2 text-center"
                [class.text-success]="serverMessage()?.type==='success'"
                [class.text-danger]="serverMessage()?.type==='error'"
                role="status" aria-live="polite">
             {{ serverMessage()?.text }}
           </div>
+          -->
         </form>
   
       </div>

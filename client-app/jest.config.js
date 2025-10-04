@@ -10,7 +10,7 @@ export default {
     ]
   },
   moduleFileExtensions: ['ts', 'html', 'js', 'mjs', 'json'],
-  testMatch: ['**/__tests__/**/*.spec.ts', '**/?(*.)+(spec).ts'],
+  testMatch: ['**/?(*.)+(spec).ts'],
   moduleNameMapper: {
     '\\.(css|scss|sass|less)$': 'identity-obj-proxy'
   },
