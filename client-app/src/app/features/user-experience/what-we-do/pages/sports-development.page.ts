@@ -5,6 +5,8 @@ import { RouterLink } from '@angular/router';
 import { NewsletterPage } from '../../correspondence/pages/newsletter.page';
 import { FixedSocialPluginComponent } from '../../~common/components/fixed-social-plugin/fixed-social-plugin.component';
 import { SocialPluginComponent } from '../../~common/components/social-plugin/social-plugin.component';
+import { CanonicalService } from '../../../../core/services/canonical.service';
+import { SITE_URL } from '../../../../core/tokens/api-config-url.tokens';
 
 @Component({
   selector: 'app-sports-development',
@@ -16,6 +18,9 @@ import { SocialPluginComponent } from '../../~common/components/social-plugin/so
 export class SportsDevelopmentPage {
   private title = inject(Title);
   private meta = inject(Meta);
+  private canonical = inject(CanonicalService);
+  private siteUrl = inject(SITE_URL);
+  
 
   schema = {
     "@context": "https://schema.org",
@@ -57,15 +62,19 @@ export class SportsDevelopmentPage {
   };
 
   ngOnInit(): void {
+    const url = `${this.siteUrl}/en/sports-development`;
     const pageTitle = 'Sports Development | Varsity Sports Academy Prep';
+    const pageDescription ='Multi-sport athlete development at Varsity Sports Academy Prep: basketball, soccer, volleyball, and track with strength, speed, agility, and NCAA-aligned pathways.';
+    const pageKeywords = 'sports development, youth athlete training, basketball training, soccer training, volleyball training, speed and agility, strength and conditioning, Barbados, NCAA preparation, athletic scholarships';
+    
     this.title.setTitle(pageTitle);
-
     this.meta.addTags([
-      { name: 'description', content: 'Multi-sport athlete development at Varsity Sports Academy Prep: basketball, soccer, volleyball, and track with strength, speed, agility, and NCAA-aligned pathways.' },
-      { name: 'keywords', content: 'sports development, youth athlete training, basketball training, soccer training, volleyball training, speed and agility, strength and conditioning, Barbados, NCAA preparation, athletic scholarships' },
+      { name: 'description', content: pageDescription },
+      { name: 'keywords', content: pageKeywords },
       { property: 'og:title', content: pageTitle },
-      { property: 'og:description', content: 'Elite coaching + performance training to unlock your full athletic potential.' },
+      { property: 'og:description', content:  pageDescription},
       { property: 'og:type', content: 'website' }
     ]);
+    this.canonical.setCanonical(url);
   }
 }

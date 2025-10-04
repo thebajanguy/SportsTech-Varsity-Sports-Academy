@@ -2,7 +2,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CORRESPONDENCE_API_BASE_URL } from '../../../../core/tokens/api-base-url.tokens';
+import { CORRESPONDENCE_API_BASE_URL } from '../../../../core/tokens/api-config-url.tokens';
 
 // A strongly-typed union you can extend as needed
 export const INTEREST_OPTIONS = ['Academics', 'Athletics', 'Sports Program', 'Camps', 'Scholarships', 'Coaching', 'Sponsorship', 'Volunteer', 'Media', 'Other'] as const;

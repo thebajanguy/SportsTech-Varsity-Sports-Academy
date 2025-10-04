@@ -11,6 +11,7 @@ export const WHAT_WE_DO_ROUTES: Routes = [
     resolve: { seo: seoResolve({
       title: 'Academic Tutoring for Student-Athletes | Varsity Sports Academy Prep',
       description: 'One-to-one and group tutoring for student-athletes in core subjects, study skills, and SAT/ACT/CSEC/CAPE test prep. Support for NCAA 16-core eligibility.',
+      keywords: 'high school sports development, youth athlete training, basketball training, soccer training, volleyball training, speed and agility, strength and conditioning, Barbados, NCAA preparation, athletic scholarships',
       canonical: 'https://www.varsitysportsacademy.com/en/what-we-do/academic-tutoring',
       jsonLd: {
         '@context': 'https://schema.org',
@@ -29,6 +30,7 @@ export const WHAT_WE_DO_ROUTES: Routes = [
     resolve: { seo: seoResolve({
       title: 'NCAA Compliance & Academic Support Guidance | Varsity Sports Academy Prep',
       description: 'Get help with NCAA 16-core course mappings, GPA & sliding scale, amateurism certification, eligibility timelines, transcripts, and recruiting rules for student-athletes.',
+      keywords: 'high school sports development, youth athlete training, basketball training, soccer training, volleyball training, speed and agility, strength and conditioning, Barbados, NCAA preparation, athletic scholarships',
       canonical: 'https://www.varsitysportsacademy.com/en/what-we-do/ncaa-compliance',
       jsonLd: {
         '@context': 'https://schema.org',
@@ -48,6 +50,7 @@ export const WHAT_WE_DO_ROUTES: Routes = [
     resolve: { seo: seoResolve({
       title: 'Sports Development | Varsity Sports Academy Prep',
       description: 'Skill development, speed & agility, strength & conditioning, and injury prevention for student-athletes.',
+      keywords: 'high school sports development, youth athlete training, basketball training, soccer training, volleyball training, speed and agility, strength and conditioning, Barbados, NCAA preparation, athletic scholarships',
       canonical: 'https://www.varsitysportsacademy.com/en/what-we-do/sports-development',
       jsonLd: {
         '@context': 'https://schema.org',
@@ -66,6 +69,7 @@ export const WHAT_WE_DO_ROUTES: Routes = [
     resolve: { seo: seoResolve({
       title: 'Athlete Recruitment & Exposure Strategy | Varsity Sports Academy Prep',
       description: 'Get recruited with Varsity Sports Academy Prep’s strategy: athlete profiles, highlights, showcase events, coach outreach, social media best practices, and scholarship negotiation support.',
+      keywords: 'high school sports development, youth athlete training, basketball training, soccer training, volleyball training, speed and agility, strength and conditioning, Barbados, NCAA preparation, athletic scholarships',
       canonical: 'https://www.varsitysportsacademy.com/en/what-we-do/recruitment-exposure',
       robots: 'index,follow',
       jsonLd: {
@@ -84,6 +88,7 @@ export const WHAT_WE_DO_ROUTES: Routes = [
     resolve: { seo: seoResolve({
       title: 'Our Approach to Academics & Athletics | Varsity Sports Academy Prep',
       description: 'A proven pathway that blends tutoring, elite training, and character to unlock scholarships.',
+      keywords: 'high school sports development, youth athlete training, basketball training, soccer training, volleyball training, speed and agility, strength and conditioning, Barbados, NCAA preparation, athletic scholarships',
       canonical: 'https://www.varsitysportsacademy.com/en/what-we-do/approach',
       robots: 'index,follow',
       jsonLd: {

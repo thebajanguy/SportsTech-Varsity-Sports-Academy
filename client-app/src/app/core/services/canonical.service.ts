@@ -6,7 +6,7 @@ import { DOCUMENT } from '@angular/common';
 export class CanonicalService {
   private doc = inject(DOCUMENT);
 
-  setCanonicalUrl(url: string) {
+  setCanonical(url: string) {
     const head = this.doc.head;
     let link: HTMLLinkElement | null = head.querySelector('link[rel="canonical"]');
     if (!link) {
