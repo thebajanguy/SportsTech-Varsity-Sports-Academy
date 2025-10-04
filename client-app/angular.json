@@ -22,7 +22,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/ng2-uxp",
+            "outputPath": "dist/ng2-uxp/browser",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -117,42 +117,6 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "buildTarget": "varsity-sports-academy-app:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "polyfills": [
-              "zone.js",
-              "@angular/localize/init"
-            ],
-            "tsConfig": "tsconfig.spec.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
-            "styles": [
-              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/angular-archwizard/styles/archwizard.css",
-              "node_modules/@swimlane/ngx-datatable/index.css",
-              "node_modules/@swimlane/ngx-datatable/themes/bootstrap.scss",
-              "node_modules/@swimlane/ngx-datatable/assets/icons.css",
-              "node_modules/ngx-toastr/toastr.css",
-              "node_modules/font-awesome/css/font-awesome.css",
-              "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-
-              "public/assets/css/nucleo-icons.css",
-              "public/assets/scss/styling-kit.scss",
-              "public/assets/scss/custom.scss",
-              "src/styles.scss"
-            ],
-            "scripts": [
-              "node_modules/rellax/rellax.min.js"
-            ]
           }
         }
       }
