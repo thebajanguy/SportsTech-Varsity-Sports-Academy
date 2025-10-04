@@ -1,239 +1,3 @@
-<!--FOOTER
-<footer class="footer footer-big footer-black">
-    <div class="container brand">
-        <div class="row">
-            <div class="col-md-12 ml-auto mr-auto col-12">
-                  <div class="row">
-                      <div class="col-sm-2 col-sm-2" >
-                          <div class="footer-logo">
-                              <a [routerLink]="['athlete-platform']" title='Showcase' style="text-decoration: none;">
-                                  <img src="img/logos/internal/logo-small-dark.png"  />
-                              </a>
-                          </div>
-                          <p class="footer-description text-gray">
-                            <br/>
-                              Varsity Sports Academy&trade; simplifies how athletes, coaches and recruiters connect, communicate and share recruiting profiles digitally.
-                          </p>
-                      </div>
-                      <div class="col-sm-2 col-sm-2" style="padding-left: 50px;">
-                          <span class="footer-link-title text-uppercase">Security</span><br />
-                          <div class="links text-left">
-                              <ul class="uppercase-links stacked-links  text-gray">
-                                  <li>
-                                      <a [routerLink]="['privacy']" title='Showcase' style="text-decoration: none;">Privacy</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['privacy']" title='Showcase' style="text-decoration: none;">Policy</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['privacy']" title='Showcase' style="text-decoration: none;">Terms</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['data-deletion']" title='Showcase' style="text-decoration: none;">Data Deletion</a>
-                                  </li>
-                              </ul>
-                          </div>
-                      </div>
-                      <div class="col-sm-2 col-sm-2">
-                          <span class="footer-link-title text-uppercase">Sign In</span><br />
-                          <div class="links text-left">
-                              <ul class="uppercase-links stacked-links">
-                                  <li>
-                                      <a [routerLink]="['/'+loginPath+'/membership']" [queryParams]="{ usertype: 'athlete'}">Athlete</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['/'+loginPath+'/membership']" [queryParams]="{ usertype: 'guardian'}">Guardian</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['/'+loginPath+'/membership']" [queryParams]="{ usertype: 'collegecoach'}">College Coach</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['/'+loginPath+'/membership']" [queryParams]="{ usertype: 'teamcoach'}">Team Coach</a>
-                                  </li>
-                              </ul>
-                          </div>
-                          <p class="footer-link-title text-uppercase ">&nbsp;</p>
-                          <span class="footer-link-title text-uppercase">Register</span><br />
-                          <div class="links ">
-                              <ul class="uppercase-links stacked-links">
-                                  <li>
-                                      <a [routerLink]="['/'+loginPath+'/membership']" [queryParams]="{ usertype: 'athlete', plan: 'starter'}">Athlete</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['/'+loginPath+'/membership']" [queryParams]="{ usertype: 'guardian', plan: 'starter'}">Guardian</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['/'+loginPath+'/membership']" [queryParams]="{ usertype: 'collegecoach', plan: 'starter'}">College Coach</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['/'+loginPath+'/membership']" [queryParams]="{ usertype: 'teamcoach', plan: 'starter'}">Team Coach</a>
-                                  </li>
-  
-                              </ul>
-                          </div>
-                      </div>
-                      <div class="col-sm-2 col-sm-2">
-                          <div>
-                              <span class="footer-link-title text-uppercase">Sports</span><br />
-                          </div>
-                          <div class="links ">
-                              <ul class="uppercase-links stacked-links">
-                                  <li>
-                                      <a [routerLink]="['athletes']" [queryParams]="{ usertype: 'athlete', plan: 'starter'}">Football</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['athletes']" [queryParams]="{ usertype: 'athlete', plan: 'starter'}">Baseball</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['athletes']" [queryParams]="{ usertype: 'athlete', plan: 'starter'}">Basketball</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['athletes']" [queryParams]="{ usertype: 'athlete', plan: 'starter'}">Cheer-leading</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['athletes']" [queryParams]="{ usertype: 'athlete', plan: 'starter'}">Cricket</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['athletes']" [queryParams]="{ usertype: 'athlete', plan: 'starter'}">Cross Country</a>
-                                  </li>
-  
-                                  <li>
-                                      <a [routerLink]="['athletes']" [queryParams]="{ usertype: 'athlete', plan: 'starter'}">Cycling</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['athletes']" [queryParams]="{ usertype: 'athlete', plan: 'starter'}">Filed Hockey</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['athletes']" [queryParams]="{ usertype: 'athlete', plan: 'starter'}">Golf</a>
-                                  </li>
-                              </ul>
-                          </div>
-                      </div>
-                      <div class="col-sm-2 col-sm-2">
-                          <div>
-                              &nbsp;
-                          </div>
-                          <div class="links ">
-                              <ul class="uppercase-links stacked-links">
-                                  <li>
-                                      <a [routerLink]="['athletes']" [queryParams]="{ usertype: 'athlete', plan: 'starter'}">Ice Hockey</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['athletes']" [queryParams]="{ usertype: 'athlete', plan: 'starter'}">Lacrosse</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['athletes']" [queryParams]="{ usertype: 'athlete', plan: 'starter'}">Rugby</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['athletes']" [queryParams]="{ usertype: 'athlete', plan: 'starter'}">Soccer</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['athletes']" [queryParams]="{ usertype: 'athlete', plan: 'starter'}">Softball</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['athletes']" [queryParams]="{ usertype: 'athlete', plan: 'starter'}">Swimming</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['athletes']" [queryParams]="{ usertype: 'athlete', plan: 'starter'}">Tennis</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['athletes']" [queryParams]="{ usertype: 'athlete', plan: 'starter'}">Track & Field</a>
-                                  </li>
-                                  <li>
-                                      <a [routerLink]="['athletes']" [queryParams]="{ usertype: 'athlete', plan: 'starter'}">Volleyball</a>
-                                  </li>
-  
-                              </ul>
-                          </div>
-                      </div>
-                      <div class="col-sm-2 col-sm-2 text-center">
-                          <div class="text-center">
-                              <a [routerLink]="['consultation']" class="btn btn-primary text-uppercase"
-                              style="font-size: 1.3em;line-height: 2.2;">
-                                  <i class="nc-icon nc-time-alarm"></i>&nbsp; Schedule Consultation
-                              </a>
-                          </div>
-  
-                          <div class="black-lives-matter" style="width:100%;">
-                              <span class="fw-bold text-start">Black Lives Matter.</span>
-                              <div>
-                                  <a class="" target="_blank" rel="noopener noreferrer" href="https://support.eji.org/give/153413/#!/donation/checkout">
-                                    <span class="text-danger">Support the Equal Justice Initiative.</span>
-                                  </a>
-                              </div>
-                          </div>
-                      </div>
-                </div>
-            </div>
-        </div>
-  
-        <div class="row" >
-          <div class="col-md-12 col-sm-12 ml-auto mr-auto text-center footer-description-copyright separator-top-main  text-gray">
-              Varsity Sports Academy&trade; Created with by Varsity Sports Academy&trade; Sports.  Coded with <i class="fa fa-heart heart"></i> by <a href="https://www.VarsitySportsAcademy.com" target="_blank">ZeurTek - Digital Transformation Consultants</a> in Irvine, California. &#169; Copyright {{date | date: 'yyyy'}}.<br>
-          </div>
-        </div>
-    </div>
-  </footer>
--->
-<!--footer class="footer footer-default" data-background-color="gray">
-    <div class="container">
-        <nav>
-            <ul>
-                <li>
-                    <a class="navbar-brand" [routerLink]="['/', lang, 'academic-tutoring-and-sports-training']" title='Varsity Sports Academy' style="text-decoration: none;">
-                        Varsity Sports Academy
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.creative-tim.com/about-us">
-                        About Us
-                    </a>
-                </li>
-                <li>
-                    <a href="http://blog.creative-tim.com">
-                        Blog
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.creative-tim.com/license">
-                        License
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <div class="copyright">
-            &copy;
-            {{date | date: 'yyyy'}}, Designed by
-            <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
-        </div>
-    </div>
-</footer>
-<footer class="footer footer-white">
-    <div class="container">
-        <a class="footer-brand" [routerLink]="['/', lang, 'academic-tutoring-and-sports-training']" title='Varsity Sports Academy' style="text-decoration: none;">
-            <img src="assets/img/logos/internal/logo.png" height="40"  />
-        </a>
-
-        <ul class="social-buttons pull-right">
-            <li>
-                <a href="https://twitter.com/CreativeTim" target="_blank" class="btn btn-icon btn-neutral btn-twitter">
-                    <i class="fa fa-twitter"></i>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.facebook.com/CreativeTim" target="_blank" class="btn btn-icon btn-neutral btn-dribbble">
-                    <i class="fa fa-dribbble"></i>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.instagram.com/CreativeTimOfficial" target="_blank" class="btn btn-icon btn-neutral btn-google">
-                    <i class="fa fa-google-plus"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
-</footer-->
 
 <!-- FOOTER -->
 <footer class="footer footer-big footer-dark" role="contentinfo" aria-labelledby="site-footer-heading">
@@ -253,8 +17,6 @@
                     <ul class="links stacked-links list-unstyled m-0">
                         <li><a [routerLink]="['/', lang, 'academic-tutoring-and-sports-training']">Home</a></li>
                         <li><a [routerLink]="['/', lang, 'who-we-are']">Who We Are</a></li>
-                        <li><a [routerLink]="['/', lang, 'what-we-do/our-approach']">Our Approach</a></li>
-                        <li><a [routerLink]="['/', lang, 'privacy']">Privacy</a></li>
                     </ul>
                 </nav>
             </div>
@@ -264,10 +26,10 @@
                 <nav aria-label="Advisory Services">
                     <p class="text-uppercase footer-heading mb-2">Advisory Services</p>
                     <ul class="links stacked-links list-unstyled m-0">
-                        <li><a [routerLink]="['/', lang, 'what-we-do', 'youth-sports-development']" fragment="Professional-Consultation">Professional Consultation</a></li>
-                        <li><a [routerLink]="['/', lang, 'what-we-do', 'youth-sports-development']" fragment="Private-Assessment">Private Assessment</a></li>
-                        <li><a [routerLink]="['/', lang, 'what-we-do', 'youth-sports-development']" fragment="Improvement-Game-Plan">Improvement Game Plan</a></li>
-                        <li><a [routerLink]="['/', lang, 'what-we-do', 'youth-sports-performance']" fragment="Performance-Clinic">Performance Clinic</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Professional-Consultation">Professional Consultation</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Private-Assessment">Private Assessment</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Improvement-Game-Plan">Improvement Game Plan</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Performance-Clinic">Performance Clinic</a></li>
                     </ul>
                 </nav>
             </div>
@@ -277,10 +39,10 @@
                 <nav aria-label="Training Services">
                     <p class="text-uppercase footer-heading mb-2">Training Services</p>
                     <ul class="links stacked-links list-unstyled m-0">
-                        <li><a [routerLink]="['/', lang, 'what-we-do', 'one-on-one-workouts']" fragment="Private-1-on-1-Training">Private 1-on-1 Training</a></li>
-                        <li><a [routerLink]="['/', lang, 'what-we-do', 'group-training']" fragment="Group-Training">Group Training</a></li>
-                        <li><a [routerLink]="['/', lang, 'what-we-do', 'strength-training']" fragment="Strength-Training">Strength Training</a></li>
-                        <li><a [routerLink]="['/', lang, 'what-we-do', 'performance-training']" fragment="Performance-Training">Performance Training</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Private-1-on-1-Training">Private 1-on-1 Training</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Group-Training">Group Training</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Strength-Training">Strength Training</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Performance-Training">Performance Training</a></li>
                     </ul>
                 </nav>
             </div>
@@ -290,10 +52,10 @@
                 <nav aria-label="Sport-Specific Training">
                     <p class="text-uppercase footer-heading mb-2">Sport-Specific</p>
                     <ul class="links stacked-links list-unstyled m-0">
-                        <li><a [routerLink]="['/', lang, 'sport','soccer']" fragment="Soccer-Training">Soccer Training</a></li>
-                        <li><a [routerLink]="['/', lang, 'sport','basketball']" fragment="Basketball-Training">Basketball Training</a></li>
-                        <li><a [routerLink]="['/', lang, 'sport','field-hockey']" fragment="Field-Hockey-Training">Field Hockey Training</a></li>
-                        <li><a [routerLink]="['/', lang, 'sport','cricket']" fragment="Cricket-Training">Cricket Training</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Soccer-Training">Soccer Training</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Basketball-Training">Basketball Training</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Field-Hockey-Training">Field Hockey Training</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Cricket-Training">Cricket Training</a></li>
                     </ul>
                 </nav>
             </div>
@@ -303,10 +65,10 @@
                 <nav aria-label="Sports Directory">
                     <p class="text-uppercase footer-heading mb-2">Sports</p>
                     <ul class="links stacked-links list-unstyled m-0">
-                        <li><a [routerLink]="['/', lang, 'sport','soccer']" fragment="Soccer">Soccer</a></li>
-                        <li><a [routerLink]="['/', lang, 'sport','basketball']" fragment="Basketball">Basketball</a></li>
-                        <li><a [routerLink]="['/', lang, 'sport','field-hockey']" fragment="Field-Hockey">Field Hockey</a></li>
-                        <li><a [routerLink]="['/', lang, 'sport','cricket']" fragment="Cricket">Cricket</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Soccer">Soccer</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Basketball">Basketball</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Field-Hockey">Field Hockey</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Cricket">Cricket</a></li>
                     </ul>
                 </nav>
             </div>
@@ -316,10 +78,10 @@
                 <nav aria-label="More Sports">
                     <p class="text-uppercase footer-heading mb-2">More Sports</p>
                     <ul class="links stacked-links list-unstyled m-0">
-                        <li><a [routerLink]="['/', lang, 'sport','track-and-field']" fragment="Track-and-Field">Track &amp; Field</a></li>
-                        <li><a [routerLink]="['/', lang, 'sport','football']" fragment="Football">Football</a></li>
-                        <li><a [routerLink]="['/', lang, 'sport','tennis']" fragment="Tennis">Tennis</a></li>
-                        <li><a [routerLink]="['/', lang, 'sport','baseball']" fragment="Baseball">Baseball</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Track-and-Field">Track &amp; Field</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Football">Football</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Tennis">Tennis</a></li>
+                        <li><a [routerLink]="['/', lang, 'what-we-do', 'sports-development']" fragment="Baseball">Baseball</a></li>
                     </ul>
                 </nav>
             </div>

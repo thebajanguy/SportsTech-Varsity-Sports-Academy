@@ -23,8 +23,8 @@ export class SportsDevelopmentPage {
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.yoursite.com/" },
-          { "@type": "ListItem", "position": 2, "name": "Sports Development", "item": "https://www.yoursite.com/sports-development" }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.varsityacademy.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Sports Development", "item": "https://www.varsityacademy.com/en/what-we-do/sports-development" }
         ]
       },
       {

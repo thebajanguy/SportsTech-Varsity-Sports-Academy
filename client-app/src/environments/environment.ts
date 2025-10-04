@@ -21,7 +21,6 @@ export const environment = {
       redirectUri: '',
       postLogoutRedirectUri: '',
       loginFailedRoute: '',
-      secret: '',
     }
   },
   apiConfig: {

@@ -29,11 +29,6 @@
               &nbsp;  Begin Your Journey Today &nbsp;
             </a>
 
-            <a [routerLink]="['/en','programs']" class="btn btn-main btn-lg btn-magnify"
-                aria-label="Explore Varsity Sports Academy Prep programs">
-              Explore Programs
-            </a>
-
             <a href="tel:+17186370566" class="btn btn-main btn-lg btn-magnify"
               aria-label="Call Varsity Sports Academy Prep">Call (718) 637-0566
             </a>
@@ -179,13 +174,14 @@
               <span>{{ submitting() ? 'Sending…' : 'Request Information' }}</span>
             </button>
           </div>
-
+          <!--
           <div *ngIf="serverMessage()" class="mt-2 text-center"
                [class.text-success]="serverMessage()?.type==='success'"
                [class.text-danger]="serverMessage()?.type==='error'"
                role="status" aria-live="polite">
             {{ serverMessage()?.text }}
           </div>
+          -->
         </form>
   
       </div>
