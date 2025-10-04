@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CORRESPONDENCE_API_BASE_URL } from '../../../../core/tokens/api-base-url.tokens';
+import { CORRESPONDENCE_API_BASE_URL } from '../../../../core/tokens/api-config-url.tokens';
 
 
 export const INTEREST_SPORT_OPTIONS = ['Sports Program','Athletic Program','Basketball','Soccer'] as const;

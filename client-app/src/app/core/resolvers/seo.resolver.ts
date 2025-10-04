@@ -9,6 +9,7 @@ import { JsonLdService } from '../services/jsonld.service';
 type SeoInput = {
   title?: string;
   description?: string;
+  keywords?: string;
   canonical?: string;
   robots?: string;
   jsonLd?: Record<string, any>;
@@ -20,6 +21,8 @@ export function seoResolve(input: SeoInput): ResolveFn<boolean> {
     const meta = inject(Meta);
     const canonical = inject(CanonicalService);
     const jsonld = inject(JsonLdService);
+
+    meta.updateTag({ property: 'og:type', content: 'website' });
 
     if (input.title) {
       titleSvc.setTitle(input.title);
@@ -37,8 +40,11 @@ export function seoResolve(input: SeoInput): ResolveFn<boolean> {
     } else {
       meta.updateTag({ name: 'robots', content: 'noindex,nofollow' });
     }
-    if (input.canonical) canonical.setCanonicalUrl(input.canonical);
+    if (input.canonical) canonical.setCanonical(input.canonical);
     if (input.jsonLd) jsonld.setJsonLd(input.jsonLd);
+
+    if (input.keywords)
+      meta.updateTag({ name: 'keywords', content: input.keywords });
 
     return true;
   };
