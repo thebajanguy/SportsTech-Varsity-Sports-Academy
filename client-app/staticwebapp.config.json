@@ -19,7 +19,8 @@
     { "route": "/index.html", "redirect": "/en/academic-tutoring-and-sports-training", "statusCode": 301 },
 
     { "route": "/lander", "redirect": "/en/academic-tutoring-and-sports-training", "statusCode": 301 },
-
+    { "route": "/lander/*", "redirect": "/en/academic-tutoring-and-sports-training", "statusCode": 301 },
+    
     { "route": "/en/academic-tutoring-and-sports-training/", "redirect": "/en/academic-tutoring-and-sports-training", "statusCode": 301 },
     { "route": "/en/who-we-are/", "redirect": "/en/who-we-are", "statusCode": 301 },
     { "route": "/en/contact/", "redirect": "/en/contact", "statusCode": 301 },
@@ -29,17 +30,7 @@
     { "route": "/en/what-we-do/sports-development/", "redirect": "/en/what-we-do/sports-development", "statusCode": 301 },
     { "route": "/en/what-we-do/recruitment-exposure/", "redirect": "/en/what-we-do/recruitment-exposure", "statusCode": 301 },
 
-    { "route": "/en/academic-tutoring-and-sports-training", "rewrite": "/index.html" },
-    { "route": "/en/who-we-are", "rewrite": "/index.html" },
-    { "route": "/en/contact", "rewrite": "/index.html" },
-    { "route": "/en/consultation", "rewrite": "/index.html" },
-    { "route": "/en/what-we-do/academic-tutoring", "rewrite": "/index.html" },
-    { "route": "/en/what-we-do/ncaa-compliance", "rewrite": "/index.html" },
-    { "route": "/en/what-we-do/sports-development", "rewrite": "/index.html" },
-    { "route": "/en/what-we-do/recruitment-exposure", "rewrite": "/index.html" },
-
-    { "route": "/sitemap.xml" },
-    { "route": "/robots.txt" }
+    { "route": "/api/*" }
   ],
   "globalHeaders": {
     "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
