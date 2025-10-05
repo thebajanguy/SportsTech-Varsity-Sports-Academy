@@ -20,6 +20,11 @@ const routes: Routes = [
         pathMatch: 'full',
         redirectTo: 'academic-tutoring-and-sports-training'
       },
+      { // Default child → Home
+        path: 'lander',
+        pathMatch: 'full',
+        redirectTo: 'academic-tutoring-and-sports-training'
+      },
       { path: 'academic-tutoring-and-sports-training',loadChildren: () => import('../features/user-experience/home/home.routes').then(m => m.HOME_ROUTES) },
       { path: 'who-we-are',loadChildren: () => import('../features/user-experience/who-we-are/who-we-are.routes').then(m => m.WHO_WE_ARE_ROUTES) },
       { path: 'what-we-do',loadChildren: () => import('../features/user-experience/what-we-do/what-we-do.routes').then(m => m.WHAT_WE_DO_ROUTES) },
