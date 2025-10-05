@@ -19,7 +19,6 @@
     { "route": "/index.html", "redirect": "/en/academic-tutoring-and-sports-training", "statusCode": 301 },
 
     { "route": "/lander", "redirect": "/en/academic-tutoring-and-sports-training", "statusCode": 301 },
-    { "route": "/lander/", "redirect": "/en/academic-tutoring-and-sports-training", "statusCode": 301 },
 
     { "route": "/en/academic-tutoring-and-sports-training/", "redirect": "/en/academic-tutoring-and-sports-training", "statusCode": 301 },
     { "route": "/en/who-we-are/", "redirect": "/en/who-we-are", "statusCode": 301 },
