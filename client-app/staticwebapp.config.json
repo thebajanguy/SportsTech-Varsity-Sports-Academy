@@ -37,10 +37,10 @@
     { "route": "/en/what-we-do/academic-tutoring", "rewrite": "/index.html" },
     { "route": "/en/what-we-do/ncaa-compliance", "rewrite": "/index.html" },
     { "route": "/en/what-we-do/sports-development", "rewrite": "/index.html" },
-    { "route": "/en/what-we-do/recruitment-exposure", "rewrite": "/index.html" }
+    { "route": "/en/what-we-do/recruitment-exposure", "rewrite": "/index.html" },
 
-    { "route": "/sitemap.xml", "serve": "/sitemap.xml" },
-    { "route": "/robots.txt", "serve": "/robots.txt" }
+    { "route": "/sitemap.xml" },
+    { "route": "/robots.txt" }
   ],
   "globalHeaders": {
     "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
