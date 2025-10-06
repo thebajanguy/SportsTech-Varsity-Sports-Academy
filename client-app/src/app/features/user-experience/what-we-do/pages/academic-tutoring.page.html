@@ -17,8 +17,8 @@
         Guided by <em>Labor Durus</em> (“Hard Work Always Pays Off”).
       </p>
       <nav class="buttons mt-4" aria-label="Primary calls to action">
-        <a [routerLink]="['/en','consultation']" class="btn btn-main btn-lg btn-magnify">Request Consultation</a>
-        <a [routerLink]="['/en','contact']" class="btn btn-main btn-lg btn-magnify">Contact Us</a>
+        <a [routerLink]="['/'+urlPath+'/consultation']" class="btn btn-main btn-lg btn-magnify">Request Consultation</a>
+        <a [routerLink]="['/'+urlPath+'/contact']" class="btn btn-main btn-lg btn-magnify">Contact Us</a>
       </nav>
 
       <!-- Social Media Links -->
@@ -65,8 +65,8 @@
 
                 <!-- Cross-links -->
                 <div class="cta-row">
-                  <a [routerLink]="['/en','what-we-do','recruitment-exposure']" class="btn btn-main btn-magnify" aria-label="Explore academic programs at Varsity Sports Academy Prep">Recruitment &amp; Exposure</a>
-                  <a [routerLink]="['/en','consultation']" class="btn btn-main btn-magnify" aria-label="Explore academic programs at Varsity Sports Academy Prep">Book a Consultation</a>
+                  <a [routerLink]="['/'+urlPath+'/recruitment-exposure']" class="btn btn-main btn-magnify" aria-label="Explore academic programs at Varsity Sports Academy Prep">Recruitment &amp; Exposure</a>
+                  <a [routerLink]="['/'+urlPath+'/consultation']" class="btn btn-main btn-magnify" aria-label="Explore academic programs at Varsity Sports Academy Prep">Book a Consultation</a>
                 </div>
             </div>
 
@@ -118,10 +118,9 @@
                   <li class="d-flex mb-3"><span class="icon" aria-hidden="true"></span>Accountability check-ins with simple scorecards</li>
                 </ul>
 
-                <a href="/en/consultation" class="btn btn-main btn-lg btn-magnify mt-4"
-                    aria-label="Explore academic programs at Varsity Sports Academy Prep">
-                    Explore Academic Programs
-                </a>
+                <a [routerLink]="['/'+urlPath+'/recruitment-exposure']" class="btn btn-main btn-magnify" aria-label="Explore academic programs at Varsity Sports Academy Prep">Recruitment &amp; Exposure</a>
+                <a [routerLink]="['/'+urlPath+'/consultation']" class="btn btn-main btn-magnify" aria-label="Explore academic programs at Varsity Sports Academy Prep">Book a Consultation</a>
+
           </div>
 
 
@@ -151,11 +150,9 @@
                   <li class="d-flex mb-3"><span class="icon" aria-hidden="true"></span>Weekly score tracking and milestone goals</li>
                 </ul>
 
-                <a href="/en/consultation" class="btn btn-main btn-lg btn-magnify mt-4"
-                    aria-label="Explore academic programs at Varsity Sports Academy Prep">
-                    Request a Constultation to Explore Academic Programs
-                </a>
-            </div>
+                <a [routerLink]="['/'+urlPath+'/recruitment-exposure']" class="btn btn-main btn-magnify" aria-label="Explore academic programs at Varsity Sports Academy Prep">Recruitment &amp; Exposure</a>
+                <a [routerLink]="['/'+urlPath+'/consultation']" class="btn btn-main btn-magnify" aria-label="Explore academic programs at Varsity Sports Academy Prep">Book a Consultation</a>
+          </div>
 
             <!-- Visual -->
             <div class="col-md-6 col-sm-6 mr-auto ml-auto">
@@ -204,10 +201,9 @@
                   <li class="d-flex mb-3"><span class="icon" aria-hidden="true"></span>Accountability check-ins with simple scorecards</li>
                 </ul>
 
-                <a href="/en/what-we-do/recruiting-exposure" class="btn btn-main btn-lg btn-magnify mt-4"
-                    aria-label="Explore academic programs at Varsity Sports Academy Prep">
-                    Explore College Recruiting Programs
-                </a>
+                <a [routerLink]="['/'+urlPath+'/recruitment-exposure']" class="btn btn-main btn-magnify" aria-label="Explore academic programs at Varsity Sports Academy Prep">Explore College Recruitment &amp; Services</a>
+                <a [routerLink]="['/'+urlPath+'/consultation']" class="btn btn-main btn-magnify" aria-label="Explore academic programs at Varsity Sports Academy Prep">Book a Consultation</a>
+
           </div>
 
 
@@ -238,10 +234,9 @@
                   <li class="d-flex mb-3"><span class="icon" aria-hidden="true"></span>Hand-off to our <a [routerLink]="['/en','what-we-do','ncaa-compliance']">NCAA Compliance</a> advisors</li>
                 </ul>
 
-                <a href="/en/what-we-do/recruiting-exposure" class="btn btn-main btn-lg btn-magnify mt-4"
-                    aria-label="Explore academic programs at Varsity Sports Academy Prep">
-                    Explore Recruiting Programs
-                </a>
+                <a [routerLink]="['/'+urlPath+'/recruitment-exposure']" class="btn btn-main btn-magnify" aria-label="Explore academic programs at Varsity Sports Academy Prep">Explore Recruitment &amp; Programs</a>
+                <a [routerLink]="['/'+urlPath+'/consultation']" class="btn btn-main btn-magnify" aria-label="Explore academic programs at Varsity Sports Academy Prep">Book a Consultation</a>
+
             </div>
 
             <!-- Visual -->
@@ -274,8 +269,8 @@
       "@type":"BreadcrumbList",
       "itemListElement":[
         {"@type":"ListItem","position":1,"name":"Home","item":"https://www.varsitysportsacademy.com/en"},
-        {"@type":"ListItem","position":2,"name":"What We Do","item":"https://www.varsitysportsacademy.com/en/what-we-do"},
-        {"@type":"ListItem","position":3,"name":"Academic Tutoring","item":"https://www.varsitysportsacademy.com/en/what-we-do/academic-tutoring"}
+        {"@type":"ListItem","position":2,"name":"What We Do","item":"https://www.varsitysportsacademy.com/en/academics-and-sports"},
+        {"@type":"ListItem","position":3,"name":"Academic Tutoring","item":"https://www.varsitysportsacademy.com/en/academics-and-sports/academic-tutoring"}
       ]
     },
     {

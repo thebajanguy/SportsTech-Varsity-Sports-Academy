@@ -40,7 +40,13 @@ body { padding-top: 3rem; } /* adjust to your navbar height */
 .logo-icon              { height: 42px; width: auto; }
 .logo-text              { height: 34px; width: auto; margin-left: .5rem; }
 
-
+.icon-link {
+  margin:0px;
+  margin-top: -10px;
+  margin-right: 10px;
+  height: 35px;
+  padding: 0px;
+}
 /* Force solid navbar (blocks any transparent/scroll states) */
 .navbar,
 .navbar.navbar-transparent,

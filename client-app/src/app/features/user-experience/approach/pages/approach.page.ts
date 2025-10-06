@@ -1,19 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { inject, ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
-import { FormsModule } from '@angular/forms';
 import { SocialPluginComponent } from '../../~common/components/social-plugin/social-plugin.component';
 import { NewsletterPage } from '../../correspondence/pages/newsletter.page';
+import { UtilitiesService } from '../../../../core/services/utilities.service';
 
 
 @Component({
     selector: 'app-approach',
     standalone: true,
 
-    imports: [CommonModule, NgbModule, FormsModule, SocialPluginComponent, NewsletterPage],
+    imports: [CommonModule, RouterLink, SocialPluginComponent, NewsletterPage],
     templateUrl: './approach.page.html',
     styleUrl: './approach.page.scss',
     encapsulation: ViewEncapsulation.None,
@@ -21,8 +20,15 @@ import { NewsletterPage } from '../../correspondence/pages/newsletter.page';
 
 })
 export class ApproachPage implements OnInit, OnDestroy  {
-    data : Date = new Date();
+    utilitiesService = inject(UtilitiesService);
+    urlPath: string = ''; 
+    loginPath: string = ''; 
+    public date: Date = new Date();
 
+    constructor( ) {
+        this.urlPath = this.utilitiesService.UrlRoutePath; 
+        this.loginPath = this.utilitiesService.LoginRoutePath;  
+    }
     ngOnInit() {
         
         var body = document.getElementsByTagName('body')[0];

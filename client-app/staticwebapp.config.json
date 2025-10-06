@@ -1,8 +1,48 @@
 {
   "trailingSlash": "auto",
-  "mimeTypes": {
-    ".json": "text/json"
+
+  "routes": [
+    { 
+      "route": "/student-athletes"
+    },
+  {
+    "route": "/sports-academics-prep"
   },
+  {
+    "route": "/approach"
+  },
+  { 
+    "route": "/academic-tutoring"
+  },
+  {
+    "route": "/ncaa-compliance"
+  },
+  { 
+    "route": "/sports-development"
+  },
+  {
+    "route": "/recruitment-exposure"
+  },
+  {
+    "route": "/consultation"
+  },
+  {
+    "route": "/contact"
+  },
+
+    {
+      "route": "/api/*",
+      "methods": ["GET"]
+    },
+    {
+      "route": "/api/*",
+      "methods": ["PUT", "POST", "PATCH", "DELETE"]
+    },
+    {
+      "route": "/api/*"
+    }
+  ],
+
   "navigationFallback": {
     "rewrite": "/index.html",
     "exclude": [
@@ -18,6 +58,9 @@
     "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
     "X-Frame-Options": "SAMEORIGIN",
     "X-Content-Type-Options": "nosniff"
+  },
+  "mimeTypes": {
+    ".json": "text/json"
   },
   "platform": {
     "apiRuntime": "dotnet-isolated:8.0"

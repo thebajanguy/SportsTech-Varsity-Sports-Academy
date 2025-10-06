@@ -9,8 +9,8 @@ export const environment = {
         emailSentTo: 'VarsitySportsAcademy@Outlook.com',
         localUserStorageKey: 'local.authenticated.user',
         userTokenKey: 'msal.idtoken',
-        urlRoutePath: '',
-        loginRoutePath: '',
+        urlRoutePath: 'academics-and-sports',
+        loginRoutePath: 'academics-and-sports',
         workspaceRoutePath: 'user-workspace',
         membershipRoutePath: 'membership',
         defaultLanguage: 'en'
