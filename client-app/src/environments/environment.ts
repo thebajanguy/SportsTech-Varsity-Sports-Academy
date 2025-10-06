@@ -9,8 +9,8 @@ export const environment = {
     emailSentTo: '',
     localUserStorageKey: '',
     userTokenKey: '',
-    urlRoutePath: '',
-    loginRoutePath: '',
+    urlRoutePath: 'academics-and-sports',
+    loginRoutePath: 'academics-and-sports',
     workspaceRoutePath: '',
     membershipRoutePath: '',
     defaultLanguage: ''  

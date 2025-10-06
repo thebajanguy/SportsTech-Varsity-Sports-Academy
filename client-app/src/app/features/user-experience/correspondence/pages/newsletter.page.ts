@@ -21,6 +21,7 @@ import {
   InterestOption,
   CountryOption
 } from '../../~common/apis/correspondence.api';
+import { UtilitiesService } from '../../../../core/services/utilities.service';
 
 @Component({
   selector: 'app-newsletter-form',
@@ -76,6 +77,16 @@ export class NewsletterPage {
     map(term => (term ?? '').toLowerCase()),
     map(term => this.countryOptions.filter(t => t.toLowerCase().includes(term)))
   );
+
+  utilitiesService = inject(UtilitiesService);
+  public urlPath: string = ''; 
+  public loginPath: string = ''; 
+  public date: Date = new Date();
+
+  constructor( ) {
+      this.urlPath = this.utilitiesService.UrlRoutePath; 
+      this.loginPath = this.utilitiesService.LoginRoutePath;  
+  }
 
   // --- Validators / guards ---
   private stringValidator(): ValidatorFn {

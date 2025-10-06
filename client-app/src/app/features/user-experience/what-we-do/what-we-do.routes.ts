@@ -51,7 +51,7 @@ export const WHAT_WE_DO_ROUTES: Routes = [
       title: 'Sports Development | Varsity Sports Academy Prep',
       description: 'Skill development, speed & agility, strength & conditioning, and injury prevention for student-athletes.',
       keywords: 'high school sports development, youth athlete training, basketball training, soccer training, volleyball training, speed and agility, strength and conditioning, Barbados, NCAA preparation, athletic scholarships',
-      canonical: 'https://www.varsitysportsacademy.com/en/what-we-do/sports-development',
+      canonical: 'https://www.varsitysportsacademy.com/en/academics-and-sports/sports-development',
       jsonLd: {
         '@context': 'https://schema.org',
         '@type': 'Service',

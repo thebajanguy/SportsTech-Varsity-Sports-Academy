@@ -1,12 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
+import { UtilitiesService } from '../../../../core/services/utilities.service';
 import { NewsletterPage } from '../../correspondence/pages/newsletter.page';
 import { FixedSocialPluginComponent } from '../../~common/components/fixed-social-plugin/fixed-social-plugin.component';
 import { SocialPluginComponent } from '../../~common/components/social-plugin/social-plugin.component';
-import { CanonicalService } from '../../../../core/services/canonical.service';
-import { SITE_URL } from '../../../../core/tokens/api-config-url.tokens';
 
 @Component({
   selector: 'app-sports-development',
@@ -16,10 +14,15 @@ import { SITE_URL } from '../../../../core/tokens/api-config-url.tokens';
   styleUrls: ['./sports-development.page.scss']
 })
 export class SportsDevelopmentPage {
-  private title = inject(Title);
-  private meta = inject(Meta);
-  private canonical = inject(CanonicalService);
-  private siteUrl = inject(SITE_URL);
+    utilitiesService = inject(UtilitiesService);
+    urlPath: string = ''; 
+    loginPath: string = ''; 
+    public date: Date = new Date();
+
+    constructor( ) {
+        this.urlPath = this.utilitiesService.UrlRoutePath; 
+        this.loginPath = this.utilitiesService.LoginRoutePath;  
+    }
   
 
   schema = {
@@ -29,7 +32,7 @@ export class SportsDevelopmentPage {
         "@type": "BreadcrumbList",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.varsityacademy.com/" },
-          { "@type": "ListItem", "position": 2, "name": "Sports Development", "item": "https://www.varsityacademy.com/en/what-we-do/sports-development" }
+          { "@type": "ListItem", "position": 2, "name": "Sports Development", "item": "https://www.varsityacademy.com/en/academics-and-sports/sports-development" }
         ]
       },
       {
@@ -62,19 +65,5 @@ export class SportsDevelopmentPage {
   };
 
   ngOnInit(): void {
-    const url = `${this.siteUrl}/en/sports-development`;
-    const pageTitle = 'Sports Development | Varsity Sports Academy Prep';
-    const pageDescription ='Multi-sport athlete development at Varsity Sports Academy Prep: basketball, soccer, volleyball, and track with strength, speed, agility, and NCAA-aligned pathways.';
-    const pageKeywords = 'sports development, youth athlete training, basketball training, soccer training, volleyball training, speed and agility, strength and conditioning, Barbados, NCAA preparation, athletic scholarships';
-    
-    this.title.setTitle(pageTitle);
-    this.meta.addTags([
-      { name: 'description', content: pageDescription },
-      { name: 'keywords', content: pageKeywords },
-      { property: 'og:title', content: pageTitle },
-      { property: 'og:description', content:  pageDescription},
-      { property: 'og:type', content: 'website' }
-    ]);
-    this.canonical.setCanonical(url);
   }
 }

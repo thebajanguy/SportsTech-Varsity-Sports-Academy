@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Meta, Title } from '@angular/platform-browser';
 
 import { RouterLink } from '@angular/router';
+import { UtilitiesService } from '../../../../core/services/utilities.service';
 import { SocialPluginComponent } from '../../~common/components/social-plugin/social-plugin.component';
 import { FixedSocialPluginComponent } from "../../~common/components/fixed-social-plugin/fixed-social-plugin.component";
 import { NewsletterPage } from '../../correspondence/pages/newsletter.page';
@@ -16,8 +16,15 @@ import { NewsletterPage } from '../../correspondence/pages/newsletter.page';
   styleUrls: ['./ncaa-compliance.page.scss']
 })
 export class NcaaCompliancePage {
-  private title = inject(Title);
-  private meta = inject(Meta);
+    utilitiesService = inject(UtilitiesService);
+    urlPath: string = ''; 
+    loginPath: string = ''; 
+    public date: Date = new Date();
+
+    constructor( ) {
+      this.urlPath = this.utilitiesService.UrlRoutePath; 
+      this.loginPath = this.utilitiesService.LoginRoutePath;  
+    }
 
   // JSON-LD for FAQ + Breadcrumb
   schema = {
@@ -71,17 +78,6 @@ export class NcaaCompliancePage {
   };
 
   ngOnInit(): void {
-    const pageTitle = 'NCAA Compliance & Eligibility Support | Varsity Sports Academy Prep';
-    this.title.setTitle(pageTitle);
-
-    this.meta.addTags([
-      { name: 'description', content: 'Get step-by-step NCAA eligibility guidance: 16-core course mapping, GPA sliding scale, amateurism rules, official documentation, timelines, and common mistakes to avoid.' },
-      { name: 'keywords', content: 'NCAA eligibility, 16 core courses, sliding scale, amateurism, transfers, transcripts, SAT ACT, Caribbean CSEC CAPE mapping' },
-      { property: 'og:title', content: pageTitle },
-      { property: 'og:description', content: 'NCAA compliance help for student-athletes: academics, documentation, and timelines—done right.' },
-      { property: 'og:type', content: 'article' }
-    ]);
-
     var body = document.getElementsByTagName('body')[0];
     body.classList.add('vsa-page');
     var navbar = document.getElementsByTagName('nav')[0];
