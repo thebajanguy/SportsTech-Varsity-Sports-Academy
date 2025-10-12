@@ -50,7 +50,7 @@ export class ContactPage  extends BasePageComponent {
     Surname: this.fb.nonNullable.control<string>('', { validators: [Validators.required, this.stringValidator()] }),
     Email: this.fb.nonNullable.control<string>('', { validators: [Validators.required, Validators.email] }),
     Phone: this.fb.nonNullable.control<string>('', { validators: [Validators.required, Validators.minLength(10), Validators.maxLength(20)] }),
-    Message: this.fb.nonNullable.control<string>('', { validators: [Validators.required, this.stringValidator(), Validators.minLength(10), Validators.maxLength(4000)] }),
+    Message: this.fb.nonNullable.control<string>('', { validators: [Validators.required, Validators.minLength(10), Validators.maxLength(4000)] }),
     Interest: new FormControl<InterestOption | null>(null, { validators: [Validators.required] }),
     honeypot: this.fb.control<string>('') // spam trap
   });
