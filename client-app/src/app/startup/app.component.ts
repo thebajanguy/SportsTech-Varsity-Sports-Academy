@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Renderer2 } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 import { CommonModule, ViewportScroller } from '@angular/common';
@@ -19,7 +19,7 @@ export class AppComponent {
 
     currentYear = new Date().getFullYear();
 
-    constructor(){
+    constructor(private renderer: Renderer2){
         this.title.setTitle('Varsity Sports Academy | Academic & Sports Preparation');
         this.meta.updateTag({name:'description', content:'Varsity Sports Academy Prep empowers student‑athletes with academic tutoring, elite training, and NCAA recruitment guidance to earn scholarships.'});
         this.meta.updateTag({property:'og:title', content:'Varsity Sports Academy | Academic & Sports Preparation'});
@@ -31,4 +31,12 @@ export class AppComponent {
       // Apply a global anchor offset (e.g., for sticky header height)
       this.vs.setOffset([0, 80]); // [x, y]
     }
+
+    ngAfterViewInit() {
+       // const nav = document.querySelector('.navbar.fixed-top') as HTMLElement | null;
+        //const setH = () => this.renderer.setStyle(document.documentElement, '--nav-h', (nav?.offsetHeight ?? 72) + 'px');
+        //setH();
+        //window.addEventListener('resize', setH);
+    }
+
 }

@@ -12,6 +12,8 @@ export type CountryOption  = typeof COUNTRY_OPTIONS[number];
 export type InterestOption = typeof INTEREST_OPTIONS[number];
 
 export interface CorrespondenceDto{
+  CorrespondenceType?: string | null;
+  ApplicationName?: string | null;
   Fullname?: string | null;
   GivenName?: string | null;
   Surname?: string | null;
@@ -23,24 +25,25 @@ export interface CorrespondenceDto{
   Day?: string | null;
   Time?: string | null;
   Year?: string | null;
+  Honeypot?: string | null; // anti-bot hidden input
 };
 
 
 @Injectable({ providedIn: 'root' })
 export class CorrespondenceApi {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = inject(CORRESPONDENCE_API_BASE_URL);
+  private readonly apiBaseUrl = inject(CORRESPONDENCE_API_BASE_URL);
 
   CreateContactRequest(payload: CorrespondenceDto): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/correspondences/contact`, payload);
+    return this.http.post<void>(`${this.apiBaseUrl}/correspondences/contact`, payload);
   }
 
   CreateNewsletterSignup(payload: CorrespondenceDto): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/correspondences/newsletter`, payload);
+    return this.http.post<void>(`${this.apiBaseUrl}/correspondences/newsletter`, payload);
   }
 
   CreateConsultationRequest(payload: CorrespondenceDto): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/correspondences/consultation`, payload);
+    return this.http.post<void>(`${this.apiBaseUrl}/correspondences/consultation`, payload);
   }
 
 }

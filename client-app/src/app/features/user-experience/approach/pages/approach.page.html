@@ -1,54 +1,22 @@
 <div class="wrapper">
-  <!--HEADER-->
-  <header class="page-header div-color-neutral" style="background-image: url('assets/img/pages/headings/heading-7.png');">
-      <div class="filter filter-black"></div>
-      <div class="content-center">
-          <div class="container">
-              <div class="row">
-                  <div class="col-md-12 ml-auto mr-auto content-left">
-                      <h1 class="text-uppercase text-left">
-                          <span style="color:white">Improve</span><br />
-                          Skill. <strong>Strength.</strong> Speed.
-                      </h1>
-                      <div class="separator-top-header-btn-main">
-                          <h5 class="text-left description">
-                              <strong>All Elete Sports</strong> provides full-cycle sports training designed to improve the way young athletes approach sports fundamentals, performance and growth,
-  
-                              by creating a multi-sports curriculum that activates, educates and provides an opportunity for young athletes to unlock their full potential.
-  
-                              We provide effective, safe and transparent sports performance and fundamentals training so young athletes can develop and reach their true potential.
-  
-                              We enlist a set of diverse experts to support youth athletes with a full-cycle approach that includes body, performance and mental training.
-                              <br /><br />
-                              Want to begin your Elite Athlete journey.
-                          </h5>
-                      </div>
-                      <br />
-                      <!-- CTA Buttons -->
-                      <div class="buttons text-left mt-4" style="z-index: 9999; top: 3em;">
-                           <a [routerLink]="['/'+urlPath+'/consultation']" class="btn btn-main btn-lg btn-magnify"
-                              aria-label="Start your journey with Varsity Sports Academy Prep">
-                              Start Your Journey
-                          </a>
-                          &nbsp;&nbsp;
-                          <a  [routerLink]="['/'+urlPath+'/academic-tutoring']" 
-                              class="btn btn-main btn-lg btn-magnify"
-                              aria-label="Explore Varsity Sports Academy Prep programs">
-                              Explore Academic Programs
-                          </a>
-                      </div>
-                      <br />
 
-                      <!-- Social Media Links -->
-                      <div class="mt-3">
-                          <app-social-plugin></app-social-plugin>
-                      </div>
+    <!-- hero-page.component.html -->
+    <app-base-hero
+    [title]="'Improve'"
+    [subtitle]="'Skill. <strong>Strength.</strong> Speed.'"
+    [description]="description"
+    [backgroundUrl]="'assets/img/pages/what-we-do/vsaprep-what-we-do-hero.png'"
+    [headerSize]="'none'"
+    [breadcrumb]="[
+        { label: 'Home', link: ['/'+urlPath+'/student-athletes'] },
+        { label: 'Our Approach' }
+    ]"
+    [ctas]="[
+        { label: 'Start Your Journey', routerLink: ['/'+urlPath+'/consultation'] , variant:'primary' },
+        { label: 'Explore Academic Programs', routerLink: ['/'+urlPath+'/academic-tutoring'], variant:'outline' }
+    ]">
+    </app-base-hero>
 
-                  </div>
-              </div>
-          </div>
-      </div>
-  </header>
   
   <div class="features-1 section-white">
       <div class="filter filter-black"></div>
@@ -64,7 +32,7 @@
   
                       We offer camps and clinics, team and one-on-one sessions, strength and performance training, sport specific training, wellness and nutrition guidance, and additional tailored programs to suit your young athlete needs.
                       Not sure where to start?
-                      <a [routerLink]="['/'+urlPath+'/contact']">Contact us</a> today and one of our expert coches will get back to you and discuss a program that fits best with your young athlete's desired goal.
+                      <a [routerLink]="['/'+urlPath+'/contact']" aria-label="Contact Varsity Sports Academy Prep.">Contact us</a> today and one of our expert coches will get back to you and discuss a program that fits best with your young athlete's desired goal.
                   </h5>
               </div>
   
@@ -244,5 +212,5 @@
       {"@type":"ListItem","position":3,"name":"Academic Tutoring","item":"https://www.varsitysportsacademy.com/en/what-we-do/approach"}
     ]
   }
-  </script>
+</script>
   

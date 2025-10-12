@@ -1,5 +1,5 @@
 // app.routes.ts
-import { Routes, provideRouter, withInMemoryScrolling, withPreloading } from '@angular/router';
+import { Routes, provideRouter, withInMemoryScrolling, withPreloading, withRouterConfig } from '@angular/router';
 import { PreloadAllModules } from '@angular/router';
 
 import { languageCanMatch } from '../core/guards/language.guard';
@@ -18,7 +18,7 @@ const routes: Routes = [
     component: UserExperienceLayout,
     canMatch: [languageCanMatch(SUPPORTED_LANGS, DEFAULT_LANG)],
     children: [
-      { // Main landing page
+      { // Home
         path: 'student-athletes',
         loadComponent: () =>
           import('../features/user-experience/home/pages/home.page')
@@ -26,7 +26,7 @@ const routes: Routes = [
             resolve: { seo: seoResolve({
               title: 'Home | Varsity Sports Academy | Academic Tutoring & Elite Sports Training for Student-Athletes',
               description: 'Varsity Sports Academy Prep in Barbados combines academic tutoring, basketball, soccer & volleyball training, and NCAA recruiting guidance to help student-athletes earn scholarships.',
-              canonical: 'https://www.varsitysportsacademy.com/en/sports-and-academic-prep',
+              canonical: 'https://www.varsitysportsacademy.com/en/academics-and-sports/',
               robots: 'index,follow',
               jsonLd: {
                 '@context': 'https://schema.org',
@@ -38,7 +38,7 @@ const routes: Routes = [
               }
             })}
       },
-      {
+      { // Who We Are
         path: 'sports-academics-prep',
         loadComponent: () =>
           import('../features/user-experience/who-we-are/pages/who-we-are.page')
@@ -46,7 +46,7 @@ const routes: Routes = [
             resolve: { seo: seoResolve({
               title: 'Who We Are | Varsity Sports Academy Prep',
               description: 'Learn about our mission: academics + elite sports training + NCAA readiness.',
-              canonical: 'https://www.varsitysportsacademy.com/en/about',
+              canonical: 'https://www.varsitysportsacademy.com/en/academics-and-sports/who-we-are',
               robots: 'index,follow',
               jsonLd: {
                 '@context': 'https://schema.org',
@@ -58,7 +58,7 @@ const routes: Routes = [
               }
             })}
       },
-      {
+      { // Our Approach
         path: 'approach',
         loadComponent: () =>
           import('../features/user-experience/approach/pages/approach.page')
@@ -66,7 +66,7 @@ const routes: Routes = [
             resolve: { seo: seoResolve({
               title: 'Our Approach | Varsity Sports Academy Prep | Academic & Athletic Training Support | Request a Meeting',
               description: 'The h Varsity Sports Academy Prep is what drives our culture. Discuss academics, training, scholarships, and next steps for your student-athlete.',
-              canonical: 'https://www.varsitysportsacademy.com/en/student-athletes/approach',
+              canonical: 'https://www.varsitysportsacademy.com/en/academics-and-sports/approach',
               robots: 'index,follow',
               jsonLd: {
                 '@context': 'https://schema.org',
@@ -78,8 +78,9 @@ const routes: Routes = [
               }
             })}
       },
+
       // What We do / Services
-      { 
+      {  // Academic tutoring
         path: 'academic-tutoring',
         loadComponent: () => import('../features/user-experience/what-we-do/pages/academic-tutoring.page')
           .then(m => m.AcademicTutoringPage),
@@ -87,7 +88,7 @@ const routes: Routes = [
               title: 'Academic Tutoring for Student-Athletes | Varsity Sports Academy Prep',
               description: 'One-to-one and group tutoring for student-athletes in core subjects, study skills, and SAT/ACT/CSEC/CAPE test prep. Support for NCAA 16-core eligibility.',
               keywords: 'high school sports development, youth athlete training, basketball training, soccer training, volleyball training, speed and agility, strength and conditioning, Barbados, NCAA preparation, athletic scholarships',
-              canonical: 'https://www.varsitysportsacademy.com/en/what-we-do/academic-tutoring',
+              canonical: 'https://www.varsitysportsacademy.com/en/academics-and-sports/academic-tutoring',
               jsonLd: {
                 '@context': 'https://schema.org',
                 '@type': 'Service',
@@ -98,7 +99,7 @@ const routes: Routes = [
               }
             }) }
       },
-      {
+      { // NCAA compliance
         path: 'ncaa-compliance',
         loadComponent: () => import('../features/user-experience/what-we-do/pages/ncaa-compliance.page')
           .then(m => m.NcaaCompliancePage),
@@ -106,7 +107,7 @@ const routes: Routes = [
               title: 'NCAA Compliance & Academic Support Guidance | Varsity Sports Academy Prep',
               description: 'Get help with NCAA 16-core course mappings, GPA & sliding scale, amateurism certification, eligibility timelines, transcripts, and recruiting rules for student-athletes.',
               keywords: 'high school sports development, youth athlete training, basketball training, soccer training, volleyball training, speed and agility, strength and conditioning, Barbados, NCAA preparation, athletic scholarships',
-              canonical: 'https://www.varsitysportsacademy.com/en/what-we-do/ncaa-compliance',
+              canonical: 'https://www.varsitysportsacademy.com/en/academics-and-sports/ncaa-compliance',
               jsonLd: {
                 '@context': 'https://schema.org',
                 '@type': 'Service',
@@ -117,7 +118,7 @@ const routes: Routes = [
               }
             })}
       },
-      { // Sports
+      { // Sports development
         path: 'sports-development',
         loadComponent: () =>
           import('../features/user-experience/what-we-do/pages/sports-development.page')
@@ -137,7 +138,7 @@ const routes: Routes = [
                 }
               }) }
       },
-      {
+      { // Recruitment & exposure
         path: 'recruitment-exposure',
         loadComponent: () => import('../features/user-experience/what-we-do/pages/recruitment-exposure.page')
           .then(m => m.RecruitmentAndExposurePage),
@@ -145,7 +146,7 @@ const routes: Routes = [
               title: 'Athlete Recruitment & Exposure Strategy | Varsity Sports Academy Prep',
               description: 'Get recruited with Varsity Sports Academy Prep’s strategy: athlete profiles, highlights, showcase events, coach outreach, social media best practices, and scholarship negotiation support.',
               keywords: 'high school sports development, youth athlete training, basketball training, soccer training, volleyball training, speed and agility, strength and conditioning, Barbados, NCAA preparation, athletic scholarships',
-              canonical: 'https://www.varsitysportsacademy.com/en/what-we-do/recruitment-exposure',
+              canonical: 'https://www.varsitysportsacademy.com/en/academics-and-sports/recruitment-exposure',
               robots: 'index,follow',
               jsonLd: {
                 '@context': 'https://schema.org',
@@ -157,15 +158,125 @@ const routes: Routes = [
               }
           })}
       },
+
+      // Programs
+      {// Programs page
+        path: 'programs',
+        loadComponent: () => import('../features/user-experience/programs/pages/programs-landing.page')
+          .then(m => m.ProgramsLandingPage),
+            resolve: { seo: seoResolve({
+              title: 'Brains & Ballers Academics & Sports Programa | Varsity Sports Academy',
+              description: 'Join the Brains & Ballers Academics and Sports Program at Varsity Sports Academy Prep for academic support and athletic training.',
+              keywords: 'after school programa, aports camps, academic supporta, athletic training, youth sports, Barbados',
+              canonical: 'https://www.varsitysportsacademy.com/en/academics-and-sports/programs/',
+              robots: 'index,follow',
+              jsonLd: {
+                '@context': 'https://schema.org',
+                '@type': 'Service',
+                'name': 'Brains & Ballers Academics and Sports Programs',
+                'serviceType': 'Educational Program',
+                'provider': { '@type': 'EducationalOrganization', 'name': 'Varsity Sports Academy Prep' },
+                'areaServed': 'BB'
+              }
+          })}
+      },
+      {// Aftershool
+        path: 'after-school',
+        loadComponent: () =>
+          import('../features/user-experience/programs/pages/after-school.page')
+            .then(m => m.AfterSchoolPage),
+          resolve: { seo: seoResolve({
+            title: 'Brains & Ballers After-School Programs | Varsity Sports Academy Prep',
+            description: 'Daily homework support, CSEC/CAPE/SAT prep, and sport-specific training—built for student-athletes to improve grades and performance.',
+            keywords: 'after school program, academic support, athletic training, youth sports, Barbados',
+            canonical: 'https://www.varsitysportsacademy.com/en/academics-and-sports/after-school',
+            robots: 'index,follow',
+            jsonLd: {
+              '@context': 'https://schema.org',
+              '@type': 'EducationalOccupationalProgram',
+              'name': 'Brains & Ballers After-School Programs',
+              'provider': { '@type': 'Organization', 'name': 'Varsity Sports Academy Prep' },
+              'timeOfDay': 'Afternoon',
+              'audience': { '@type': 'EducationalAudience', 'educationalRole': 'Student' },
+              'hasCourse': [
+                { '@type': 'Course', 'name': 'Homework Support & Study Skills' },
+                { '@type': 'Course', 'name': 'CSEC/CAPE & SAT/ACT Prep' },
+                { '@type': 'Course', 'name': 'Sports Skills, Speed & Agility' }
+              ],
+              'areaServed': 'BB'
+            }
+        })}
+      },
+      {// Gold Camps - Basketball
+        path: 'basketball-gold-camps',
+        loadComponent: () => import('../features/user-experience/programs/pages/gold-camps-basketball.page')
+          .then(m => m.GoldCampsBasketballPage),
+            resolve: { seo: seoResolve({
+              title: 'Brains & Ballers Basketball Gold Camps | Varsity Sports Academy Prep',
+              description: 'Elite basketball skill, IQ, and leadership camp for student-athletes.',
+              keywords: 'after school program, academic support, athletic training, youth sports, Barbados',
+              canonical: 'https://www.varsitysportsacademy.com/en/academics-and-sports/basketball-gold-camps',
+              robots: 'index,follow',
+              jsonLd: {
+                '@context': 'https://schema.org',
+                '@type': 'Service',
+                'name': 'Brains & Ballers Basketball Gold Camps',
+                'serviceType': 'Educational Program',
+                'provider': { '@type': 'EducationalOrganization', 'name': 'Varsity Sports Academy Prep' },
+                'areaServed': 'BB'
+              }
+          })}
+      },
+      {// Gold Camps - Soccer
+        path: 'soccer-gold-camps',
+        loadComponent: () => import('../features/user-experience/programs/pages/gold-camps-soccer.page')
+          .then(m => m.GoldCampsSoccerPage),
+            resolve: { seo: seoResolve({
+              title: 'Brains & Ballers Soccer Gold Camps | Varsity Sports Academy Prep',
+              description: 'Advanced soccer training, fitness, and showcase experience for student-athletes.',
+              keywords: 'after school program, academic support, athletic training, youth sports, Barbados',
+              canonical: 'https://www.varsitysportsacademy.com/n/academics-and-sports/soccer-gold-camps',
+              robots: 'index,follow',
+              jsonLd: {
+                '@context': 'https://schema.org',
+                '@type': 'Service',
+                'name': 'Brains & Ballers Soccer Gold Camps',
+                'serviceType': 'Educational Program',
+                'provider': { '@type': 'EducationalOrganization', 'name': 'Varsity Sports Academy Prep' },
+                'areaServed': 'BB'
+              }
+          })}
+      },
+      {// Programs Registration page
+        path: 'register',
+        loadComponent: () => import('../features/user-experience/programs/pages/programs-register.page')
+          .then(m => m.ProgramsRegisterPage),
+            resolve: { seo: seoResolve({
+              title: 'Brains & Ballers Academics & Sports Programa | Varsity Sports Academy',
+              description: 'Join the Brains & Ballers Academics and Sports Program at Varsity Sports Academy Prep for academic support and athletic training.',
+              keywords: 'after school programa, aports camps, academic supporta, athletic training, youth sports, Barbados',
+              canonical: 'https://www.varsitysportsacademy.com/en/academics-and-sports/programs/',
+              robots: 'index,follow',
+              jsonLd: {
+                '@context': 'https://schema.org',
+                '@type': 'Service',
+                'name': 'Brains & Ballers Academics and Sports Programs',
+                'serviceType': 'Educational Program',
+                'provider': { '@type': 'EducationalOrganization', 'name': 'Varsity Sports Academy Prep' },
+                'areaServed': 'BB'
+              }
+          })}
+      },
+
       // Correspondence
-      {
+      { // Consultation
           path: 'consultation',
           loadComponent: () =>
             import('../features/user-experience/correspondence/pages/consultation.page').then(m => m.ConsultationPage),
               resolve: { seo: seoResolve({
                 title: 'Free Consultation | Varsity Sports Academy Prep | Academic & Athletic Training Support | Request a Meeting',
                 description: 'Book a free consultation with Varsity Sports Academy Prep. Discuss academics, training, scholarships, and next steps for your student-athlete.',
-                canonical: 'https://www.varsitysportsacademy.com/en/consultation',
+                canonical: 'https://www.varsitysportsacademy.com/en/academics-and-sports/consultation',
                 robots: 'index,follow',
                 jsonLd: {
                   '@context': 'https://schema.org',
@@ -177,14 +288,14 @@ const routes: Routes = [
                 }
               })}
       },
-      {
+      { // Contact
         path: 'contact',
         loadComponent: () =>
           import('../features/user-experience/correspondence/pages/contact.page').then(m => m.ContactPage),
             resolve: { seo: seoResolve({
               title: 'Contact Varsity Sports Academy Prep | Academic & Athletic Training Support',
               description: 'Get in touch with Varsity Sports Academy Prep to learn about academic tutoring, athletic training, scholarships, and group rates. Contact us today to start your student-athlete journey.',
-              canonical: 'https://www.varsitysportsacademy.com/en/contact',
+              canonical: 'https://www.varsitysportsacademy.com/en/academics-and-sports/contact',
               robots: 'index,follow',
               jsonLd: {
                 '@context': 'https://schema.org',
@@ -207,13 +318,10 @@ const routes: Routes = [
 
 export const ROUTER_PROVIDERS = [
   provideRouter(routes,
-    withInMemoryScrolling({ 
-      anchorScrolling: 'enabled',
-      scrollPositionRestoration: 'enabled'
-    }),
+    withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }),
+    withRouterConfig({ onSameUrlNavigation: 'reload' }),
     withPreloading(PreloadAllModules) // faster perceived loads
   )
-
 ];
 
 

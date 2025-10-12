@@ -22,6 +22,7 @@ import {
   CountryOption
 } from '../../~common/apis/correspondence.api';
 import { UtilitiesService } from '../../../../core/services/utilities.service';
+import { BasePageComponent } from '../../../../core/directives/base-page.directive';
 
 @Component({
   selector: 'app-newsletter-form',
@@ -32,7 +33,8 @@ import { UtilitiesService } from '../../../../core/services/utilities.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
-export class NewsletterPage {
+export class NewsletterPage  extends BasePageComponent {
+  override pageName = 'vsa-page';
   private readonly fb = inject(FormBuilder);
   private readonly svc = inject(CorrespondenceApi);
   private readonly notifications = inject(CoreNotificationsService);
@@ -77,16 +79,6 @@ export class NewsletterPage {
     map(term => (term ?? '').toLowerCase()),
     map(term => this.countryOptions.filter(t => t.toLowerCase().includes(term)))
   );
-
-  utilitiesService = inject(UtilitiesService);
-  public urlPath: string = ''; 
-  public loginPath: string = ''; 
-  public date: Date = new Date();
-
-  constructor( ) {
-      this.urlPath = this.utilitiesService.UrlRoutePath; 
-      this.loginPath = this.utilitiesService.LoginRoutePath;  
-  }
 
   // --- Validators / guards ---
   private stringValidator(): ValidatorFn {
@@ -172,10 +164,15 @@ export class NewsletterPage {
 
     // Create payload
     const payload: CorrespondenceDto = {
+      CorrespondenceType: "Request-For-Newsletter",
+      ApplicationName: "VSA Prep",
+
       Fullname: this.form.value.Fullname!.trim(),
       Email: this.form.value.Email!.trim().toLowerCase(),
       Interest: this.form.value.Interest!.trim(),
       Country: this.form.value.Country!.trim(),
+
+      Honeypot: this.form.value.honeypot!.trim()
     };
 
     this.submitting.set(true);

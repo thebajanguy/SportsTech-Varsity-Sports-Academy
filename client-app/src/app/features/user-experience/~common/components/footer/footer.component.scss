@@ -3,6 +3,9 @@ $main-color:                #ffd212 !default;
 $nav-color:                 #0a2144 !default;
 $dark-color:                #0a2144 !default;
 $light-gray:                #ecf0f1 !default;
+$warning-color: #FFB236 !default;
+$medium-gray:              #f4f4f4 !default;
+$dark-gray:                #333333 !default;
 
 
 $link-disabled-color:       #666666 !default;
@@ -10,6 +13,9 @@ $link-hover-color:          $main-color !default;
 $link-active-color:         $main-color !default;
 $link-focus-color:          $main-color !default;
 $link-default-color:        $white-color !default;
+
+$font-size-medium: 16px !default;
+
 
 /* Footer Transformation Styles */
 .footer-dark { background-color: $nav-color; }
@@ -19,7 +25,20 @@ $link-default-color:        $white-color !default;
   .footer .btn { margin-bottom: 0;  }
 
   /* Footer headings */
+  .footer .footer-link-title,
   .footer .footer-heading { color: $main-color !important; /* yellow */ font-weight: 400;}
+  .footer-description {
+    color: #ccc;              /* or your $light-gray variable */
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: left;
+    padding: 0 5px;
+    margin: 0;                /* remove default <p> margins */
+    text-indent: 0;           /* prevent first-line indentation */
+    display: block;           /* ensure it’s not inheriting inline styles */
+    clear: both;              /* clears any floated elements before it */
+  }
+    
 
   /* Footer links */
   .footer .links a { color: #ffffff !important; /* white */ text-decoration: none; transition: color 0.3s ease;}
@@ -41,3 +60,23 @@ $link-default-color:        $white-color !default;
     float: none;
     margin-top: -2em;
   }
+
+  .black-lives-matter,
+  .btn-cta {
+    padding: 25px;
+    box-sizing: border-box;
+    background-color: $medium-gray;
+    text-align: left;
+    border-radius: 10px;
+    width: 100%;
+    margin-top: 15px;
+    color: $dark-gray;
+    font-size: $font-size-medium;
+
+    a {
+        display: block;
+        color: $warning-color;
+        font-size: inherit;
+        font-weight: 500;
+      }
+}

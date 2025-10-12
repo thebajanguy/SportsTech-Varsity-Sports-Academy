@@ -1,4 +1,6 @@
 
+
+
 <!-- FOOTER -->
 <footer class="footer footer-big footer-dark" role="contentinfo" aria-labelledby="site-footer-heading">
   <div class="filter filter-black" aria-hidden="true"></div>
@@ -12,13 +14,18 @@
 
             <!-- COMPANY INFO -->
             <div class="col-sm-2 col-6">
-                <nav aria-label="Company Info">
                 <p class="text-uppercase footer-heading mb-2">Company Info</p>
+                <nav aria-label="Company Info" class="footer-logo">
                     <ul class="links stacked-links list-unstyled m-0">
                         <li><a [routerLink]="['student-athletes']">Home</a></li>
                         <li><a [routerLink]="['sports-academics-prep']">Who We Are</a></li>
                     </ul>
                 </nav>
+                <p class="footer-description text-gray">
+                    <strong>Varsity Sports Academy&trade;</strong> empowers <em>student-athletes</em> to take control of their <em>academic progress</em> and <em>athletic development</em>. 
+                    Our program connects athletes, coaches, and recruiters through verified digital recruiting profiles — making it easier to gain exposure and achieve your goals. 
+                    <strong>Simplify your path to scholarships and sports success.</strong>
+                  </p>
             </div>
 
             <!-- ADVISORY SERVICES -->
@@ -26,7 +33,7 @@
                 <nav aria-label="Advisory Services">
                     <p class="text-uppercase footer-heading mb-2">Advisory Services</p>
                     <ul class="links stacked-links list-unstyled m-0">
-                        <li><a [routerLink]="['consultation']" fragment="Professional-Consultation">Professional Consultation</a></li>
+                        <li><a [routerLink]="['consultation']" fragment="Professional-Consultation" aria-label="Professional-Consultation">Professional Consultation</a></li>
                         <li><a [routerLink]="['consultation']" fragment="Private-Assessment">Private Assessment</a></li>
                         <li><a [routerLink]="['contact']" fragment="Improvement-Game-Plan">Improvement Game Plan</a></li>
                         <li><a [routerLink]="['contact']" fragment="Performance-Clinic">Performance Clinic</a></li>
@@ -69,21 +76,34 @@
                         <li><a [routerLink]="['sports-development']" fragment="Basketball">Basketball</a></li>
                         <li><a [routerLink]="['sports-development']" fragment="Field-Hockey">Field Hockey</a></li>
                         <li><a [routerLink]="['sports-development']" fragment="Cricket">Cricket</a></li>
-                    </ul>
-                </nav>
-            </div>
-
-            <!-- MORE SPORTS -->
-            <div class="col-sm-2 col-6">
-                <nav aria-label="More Sports">
-                    <p class="text-uppercase footer-heading mb-2">More Sports</p>
-                    <ul class="links stacked-links list-unstyled m-0">
                         <li><a [routerLink]="['sports-development']" fragment="Track-and-Field">Track &amp; Field</a></li>
                         <li><a [routerLink]="['sports-development']" fragment="Football">Football</a></li>
                         <li><a [routerLink]="['sports-development']" fragment="Tennis">Tennis</a></li>
                         <li><a [routerLink]="['sports-development']" fragment="Baseball">Baseball</a></li>
-                    </ul>
+                     </ul>
                 </nav>
+            </div>
+
+            <!-- SCHEDULE CONSULTATION -->
+            <div class="col-sm-2 col-sm-2">
+                <div class="text-left">
+                    <a [routerLink]="['/'+urlPath+'/consultation']" 
+                        class="btn btn-main btn-lg"
+                        aria-label="Start your journey with Varsity Sports Academy Prep"
+                        style="line-height: 2.2;">
+                        <i class="nc-icon nc-time-alarm"></i>&nbsp; 
+                        <span class="fw-bold text-start">Schedule Consultation</span>
+                    </a>
+                </div>
+
+                <div class="black-lives-matter" style="width:100%;">
+                    <span class="fw-bold text-start">Black Lives Matter.</span>
+                    <div>
+                        <a class="" target="_blank" rel="noopener noreferrer" href="https://support.eji.org/give/153413/#!/donation/checkout">
+                          <span class="text-danger">Support the Equal Justice Initiative.</span>
+                        </a>
+                    </div>
+                </div>
             </div>
 
         </div>

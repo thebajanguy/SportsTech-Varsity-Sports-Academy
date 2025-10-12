@@ -10,6 +10,8 @@
 
 // font styles
 $font-family-sans-serif:    Segoe UI, SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif;
+$sans-serif-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+
 
 // basics
 $none:                      0 !default;
@@ -62,7 +64,7 @@ $black-states-color:        darken($black-color, 8%) !default;
 
 $light-gray:                #ecf0f1 !default;
 $medium-gray:               #dddddd !default;
-$dark-gray:                 #66615b !default;
+$dark-gray:                 #363432 !default;
 $placeholder-gray:          rgba(210, 210, 210, 1) !default;
 
 $gray-input-bg:             #fffcf5 !default;
@@ -106,7 +108,7 @@ $font-size-large-navbar:    22px !default;
 
 $font-size-h1:              4.5em !default;
 $font-size-h2:              3em !default;
-$font-size-h3:              2.525em !default;
+$font-size-h3:              2em !default;
 $font-size-h4:              1.6em !default;
 $font-size-h5:              1.35em !default;
 $font-size-h6:              0.9em !default;
@@ -146,6 +148,14 @@ html {
     -webkit-text-size-adjust: 100%
 }
 
+.toc {
+  display: flex; flex-wrap: wrap; gap: .5rem 1rem; margin-bottom: 1rem;
+}
+.toc a { text-decoration: none; font-weight: 600; padding-right: 20px; padding-left:0px; border-right: 2px solid #03214d;}
+.toc a:hover { text-decoration: underline; color : gray; }
+.block { margin-top: 2rem; }
+.toc-lift-top-section { padding-top: 10px;margin-top: -50px;}
+
 
 // ============================================================================
 // Utilities & Components (kept, lightly hardened)
@@ -169,17 +179,9 @@ html {
 .align-right  { text-align: right; }
 .align-center { text-align: center; }
 
-/*           Font Smoothing      */
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand, a, .td-name, td, button, .buttons input, select, textarea {
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-family: $font-family-sans-serif;
-    font-weight: $font-weight-light;
-}
-
 // Text utilities
 /*           Font Smoothing      */
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand, a, .td-name, td, button, input, select, textarea {
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand, a, .td-name, td, button, .buttons, input, select, textarea {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-family: $font-family-sans-serif;
@@ -210,6 +212,8 @@ h2, .h2 {
 
 h3, .h3 {
     font-size: $font-size-h3;
+    color: $secondary-color;
+    font-weight: 400;
     line-height: 1.4;
     margin: 20px 0 0px;
 }
@@ -224,6 +228,9 @@ h4, .h4 {
 h5, .h5 {
     font-size: $font-size-h5;
     line-height: 1.4em;
+    font-weight: 300;
+    color: $dark-color;
+
 }
 
 h6, .h6 {
@@ -231,6 +238,9 @@ h6, .h6 {
     font-weight: $font-weight-bold;
     text-transform: uppercase;
     line-height: 1.5em;
+    font-weight: 300;
+    color: $dark-color;
+
 }
 
 p {
@@ -239,11 +249,12 @@ p {
     margin-bottom: 5px;
 }
 
-h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small, h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small, .h1 .small, .h2 .small, .h3 .small, .h4 .small, .h5 .small, .h6 .small {
-/*    color: $dark-gray;
-*/    
-    color: $font-color;
-    line-height: $line-height-general;
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, 
+.h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small, 
+h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small, 
+.h1 .small, .h2 .small, .h3 .small, .h4 .small, .h5 .small, .h6 .small {
+  color: $dark-gray;
+  line-height: $line-height-general;
 }
 
 h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
@@ -317,6 +328,14 @@ blockquote small {
 .title.text-center {
     margin-bottom: 50px;
 }
+.card-description-dark{
+  padding: 15px 0px;
+  color: $font-color;
+}
+.card-description-light{
+  padding: 15px 0px;
+  color: $white-color;
+}
 
 // Text color utilities
 .text-color-main      { color: $main-color; }
@@ -335,7 +354,7 @@ blockquote small {
 .card-info-title { font-weight: 500; font-size: 1.5em; margin-top: -5px; }
 .section-title   { font-weight: 700; line-height: 1; font-size: 3em; }
 .section-title-md{ font-weight: 600; line-height: 1; font-size: 2em; }
-.section-title-sm{ font-weight: 500; line-height: 1; font-size: 1.2em; }
+.section-title-sm{ font-weight: 500; line-height: 1; font-size: 1.5em; }
 .info-title-md   { font-weight: 600; color: $main-color; line-height: 1; font-size: 2em; }
 .info-title-sm   { font-weight: 500; line-height: 1; font-size: 1.5em; color: $secondary-color; }
 
@@ -370,6 +389,7 @@ blockquote small {
   color: $white-color;
 }
 .hero-subtitle { font-size: 1.7em; color: $white-color; }
+.hero-description { font-size: 1.7em; color: $white-color; }
 
 .h2-heading-pull-up {margin-top: -30px; }
 
@@ -398,6 +418,13 @@ blockquote small {
         text-align: center;
         margin: 0 auto;
     }
+    .hero-description { 
+      font-size: 1rem;
+      text-align: center;
+      margin: 0 auto;
+      color: $white-color; 
+    }
+
     .buttons {
         text-align: center !important;
     }
@@ -448,6 +475,8 @@ blockquote small {
     h1 { color: $dark-color; padding: 0 0 15px; }
     h2 { color: $main-states-color; padding: 0 0 15px; }
     h5, h3, h4 { color: $dark-color; }
+    background-color: $pale-bg; color: $dark-color;
+
   }
 
 // Separators
