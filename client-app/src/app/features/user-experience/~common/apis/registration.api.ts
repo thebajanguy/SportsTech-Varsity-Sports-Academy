@@ -82,11 +82,13 @@ export class ActivityRegistrationApi {
   private readonly apiBaseUrl = inject(REGISTRATION_API_BASE_URL);
 
   RegisterForCamp(payload: ActivityRegistrationDto): Observable<void> {
+    alert(`${this.apiBaseUrl}/registrations/gold-camp`);
     return this.http.post<void>(`${this.apiBaseUrl}/registrations/gold-camp`, payload);
   }
 
   RegisterForAfterSchool(payload: ActivityRegistrationDto): Observable<void> {
-    return this.http.post<void>(`${this.apiBaseUrl}/registrations/after-school`, payload);
+    alert(`${this.apiBaseUrl}/registrations/gold-camp`);
+     return this.http.post<void>(`${this.apiBaseUrl}/registrations/after-school`, payload);
   }
 }
 
