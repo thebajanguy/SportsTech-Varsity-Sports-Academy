@@ -25,7 +25,7 @@ import {
   BehaviorSubject} from 'rxjs';
 import { signal } from '@angular/core';
 import { CoreNotificationsService } from '../../../../../core/notifications/notifications.service';
-import { ActivityRegistrationApi, ActivityRegistrationDto, BASKETBALL_POSITION_OPTIONS, BasketballPositionOption, COUNTRY_OPTIONS, CountryOption, INTEREST_OPTIONS, InterestOption, SKILL_LEVEL_OPTIONS, SkillLevelOption, SOCCER_POSITION_OPTIONS, TSHIRT_SIZE_OPTIONS, TShirtSizeOption } from './registration.api';
+import { ActivityRegistrationApi, ActivityRegistrationDto, BASKETBALL_POSITION_OPTIONS, BasketballPositionOption, COUNTRY_OPTIONS, CountryOption, INTEREST_OPTIONS, InterestOption, SKILL_LEVEL_OPTIONS, SkillLevelOption, SOCCER_POSITION_OPTIONS, TSHIRT_SIZE_OPTIONS, TShirtSizeOption } from '../../apis/registration.api';
 import { Camp, CampsService } from '../../apis/camp.api';
 import { stringValidator, isoDateValidator, phoneNumberValidator, digitsOnlyValidator, isOptionValidator, alphaNumValidator } from '../../validators/validators';
 import { sqlInjectionValidator } from '../../validators/sqlinjection.validators';
@@ -199,7 +199,8 @@ export class CampRegistrationIntakeComponent  {
     // Create payload
     const payload: ActivityRegistrationDto = {
       RegistrationType: this.activity.trim().toLocaleLowerCase(),
-      
+      ApplicationName: "VSA Prep",
+
       Country: v.Country!.trim(), Interest: v.Interest!.trim(), ActivityId: v.ActivityId!.trim(),
       Player: {
         Givenname: v.Givenname!.trim(), Surname: v.Surname!.trim(),  DOB: v.DOB!.trim(),        
@@ -234,13 +235,13 @@ export class CampRegistrationIntakeComponent  {
         catchError(err => {
           this.serverMessage.set({ type: 'error', text: err?.error?.message ?? 'Sorry, something went wrong. Please try again.' });
           this.serverSuccess.set(false);
-          //this.notifications.showError('Error - Registration Form', this.serverMessage()?.text ?? '' );
+          this.notifications.showError('Error - Registration Form', this.serverMessage()?.text ?? '' );
           // --- TEMP success for stubbed API path (keep/remove as needed) ---
           // this.notifications.showError('Error - Consultation form', this.serverMessage()?.text ?? 'Sorry, something went wrong. Please try again.');
 
           // --- TEMP success for stubbed API path (keep/remove as needed) ---
-          this.notifications.showSuccess('Success - Registration Form', 'Thanks for registering! We will get back to you ASAP.');
-          this.resetForm();
+          //this.notifications.showSuccess('Success - Registration Form', 'Thanks for registering! We will get back to you ASAP.');
+          //this.resetForm();
           // ---------------------------------------------------------------
           return of(void 0);
         }),

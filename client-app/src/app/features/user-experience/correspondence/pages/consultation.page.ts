@@ -131,25 +131,25 @@ export class ConsultationPage  extends BasePageComponent {
       Phone: this.form.value.Phone!.trim(),
       Interest: this.form.value.Interest!.trim(),
       Message: this.form.value.Message!.trim(),
-      
+
       Honeypot: this.form.value.honeypot!.trim()
     };
 
     this.submitting.set(true);
 
-    this.svc.CreateContactRequest(payload)
+    this.svc.CreateConsultationRequest(payload)
       .pipe(
         catchError(err => {
           this.serverMessage.set({ type: 'error', text: err?.error?.message ?? 'Sorry, something went wrong. Please try again.' });
           // --- TEMP success for stubbed API path (keep/remove as needed) ---
-          // this.notifications.showError('Error - Consultation form', this.serverMessage()?.text ?? 'Sorry, something went wrong. Please try again.');
+          this.notifications.showError('Error - Consultation form', this.serverMessage()?.text ?? 'Sorry, something went wrong. Please try again.');
 
           // --- TEMP success for stubbed API path (keep/remove as needed) ---
-          this.serverMessage.set({ type: 'success', text: 'Thanks! We will get back to you ASAP.' });
-          this.serverSuccess.set(true);
-          this.notifications.showSuccess('Success - Consultation form', this.serverMessage()?.text ?? 'Thanks for contacting us! We will get back to you ASAP.');
+          //this.serverMessage.set({ type: 'success', text: 'Thanks! We will get back to you ASAP.' });
+          //this.serverSuccess.set(true);
+          //this.notifications.showSuccess('Success - Consultation form', this.serverMessage()?.text ?? 'Thanks for contacting us! We will get back to you ASAP.');
 
-          this.resetForm();
+          //this.resetForm();
           // ---------------------------------------------------------------
           return of(void 0);
         }),

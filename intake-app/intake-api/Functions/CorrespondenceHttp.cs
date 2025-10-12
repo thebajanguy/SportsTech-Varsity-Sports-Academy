@@ -67,7 +67,7 @@ internal class CorrespondenceHttp(ILogger<CorrespondenceHttp> logger, IEmailServ
 
 
             // Send via Gmail SMTP (SSL 465 or STARTTLS 587)
-            var sentAsync = await _emailService.SendEmailAsync(body, null, ct);
+            var sentAsync = await _emailService.SendCorrespondenceEmailAsync(body, null, ct);
 
             return req.CreateResponse(HttpStatusCode.OK, new { data = sentAsync });
         }
@@ -128,7 +128,7 @@ internal class CorrespondenceHttp(ILogger<CorrespondenceHttp> logger, IEmailServ
 
 
             // Send via Gmail SMTP (SSL 465 or STARTTLS 587)
-            var sentAsync = await _emailService.SendEmailAsync(body, null, ct);
+            var sentAsync = await _emailService.SendCorrespondenceEmailAsync(body, null, ct);
 
             return req.CreateResponse(HttpStatusCode.NoContent);
         }
@@ -185,7 +185,7 @@ internal class CorrespondenceHttp(ILogger<CorrespondenceHttp> logger, IEmailServ
             }
 
             // Send via Gmail SMTP (SSL 465 or STARTTLS 587)
-            var sentAsync = await _emailService.SendEmailAsync(body, null, ct);
+            var sentAsync = await _emailService.SendCorrespondenceEmailAsync(body, null, ct);
 
             return req.CreateResponse(HttpStatusCode.NoContent);
         }
