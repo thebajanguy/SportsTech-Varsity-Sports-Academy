@@ -20,6 +20,7 @@ import {
   InterestOption 
 } from '../../~common/apis/correspondence.api';
 import { SocialPluginComponent } from '../../~common/components/social-plugin/social-plugin.component';
+import { BasePageComponent } from '../../../../core/directives/base-page.directive';
 
 @Component({
   selector: 'app-contact-form',
@@ -30,7 +31,8 @@ import { SocialPluginComponent } from '../../~common/components/social-plugin/so
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
-export class ContactPage {
+export class ContactPage  extends BasePageComponent {
+  override pageName = 'vsa-page';
   private readonly fb = inject(FormBuilder);
   private readonly svc = inject(CorrespondenceApi);
   private readonly notifications = inject(CoreNotificationsService);
@@ -120,12 +122,17 @@ export class ContactPage {
 
     // Create payload
     const payload: CorrespondenceDto = {
+      CorrespondenceType: "Request-For-Information",
+      ApplicationName: "VSA Prep",
+
       GivenName: this.form.value.GivenName!.trim(),
       Surname: this.form.value.Surname!.trim(),
       Email: this.form.value.Email!.trim().toLowerCase(),
       Phone: this.form.value.Phone!.trim(),
       Interest: this.form.value.Interest!.trim(),
       Message: this.form.value.Message!.trim(),
+
+      Honeypot: this.form.value.honeypot!.trim()
     };
 
     this.submitting.set(true);

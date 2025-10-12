@@ -1,7 +1,9 @@
 export const environment = {
     production: true,
     useApiMock: false,                        // <- real API
-    correspondenceApiBaseUrl: 'https://correspondence-manager.azurewebsites.net/api',
+    correspondenceApiBaseUrl: '/api',
+    registrationApiBaseUrl: '/api',             // Functions default port
+    stripePk: 'pk_live_XXXXXXXXXXXXXXXXXXXXXXXX',   // <-- add this   
     appSettings: {
         applicationName: 'Varsity Sports Academy',
         siteUrl: `${window.location.origin}/`, //'http://localhost:5900/', // The redirect URI of the application, this should be same as the value in the application registration portal.Defaults to window.location.href.

@@ -1,38 +1,22 @@
-<header id="recruitment-exposure" class="page-header div-color-dark parallax-hero"
-        style="background-image:url('assets/img/pages/what-we-do/vsaprep-what-we-do-ncaa-eligibility-support.png')"
-        role="banner" aria-label="Academic Tutoring Hero">
-        <div class="filter filter-black" aria-hidden="true"></div>
-
-        <div class="filter filter-black"></div>
-  <div class="content-center">
-    <div class="container">
-      <h1 class="text-uppercase hero-title">
-        <span class="text-color-white">Recruitment & </span><br />
-        <span class="text-color-main">Exposure Strategy</span>
-      </h1>
-
-      <p class="lead text-white mt-3">
-        Getting recruited to play college sports in the U.S. requires more than skill — it takes 
-        <strong>strategic exposure and consistent communication</strong>. 
-        Varsity Sports Academy Prep helps American, Caribbean and European student-athletes showcase their talent, connect with coaches, and stay on track for scholarship opportunities.
-      </p>
-      
-      <nav class="buttons mt-4" aria-label="Primary calls to action">
-        <a [routerLink]="['/'+urlPath+'/consultation']" class="btn btn-main btn-lg btn-magnify">Request Consultation</a>
-        <a [routerLink]="['/'+urlPath+'/contact']" class="btn btn-main btn-lg btn-magnify">Contact Us</a>
-      </nav>
-
-      <!-- Social Media Links -->
-      <div class="mt-3">
-          <app-social-plugin></app-social-plugin>
-      </div>
-
-    </div>
-  </div>
-</header>
+<!-- hero-page.component.html -->
+<app-base-hero
+[title]="'Recruitment &'"
+[subtitle]="'Exposure Strategy'"
+[description]="'Getting recruited to play college sports in the U.S. requires more than skill — it take <strong>strategic exposure and consistent communication</strong>. Varsity Sports Academy Prep helps American, Caribbean and European student-athletes showcase their talent, connect with coaches, and stay on track for scholarship opportunities.'"
+[backgroundUrl]="'assets/img/pages/what-we-do/vsaprep-what-we-do-hero.png'"
+[headerSize]="'none'"
+[breadcrumb]="[
+    { label: 'Home', link: ['/'+urlPath+'/student-athletes'] },
+    { label: 'Our Approach' }
+]"
+[ctas]="[
+    { label: 'Start Your Journey', routerLink: ['/'+urlPath+'/consultation'] , variant:'primary', ariaLabel:'Start your journey with Varsity Sports Academy Prep' },
+    { label: 'Explore Academic Programs', routerLink: ['/'+urlPath+'/academic-tutoring'], variant:'outline', ariaLabel:'Explore academic programs with Varsity Sports Academy Prep' }
+]">
+</app-base-hero>
 
 
-<section class="section section-white" aria-labelledby="tutoring-title" style="margin-top: -50px;">
+<section class="section section-white" aria-labelledby="recruiting-title" style="margin-top: -50px;">
   <div class="container">
     <!-- On-page nav -->
     <aside class="toc" aria-label="On this page">
@@ -46,7 +30,7 @@
 </section>  
 
 <!-- Athlete Profiles &amp;  Highlights -->
-<section id="profile-highlights" class="section section-white" aria-labelledby="profile-highlights-heading" style="padding-top: 10px;margin-top: -50px;">
+<section id="profile-highlights" class="section section-white toc-lift-top-section" aria-labelledby="profile-highlights-heading">
     <div class="container">
         <div class="row align-items-left">
 
@@ -60,9 +44,9 @@
                 </header> 
 
                   <ul class="icon-list mt-4 description align-left" role="list" itemprop="description">
-                    <li class="d-flex mb-3"><span class="icon" aria-hidden="true"></span> Virtual <a href="/en/athlete-profiles">Athlete Profiles</a> with academics + athletics</li>
+                    <li class="d-flex mb-3"><span class="icon" aria-hidden="true"></span> Virtual <a [routerLink]="['/'+urlPath+'/consultation']">Athlete Profiles</a> with academics + athletics</li>
                     <li class="d-flex mb-3"><span class="icon" aria-hidden="true"></span> Highlight reels showcasing game footage and skills</li>
-                    <li class="d-flex mb-3"><span class="icon" aria-hidden="true"></span> Verified transcripts and <a href="/en/ncaa-compliance">NCAA compliance status</a></li>
+                    <li class="d-flex mb-3"><span class="icon" aria-hidden="true"></span> Verified transcripts and <a [routerLink]="['/'+urlPath+'/ncaa-compliance']">NCAA compliance status</a></li>
                     <li class="d-flex mb-3"><span class="icon" aria-hidden="true"></span> Links to SAT/ACT scores, awards, and references</li>
                   </ul>
 

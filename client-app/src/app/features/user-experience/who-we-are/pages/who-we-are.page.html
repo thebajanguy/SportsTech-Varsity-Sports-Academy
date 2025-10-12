@@ -1,52 +1,28 @@
 <div class="wrapper">
-    <!-- Start Hero Section -->
-    <header id="about-varsity-sports-academy-prep" class="page-header div-color-dark parallax-hero"
-        style="background-image: url('assets/img/pages/who-we-are/vsaprep-hero-bg.png');" role="banner"
-        aria-label="about Varsity Sports Academy Prep Hero">
-
-
-        <div class="content-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 ml-auto mr-auto align-center">
-
-                        <!-- SEO Headline -->
-                        <h1 class="text-uppercase hero-title">
-                            <span class="text-color-white">Youth Sports & </span><br />
-                            <span class="text-color-main">Academic Training</span>
-                        </h1>
-
-                        <!-- Supporting tagline for SEO -->
-                        <h5 class="hero-subtitle">
-                            At <strong>Varsity Sports Academy Prep</strong>, we prepare student-athletes to excel
-                            both in the classroom and on the field. Through our unique blend of
-                            <strong>academic tutoring, elite sports training, and NCAA compliance guidance</strong>,
-                            we help youth unlock their full potential and pursue opportunities worldwide.
-                            <br /><br />
-                            Rooted in discipline, teamwork, and our motto
-                            <strong>Labor Durus</strong> (<em>“hard work”</em>), we focus on developing
-                            not just athletes, but well-rounded leaders.
-                        </h5>
-
-                        <!-- CTA Buttons -->
-                        <nav class="buttons mt-4" aria-label="Primary calls to action">
-                          <a [routerLink]="['/'+urlPath+'/contact']" class="btn btn-main btn-lg btn-magnify"
-                            aria-label="Request a consultation">&nbsp; Start Your Journey &nbsp;</a>
-                          <a [routerLink]="['/'+urlPath+'/sports-development']" class="btn btn-main btn-lg btn-magnify"
-                            aria-label="View training programs">Explore Programs</a>
-                        </nav>
-
-                        <!-- Social Media Links -->
-                        <div class="mt-3">
-                            <app-social-plugin></app-social-plugin>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- End Hero Section -->
+  <!-- hero-page.component.html -->
+  <app-base-hero
+  [title]="'Youth Sports &'"
+  [subtitle]="'Academic Training'"
+  [description]="'At <strong>Varsity Sports Academy Prep</strong>, we prepare student-athletes to excel
+  both in the classroom and on the field. Through our unique blend of
+  <strong>academic tutoring, elite sports training, and NCAA compliance guidance</strong>,
+  we help youth unlock their full potential and pursue opportunities worldwide.
+  <br /><br />
+  Rooted in discipline, teamwork, and our motto
+  <strong>Labor Durus</strong> (<em>“hard work”</em>), we focus on developing
+  not just athletes, but well-rounded leaders.'"
+  [backgroundUrl]="'assets/img/pages/who-we-are/vsaprep-hero-bg.png'"
+  [headerSize]="'none'"
+  [breadcrumb]="[
+      { label: 'Home', link: ['/'+urlPath+'/student-athletes'] },
+      { label: 'Our Approach' }
+  ]"
+  [ctas]="[
+      { label: 'Start Your Journey', routerLink: ['/'+urlPath+'/consultation'] , variant:'primary', ariaLabel:'Start your journey with Varsity Sports Academy Prep' },
+      { label: 'Explore Academic Programs', routerLink: ['/'+urlPath+'/academic-tutoring'], variant:'primary', ariaLabel:'Explore academic programs with Varsity Sports Academy Prep' },
+      { label: 'Explore NCAA Compliance', routerLink: ['/'+urlPath+'/ncaa-compliance'], variant:'outline', ariaLabel:'Explore NCAA compliance with Varsity Sports Academy Prep' }
+      ]">
+  </app-base-hero>
 
     <!-- Start: Inspired by Our Values -->
     <section id="inspired-by-our-values" class="section section-white" aria-labelledby="values-heading">

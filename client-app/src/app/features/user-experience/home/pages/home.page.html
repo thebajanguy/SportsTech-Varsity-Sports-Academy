@@ -1,219 +1,181 @@
 <div class="wrapper">
 
-    <!-- Start Hero Section -->
-    <header id="home-varsity-sports-academy-prep" 
-        class="page-header div-color-dark parallax-hero"
-        style="background-image: url('assets/img/pages/home/vsaprep-home-hero-bg.png');" 
-        role="banner"
-        aria-label="Home Varsity Sports Academy Prep Hero">
+  <!-- hero-page.component.html -->
+  <app-base-hero
+  [title]="'Learn the'"
+  [subtitle]="'VSA Prep Way'"
+  [description]="description"
+  [backgroundUrl]="'assets/img/pages/home/vsaprep-home-hero-bg.png'"
+  [headerSize]="'none'"
+  [breadcrumb]="[
+      { label: 'Home', link: ['/'+urlPath+'/student-athletes'] },
+      { label: 'Our Approach' }
+  ]"
+  [ctas]="[
+      { label: 'Start Your Journey', routerLink: ['/'+urlPath+'/consultation'] , variant:'primary', ariaLabel:'Start your journey with Varsity Sports Academy Prep' },
+      { label: 'Explore Academic Programs', routerLink: ['/'+urlPath+'/academic-tutoring'], variant:'outline', ariaLabel:'Explore academic programs with Varsity Sports Academy Prep' }
+  ]">
+  </app-base-hero>
 
 
-        <div class="content-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 ml-auto mr-auto align-center">
+  <!-- Start The Problem & The Solution -->
+  <section id="problem-solution" class="section problem-solution text-center py-5" aria-labelledby="problem-solution-heading">
+      <div class="container">
+          <div class="row">
+              <div class="ml-auto mr-auto text-center">
+                  <header>
+                      <h2 id="problem-solution-heading" class="align-center">
+                          The Problem Student-Athletes Face & The VSA Prep Solution
+                      </h2>
+                  </header>
+              </div>
+          </div>
 
-                        <!-- SEO Headline -->
-                        <h1 class="text-uppercase hero-title">
-                            <span class="text-color-white">Learn the</span><br />
-                            <span class="text-color-main">VSA Prep Way</span>
-                        </h1>
+          <div class="row">
+              <!-- The Problem Copy -->
+              <div class="col-md-6 col-sm-6 mr-auto ml-auto">
+                  <header>
+                      <h3 class="text-danger">🚨 The Problem</h3>
+                      <p class="description align-left" style="padding-top: 10px;">
+                          Too many student-athletes <strong>miss scholarship opportunities</strong> because balancing
+                          <strong>academics and athletics</strong> is hard. Families often face:
+                      </p>
+                  </header>
 
-                        <!-- Supporting tagline for SEO -->
-                        <h5 class="lead text-white mt-3 hero-subtitle">
-                            You have a dream — we have the game plan. At
-                            <strong>Varsity Sports Academy Prep</strong>, our motto
-                            <em>“Labor Durus”</em> (Hard Work Always Pays Off) guides student-athletes
-                            to succeed in academics and athletics. What you put into life is what
-                            you’ll get out — train harder, play better, achieve more.
-                        </h5>
+                  <ul class="list-unstyled mt-4 description" role="list">
+                      <li class="d-flex mb-3">
+                          <span class="text-blue-600 me-2" aria-hidden="true">❌</span>
+                          <span>Weak academic readiness (GPA, NCAA 16-core, SAT/ACT)</span>
+                      </li>
+                      <li class="d-flex mb-3">
+                          <span class="text-blue-600 me-2" aria-hidden="true">❌</span>
+                          <span>Limited exposure to recruiters and college scouts</span>
+                      </li>
+                      <li class="d-flex mb-3">
+                          <span class="text-blue-600 me-2" aria-hidden="true">❌</span>
+                          <span>No clear roadmap from raw talent → verified scholarship pathway</span>
+                      </li>
+                  </ul>
+              </div>
 
-                        <!-- CTA Buttons -->
-                        <div class="buttons text-left mt-4" style="z-index: 9999; top: 3em;">
-                             <a [routerLink]="['/'+urlPath+'/consultation']" class="btn btn-main btn-lg btn-magnify"
-                                aria-label="Start your journey with Varsity Sports Academy Prep">
-                                Start Your Journey
-                            </a>
-                            &nbsp;&nbsp;
-                            <a  [routerLink]="['/'+urlPath+'/academic-tutoring']" 
-                                class="btn btn-main btn-lg btn-magnify"
-                                aria-label="Explore Varsity Sports Academy Prep programs">
-                                Explore Academic Programs
-                            </a>
-                        </div>
+              <!-- The Solution Copy -->
+              <div class="col-md-6 col-sm-6 mr-auto ml-auto">
+                  <header>
+                  <h3 class="text-success">✅ The VSA Prep Solution</h3>
+                  <p class="description align-left" style="padding-top: 10px;">
+                    <strong>Varsity Sports Academy Prep</strong> delivers a
+                      <strong>one-stop academic + athletic program</strong> that removes uncertainty and accelerates results.
+                  </p>
+                  </header>
 
-                        <!-- Social Media Links -->
-                        <div class="mt-3">
-                            <app-social-plugin></app-social-plugin>
-                        </div>
+                  <ul class="list-unstyled mt-4 description align-left" role="list">
+                      <li class="d-flex mb-3">
+                          <span class="text-blue-600 me-2" aria-hidden="true">📘</span>
+                          <span>Academic tutoring, SAT/ACT prep & NCAA compliance mapping</span>
+                      </li>
+                      <li class="d-flex mb-3">
+                          <span class="text-blue-600 me-2" aria-hidden="true">🏀</span>
+                          <span>Elite training in basketball, soccer & volleyball with certified coaches</span>
+                      </li>
+                      <li class="d-flex mb-3">
+                          <span class="text-blue-600 me-2" aria-hidden="true">🌍</span>
+                          <span>Verified athlete profiles, showcase camps & international tours for exposure</span>
+                      </li>
+                      <li class="d-flex mb-3">
+                          <span class="text-blue-600 me-2" aria-hidden="true">🧭</span>
+                          <span>Step-by-step pathway from classroom readiness → college recruiting spotlight</span>
+                      </li>
+                  </ul>
+              </div>
+          </div>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- End Hero Section -->
+          <!-- Calls to Action -->
+          <div class="row mt-2">
+              <div class="col-md-6 col-sm-6 mr-auto ml-auto">
+                  <a [routerLink]="['/'+urlPath+'/academic-tutoring']"
+                  class="btn btn-main btn-lg btn-magnify mt-4"
+                  aria-label="Explore academic programs at Varsity Sports Academy Prep">
+                  Unlock Academic & Athletic Success
+                  </a>
+              </div>
+              <div class="col-md-6 col-sm-6 mr-auto ml-auto">
+                  <a [routerLink]="['/'+urlPath+'/contact']" 
+                  class="btn btn-main btn-lg mt-3"
+                  title="Get started with VSA Prep today">
+                  Talk to a Prep Advisor Today
+                  </a>
+              </div>
+          </div>
 
-    <!-- Start The Problem & The Solution -->
-    <section id="problem-solution" class="section problem-solution text-center py-5" aria-labelledby="problem-solution-heading">
-        <div class="container">
-            <div class="row">
-                <div class="ml-auto mr-auto text-center">
-                    <header>
-                        <h2 id="problem-solution-heading" class="align-center">
-                            The Problem Student-Athletes Face & The VSA Prep Solution
-                        </h2>
-                    </header>
-                </div>
-            </div>
+          <!-- Reassurance line for SEO/context -->
+          <div class="row mt-3">
+              <div class="col-md-12">
+                  <p class="description text-muted">
+                  VSA Prep helps student-athletes achieve NCAA eligibility, build elite skills, and gain the recruiting exposure needed to earn scholarships.
+                  </p>
+              </div>
+          </div>
 
-            <div class="row">
-                <!-- The Problem Copy -->
-                <div class="col-md-6 col-sm-6 mr-auto ml-auto">
-                    <header>
-                        <h3 class="text-danger">🚨 The Problem</h3>
-                        <p>
-                            Too many student-athletes <strong>miss scholarship opportunities</strong> because balancing
-                            <strong>academics and athletics</strong> is hard. Families often face:
-                        </p>
-                    </header>
+      </div>
+  </section>
+  <!-- End The Problem & The Solution -->
+    
+  <!-- Start Academics First -->
+  <section id="academics-first" class="section section-white" aria-labelledby="academics-first-heading">
+      <div class="container">
+          <div class="row align-items-left">
 
-                    <ul class="list-unstyled mt-4 description" role="list">
-                        <li class="d-flex mb-3">
-                            <span class="text-blue-600 me-2" aria-hidden="true">❌</span>
-                            <span>Weak academic readiness (GPA, NCAA 16-core, SAT/ACT)</span>
-                        </li>
-                        <li class="d-flex mb-3">
-                            <span class="text-blue-600 me-2" aria-hidden="true">❌</span>
-                            <span>Limited exposure to recruiters and college scouts</span>
-                        </li>
-                        <li class="d-flex mb-3">
-                            <span class="text-blue-600 me-2" aria-hidden="true">❌</span>
-                            <span>No clear roadmap from raw talent → verified scholarship pathway</span>
-                        </li>
-                    </ul>
-                </div>
+              <!-- Copy -->
+              <div class="col-md-6 col-sm-6 mr-auto ml-auto">
+                  <header>
+                      <h2 id="academics-first-heading" class="h2-heading-pull-up align-left">Academics First</h2>
+                      <h3 class="text-muted" style="padding: 20px;padding-left:0px;">
+                          Focused tutoring, exam readiness, and NCAA guidance designed for student-athletes.
+                      </h3>
+                  </header>
 
-                <!-- The Solution Copy -->
-                <div class="col-md-6 col-sm-6 mr-auto ml-auto">
-                    <header>
-                    <h3 class="text-success">✅ The VSA Prep Solution</h3>
-                    <p>
-                        <strong>Varsity Sports Academy Prep</strong> delivers a
-                        <strong>one-stop academic + athletic program</strong> that removes uncertainty and accelerates results.
-                    </p>
-                    </header>
+                  <ul class="list-unstyled mt-4 description align-left" role="list">
+                      <li class="d-flex mb-3">
+                          <span class="text-blue-600 me-2" aria-hidden="true">📘</span>
+                          <span><strong>Core Subject Tutoring</strong> — Math, English, Sciences, and Languages</span>
+                      </li>
+                      <li class="d-flex mb-3">
+                          <span class="text-blue-600 me-2" aria-hidden="true">📝</span>
+                          <span><strong>Exam Prep & Study Hall</strong> — SAT, ACT, CSEC, and other exams</span>
+                      </li>
+                      <li class="d-flex mb-3">
+                          <span class="text-blue-600 me-2" aria-hidden="true">🎓</span>
+                          <span><strong>NCAA Eligibility Mapping</strong> — 16-core compliance guidance</span>
+                      </li>
+                      <li class="d-flex">
+                          <span class="text-blue-600 me-2" aria-hidden="true">🌟</span>
+                          <span><strong>Mentorship & Leadership</strong> — personal growth and character
+                              building</span>
+                      </li>
+                  </ul>
 
-                    <ul class="list-unstyled mt-4 description align-left" role="list">
-                        <li class="d-flex mb-3">
-                            <span class="text-blue-600 me-2" aria-hidden="true">📘</span>
-                            <span>Academic tutoring, SAT/ACT prep & NCAA compliance mapping</span>
-                        </li>
-                        <li class="d-flex mb-3">
-                            <span class="text-blue-600 me-2" aria-hidden="true">
-                                <i class="fas fa-volleyball-ball"></i>
-                            </span>
-                            <span>Elite training in basketball, soccer & volleyball with certified coaches</span>
-                        </li>
-                        <li class="d-flex mb-3">
-                            <span class="text-blue-600 me-2" aria-hidden="true">🌍</span>
-                            <span>Verified athlete profiles, showcase camps & international tours for exposure</span>
-                        </li>
-                        <li class="d-flex mb-3">
-                            <span class="text-blue-600 me-2" aria-hidden="true">🧭</span>
-                            <span>Step-by-step pathway from classroom readiness → college recruiting spotlight</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+                  <a [routerLink]="['/'+urlPath+'/academic-tutoring']" class="btn btn-main btn-lg btn-magnify mt-4"
+                      aria-label="Explore academic programs at Varsity Sports Academy Prep">
+                      Explore Academic Programs
+                  </a>
+              </div>
 
-            <!-- Calls to Action -->
-            <div class="row mt-2">
-                <div class="col-md-6 col-sm-6 mr-auto ml-auto">
-                    <a [routerLink]="['/'+urlPath+'/academic-tutoring']"
-                    class="btn btn-main btn-lg btn-magnify mt-4"
-                    aria-label="Explore academic programs at Varsity Sports Academy Prep">
-                    Unlock Academic & Athletic Success
-                    </a>
-                </div>
-                <div class="col-md-6 col-sm-6 mr-auto ml-auto">
-                    <a [routerLink]="['/'+urlPath+'/contact']" 
-                    class="btn btn-main btn-lg mt-3"
-                    title="Get started with VSA Prep today">
-                    Talk to a Prep Advisor Today
-                    </a>
-                </div>
-            </div>
+              <!-- Visual -->
+              <div class="col-md-6 col-sm-6 mr-auto ml-auto">
+                  <figure class="m-0">
+                      <img src="assets/img/pages/home/vsaprep-academics-first.png"
+                          alt="Academics tutoring and exam preparation for student-athletes at Varsity Sports Academy Prep"
+                          loading="lazy" decoding="async" class="img-fluid rounded shadow" width="1200"
+                          height="900" />
+                      <!-- Optional caption for SEO -->
+                      <!-- <figcaption class="visually-hidden">Academic support and NCAA compliance guidance at VSA Prep.</figcaption> -->
+                  </figure>
+              </div>
 
-            <!-- Reassurance line for SEO/context -->
-            <div class="row mt-3">
-                <div class="col-md-12">
-                    <p class="description text-muted">
-                    VSA Prep helps student-athletes achieve NCAA eligibility, build elite skills, and gain the recruiting exposure needed to earn scholarships.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-    <!-- End The Problem & The Solution -->
-      
-    <!-- Start Academics First -->
-    <section id="academics-first" class="section section-white" aria-labelledby="academics-first-heading">
-        <div class="container">
-            <div class="row align-items-left">
-
-                <!-- Copy -->
-                <div class="col-md-6 col-sm-6 mr-auto ml-auto">
-                    <header>
-                        <h2 id="academics-first-heading" class="h2-heading-pull-up align-left">Academics First</h2>
-                        <h3 class="text-muted" style="padding: 20px;padding-left:0px;">
-                            Focused tutoring, exam readiness, and NCAA guidance designed for student-athletes.
-                        </h3>
-                    </header>
-
-                    <ul class="list-unstyled mt-4 description align-left" role="list">
-                        <li class="d-flex mb-3">
-                            <span class="text-blue-600 me-2" aria-hidden="true">📘</span>
-                            <span><strong>Core Subject Tutoring</strong> — Math, English, Sciences, and Languages</span>
-                        </li>
-                        <li class="d-flex mb-3">
-                            <span class="text-blue-600 me-2" aria-hidden="true">📝</span>
-                            <span><strong>Exam Prep & Study Hall</strong> — SAT, ACT, CSEC, and other exams</span>
-                        </li>
-                        <li class="d-flex mb-3">
-                            <span class="text-blue-600 me-2" aria-hidden="true">🎓</span>
-                            <span><strong>NCAA Eligibility Mapping</strong> — 16-core compliance guidance</span>
-                        </li>
-                        <li class="d-flex">
-                            <span class="text-blue-600 me-2" aria-hidden="true">🌟</span>
-                            <span><strong>Mentorship & Leadership</strong> — personal growth and character
-                                building</span>
-                        </li>
-                    </ul>
-
-                    <a [routerLink]="['/'+urlPath+'/academic-tutoring']" class="btn btn-main btn-lg btn-magnify mt-4"
-                        aria-label="Explore academic programs at Varsity Sports Academy Prep">
-                        Explore Academic Programs
-                    </a>
-                </div>
-
-                <!-- Visual -->
-                <div class="col-md-6 col-sm-6 mr-auto ml-auto">
-                    <figure class="m-0">
-                        <img src="assets/img/pages/home/vsaprep-academics-first.png"
-                            alt="Academics tutoring and exam preparation for student-athletes at Varsity Sports Academy Prep"
-                            loading="lazy" decoding="async" class="img-fluid rounded shadow" width="1200"
-                            height="900" />
-                        <!-- Optional caption for SEO -->
-                        <!-- <figcaption class="visually-hidden">Academic support and NCAA compliance guidance at VSA Prep.</figcaption> -->
-                    </figure>
-                </div>
-
-            </div>
-        </div>
-    </section>
-    <!-- End Academics First -->
+          </div>
+      </div>
+  </section>
+  <!-- End Academics First -->
 
 
     <!-- Start Sports Training -->
@@ -283,7 +245,6 @@
         </div>
     </section>
     <!-- End Sports Training -->
-
 
     <!-- Start Recruitment and Exposure -->
     <section id="recruitment-and-exposure" class="section section-white"
@@ -410,7 +371,7 @@
                             <img src="assets/img/pages/home/vsaprep-camp-soccer.png"
                                 alt="VSA Prep Soccer Camps for ages 5–14: ball control, footwork, shooting, defense, team play"
                                 loading="lazy" width="580" height="360" />
-                            <h3 class="card-category section-title-md text-primary">Soccer Camps</h3>
+                            <h3 class="card-category section-title-md text-primary">Brains & Ballers<br />Soccer Camps</h3>
                             <p class="card-description-dark">
                                 Brains & Ballers<strong>Soccer Camps</strong> build fundamentals:
                                 ball control, <strong>footwork</strong>, shooting, defensive pressure, and team play.
@@ -435,7 +396,7 @@
                             <img src="assets/img/pages/home/vsaprep-camp-basketball.png"
                                 alt="VSA Prep Basketball Camps for ages 5–14: ball-handling, shooting, defense, game IQ"
                                 loading="lazy" width="580" height="360" />
-                            <h3 class="card-category section-title-md text-primary">Basketball Camps</h3>
+                            <h3 class="card-category section-title-md text-primary">Brains & Ballers<br />Basketball Camps</h3>
                             <p class="card-description-dark">
                                 Our <strong>Basketball Camps</strong> emphasize ball-handling, shooting form,
                                 footwork, on-ball defense, and <strong>game IQ</strong>, with small-group
@@ -461,7 +422,7 @@
                             <img src="assets/img/pages/home/vsaprep-camp-football.png"
                                 alt="VSA Prep Football Camps for ages 5–14: footwork, catching, defense, teamwork"
                                 loading="lazy" width="580" height="360" />
-                            <h3 class="card-category section-title-md text-primary">Football Camps</h3>
+                            <h3 class="card-category section-title-md text-primary">Brains & Ballers<br />Football Camps</h3>
                             <p class="card-description-dark">
                                 The <strong>Football Camps</strong> develop position-specific <strong>footwork</strong>,
                                 catching mechanics, defensive fundamentals, and team concepts. Open to boys and girls
@@ -1070,7 +1031,7 @@
                     <div class="card-footer">
                       <a [routerLink]="['/'+urlPath+'/contact']" class="btn btn-main"
                          aria-label="Request information about One-on-One Workouts at VSA Prep">
-                        <i class="nc-icon nc-email-85"></i>&nbsp; Request Private Training Info
+                        <i class="nc-icon nc-email-85"></i>&nbsp; Request 1-on-1 Training Info
                       </a>
                     </div>
                   </div>

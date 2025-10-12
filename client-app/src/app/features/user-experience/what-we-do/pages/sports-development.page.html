@@ -1,50 +1,23 @@
-<header id="sports-development-hero" class="page-header div-color-dark parallax-hero "
-        style="background-image:url('assets/img/pages/what-we-do/vsaprep-what-we-do-hero-sports-development.png')"
-        role="banner" aria-label="Academic Tutoring Hero">
-
-  <div class="filter filter-black" aria-hidden="true"></div>
-  <div class="filter filter-black"></div>
-
-  <div class="content-center">
-    <div class="container">
-      <div class="col-md-12 ml-auto mr-auto align-center">
-
-        <h1 class="text-uppercase hero-title">
-          <span class="text-color-white">Sports Development &</span><br />
-          <span class="text-color-main">Performance Training</span>
-        </h1>
-
-        <nav class="sr-only" aria-label="Breadcrumb">
-          <ol>
-            <li><a routerLink="/">Home</a></li>
-            <li aria-current="page">Sports Development</li>
-          </ol>
-        </nav>
-
-        <!-- Supporting tagline for SEO -->
-        <h5 class="hero-subtitle text-white mt-3 ">
-          We combine elite coaching, athletic performance training, and skill development with an academic-first approach to ensure long-term success. Whether your passion is basketball, soccer, volleyball, or track & field, our programs prepare you for the next level of competition and scholarship opportunities.
-          Every athlete has untapped potential. Our multi-sport development blends elite coaching,
-          performance training, and sports IQ with academics—building stronger, faster, smarter athletes.
-  
-        </h5>
-
-        <!-- CTA Buttons -->
-        <nav class="buttons mt-4" aria-label="Primary calls to action">
-          <a [routerLink]="['/'+urlPath+'/consultation']" class="btn btn-main btn-lg btn-magnify">Request Consultation</a>
-          <a [routerLink]="['/'+urlPath+'/contact']" class="btn btn-main btn-lg btn-magnify">Contact Us</a>
-        </nav>
-
-        <!-- Social Media Links -->
-        <div class="mt-3">
-            <app-social-plugin></app-social-plugin>
-        </div>
-
-      </div>
-      
-    </div>
-  </div>
-</header>
+<!-- hero-page.component.html -->
+<app-base-hero
+[title]="'Sports Development &'"
+[subtitle]="'Performance Training'"
+[description]="
+  'We combine elite coaching, athletic performance training, and skill development with an academic-first approach to ensure long-term success. Whether your passion is basketball, soccer, volleyball, or track & field, our programs prepare you for the next level of competition and scholarship opportunities.
+  Every athlete has untapped potential. Our multi-sport development blends elite coaching,
+  performance training, and sports IQ with academics—building stronger, faster, smarter athletes.
+  '"
+[backgroundUrl]="'assets/img/pages/what-we-do/vsaprep-what-we-do-hero-sports-development.png'"
+[headerSize]="'none'"
+[breadcrumb]="[
+    { label: 'Home', link: ['/'+urlPath+'/student-athletes'] },
+    { label: 'Our Approach' }
+]"
+[ctas]="[
+    { label: 'Start Your Journey', routerLink: ['/'+urlPath+'/consultation'] , variant:'primary', ariaLabel:'Start your journey with Varsity Sports Academy Prep' },
+    { label: 'Explore Academic Programs', routerLink: ['/'+urlPath+'/academic-tutoring'], variant:'outline', ariaLabel:'Explore academic programs with Varsity Sports Academy Prep' }
+]">
+</app-base-hero>
 
 <!-- Multi-Sport Training Programs -->
 <section id="multi-sport-training" class="section section-white" aria-labelledby="multi-sport-training-heading">

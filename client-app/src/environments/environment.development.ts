@@ -1,9 +1,11 @@
 export const environment = {
     production: false,
     useApiMock: true,                         // <- toggle this
-    correspondenceApiBaseUrl: 'http://localhost:8073/api',  // Functions default port
+    correspondenceApiBaseUrl: 'http://localhost:7205/api',  // Functions default port
+    registrationApiBaseUrl: 'http://localhost:7205/api',             // Functions default port
+    stripePk: 'pk_test_XXXXXXXXXXXXXXXXXXXXXXXX',   // <-- add this    
     appSettings: {
-        applicationName: 'Varsity Sports Academy',
+          applicationName: 'Varsity Sports Academy',
         siteUrl: `${window.location.origin}/`, //'http://localhost:5900/', // The redirect URI of the application, this should be same as the value in the application registration portal.Defaults to window.location.href.
         pageTitle: 'Academic & Sports Preparation',
         emailSentTo: 'VarsitySportsAcademy@Outlook.com',

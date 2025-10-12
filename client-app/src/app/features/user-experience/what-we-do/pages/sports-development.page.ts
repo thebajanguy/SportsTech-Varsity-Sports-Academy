@@ -1,29 +1,21 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { UtilitiesService } from '../../../../core/services/utilities.service';
 import { NewsletterPage } from '../../correspondence/pages/newsletter.page';
 import { FixedSocialPluginComponent } from '../../~common/components/fixed-social-plugin/fixed-social-plugin.component';
 import { SocialPluginComponent } from '../../~common/components/social-plugin/social-plugin.component';
+import { BasePageComponent } from '../../../../core/directives/base-page.directive';
+import { BaseHeroComponent } from "../../~common/components/base-hero/base-hero.component";
 
 @Component({
   selector: 'app-sports-development',
   standalone: true,
-  imports: [CommonModule, RouterLink, SocialPluginComponent, NewsletterPage, FixedSocialPluginComponent],
+  imports: [CommonModule, RouterLink, SocialPluginComponent, NewsletterPage, FixedSocialPluginComponent, BaseHeroComponent],
   templateUrl: './sports-development.page.html',
   styleUrls: ['./sports-development.page.scss']
 })
-export class SportsDevelopmentPage {
-    utilitiesService = inject(UtilitiesService);
-    urlPath: string = ''; 
-    loginPath: string = ''; 
-    public date: Date = new Date();
-
-    constructor( ) {
-        this.urlPath = this.utilitiesService.UrlRoutePath; 
-        this.loginPath = this.utilitiesService.LoginRoutePath;  
-    }
-  
+export class SportsDevelopmentPage extends BasePageComponent {
+  override pageName = 'vsa-page';
 
   schema = {
     "@context": "https://schema.org",
@@ -64,6 +56,5 @@ export class SportsDevelopmentPage {
     ]
   };
 
-  ngOnInit(): void {
-  }
+ 
 }

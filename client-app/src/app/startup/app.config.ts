@@ -26,7 +26,7 @@ import { ROUTER_PROVIDERS } from './app.routes';
 import { IdentityManagementModule } from '../features/identity-management/~identity-management.module';
 import { CoreApplicationModule } from '../core/~core.module';
 import { RouteSeoService } from '../core/services/route-seo.service';
-import { CORRESPONDENCE_API_BASE_URL, SITE_URL } from '../core/tokens/api-config-url.tokens';
+import { CORRESPONDENCE_API_BASE_URL, REGISTRATION_API_BASE_URL, SITE_URL } from '../core/tokens/api-config-url.tokens';
 
 
 
@@ -48,6 +48,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptorsFromDi(), withFetch()),
     provideAnimations(),
     { provide: CORRESPONDENCE_API_BASE_URL, useValue: environment.correspondenceApiBaseUrl },
+    { provide: REGISTRATION_API_BASE_URL, useValue: environment.registrationApiBaseUrl },
     { provide: SITE_URL, useValue: environment.appSettings.siteUrl },
     { provide: RouteSeoService, useClass: RouteSeoService },
   ],
