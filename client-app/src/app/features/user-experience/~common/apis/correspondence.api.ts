@@ -34,17 +34,21 @@ export class CorrespondenceApi {
   private readonly http = inject(HttpClient);
   private readonly apiBaseUrl = inject(CORRESPONDENCE_API_BASE_URL);
 
+  CreateConsultationRequest(payload: CorrespondenceDto): Observable<void> {
+    alert(`${this.apiBaseUrl}/correspondences/consultation` + payload);
+    return this.http.post<void>(`${this.apiBaseUrl}/correspondences/consultation`, payload);
+  }
+  
   CreateContactRequest(payload: CorrespondenceDto): Observable<void> {
+    alert(`${this.apiBaseUrl}/correspondences/contact` + payload);
     return this.http.post<void>(`${this.apiBaseUrl}/correspondences/contact`, payload);
   }
 
   CreateNewsletterSignup(payload: CorrespondenceDto): Observable<void> {
+    alert(`${this.apiBaseUrl}/correspondences/newsletter` + payload);
     return this.http.post<void>(`${this.apiBaseUrl}/correspondences/newsletter`, payload);
   }
 
-  CreateConsultationRequest(payload: CorrespondenceDto): Observable<void> {
-    return this.http.post<void>(`${this.apiBaseUrl}/correspondences/consultation`, payload);
-  }
 
 }
 

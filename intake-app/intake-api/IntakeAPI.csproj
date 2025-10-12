@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DTOs\ActivityDtos.cs" />
     <Compile Remove="Function1.cs" />
-    <Compile Remove="Functions\RegistrationHttp.cs" />
   </ItemGroup>
 
   <ItemGroup>

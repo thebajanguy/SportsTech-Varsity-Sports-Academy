@@ -142,14 +142,14 @@ export class ContactPage  extends BasePageComponent {
         catchError(err => {
           this.serverMessage.set({ type: 'error', text: err?.error?.message ?? 'Sorry, something went wrong. Please try again.' });
           // --- TEMP success for stubbed API path (keep/remove as needed) ---
-          // this.notifications.showError('Error - Contact form', this.serverMessage()?.text ?? 'Sorry, something went wrong. Please try again.');
+          this.notifications.showError('Error - Contact form', this.serverMessage()?.text ?? 'Sorry, something went wrong. Please try again.');
 
           // --- TEMP success for stubbed API path (keep/remove as needed) ---
-          this.serverMessage.set({ type: 'success', text: 'Thanks! We will get back to you ASAP.' });
-          this.serverSuccess.set(true);
-          this.notifications.showSuccess('Success - Contact form', this.serverMessage()?.text ?? 'Thanks for contacting us! We will get back to you ASAP.');
+          //this.serverMessage.set({ type: 'success', text: 'Thanks! We will get back to you ASAP.' });
+          //this.serverSuccess.set(true);
+          //this.notifications.showSuccess('Success - Contact form', this.serverMessage()?.text ?? 'Thanks for contacting us! We will get back to you ASAP.');
 
-          this.resetForm();
+          //this.resetForm();
           // ---------------------------------------------------------------
           return of(void 0);
         }),

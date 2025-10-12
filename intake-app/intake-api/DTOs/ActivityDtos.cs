@@ -1,22 +1,25 @@
-﻿namespace IntakeAPI.DTOs;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace IntakeAPI.DTOs;
 
 public sealed record ActivityRegistrationDto
 {
-    public string? RegistrationType { get; init; }
-    public string? ApplicationName { get; init; }
-    public DateTimeOffset Timestamp { get; init; }
+    public string? RegistrationType { get; init; }   // "basketball-camp" | "soccer-camp" | "after-school" | etc.
 
-
-    public string? Country { get; init; }            // Barbados / United States / etc.
-    public string? Interest { get; init; }           // Sport / After-School / etc.
-    public string? ActivityId { get; init; }         // campId or afterSchoolId
+    public string? Country { get; init; }
+    public string? Interest { get; init; }
+    public string? ActivityId { get; init; }
 
     public PlayerDto? Player { get; init; }
     public GuardianDto? Guardian { get; init; }
     public PaymentDto? Payment { get; init; }
 
     public string? Notes { get; init; }
-    public string? CreatedAt { get; init; }          // 'YYYY-MM-DD' or ISO8601 if you prefer
+    public string? CreatedAt { get; init; }          // ISO 8601 string (e.g., new Date().toISOString())
     public string? Honeypot { get; init; }           // anti-bot hidden input
 }
 
@@ -47,7 +50,7 @@ public sealed record GuardianDto
 public sealed record PaymentDto
 {
     public string? PaymentMethod { get; init; }
-    public double? PaymentAmount { get; init; }
+    public double? PaymentAmount { get; init; }      // use decimal? if you prefer exact currency
     public string? PaymentCurrency { get; init; }
     public string? PaymentStatus { get; init; }
     public string? PaymentTransactionId { get; init; }

@@ -1,19 +1,26 @@
-﻿using MailKit.Net.Smtp;
-using Microsoft.Extensions.Options;
-using MimeKit;
-using Org.BouncyCastle.Ocsp;
-using System.Net;
-using System.Text;
-using IntakeAPI.DTOs;
+﻿using IntakeAPI.DTOs;
 using IntakeAPI.Extensions;
 using IntakeAPI.Settings;
+using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.Extensions.Options;
+using Microsoft.Identity.Client;
+using MimeKit;
+using Org.BouncyCastle.Ocsp;
+using System.Diagnostics.Metrics;
+using System.Net;
+using System.Numerics;
+using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace IntakeAPI.Services;
 
 internal interface IEmailService
 {
-    Task<string> SendEmailAsync(CorrespondenceDto c, IEnumerable<string>? additionalTo = null, CancellationToken ct = default);
+    Task<string> SendCorrespondenceEmailAsync(CorrespondenceDto c, IEnumerable<string>? additionalTo = null, CancellationToken ct = default);
+    Task<string> SendRegistrationEmailAsync(ActivityRegistrationDto c, IEnumerable<string>? additionalTo = null, CancellationToken ct = default);
+
 }
 
 
@@ -21,31 +28,58 @@ internal class EmailService(IOptions<GmailOptions> mailOptions) : IEmailService
 {
     private readonly GmailOptions _mailOptions = mailOptions.Value ?? throw new ArgumentNullException(nameof(mailOptions));
 
-    public async Task<string> SendEmailAsync(CorrespondenceDto c, IEnumerable<string>? additionalTo = null, CancellationToken ct = default)
+    public async Task<string> SendRegistrationEmailAsync(ActivityRegistrationDto r, IEnumerable<string>? additionalTo = null, CancellationToken ct = default)
+    {
+        try
+        {
+            var (subject, html, text) = BuildForRegistration(r);
+
+            var gmailUser = _mailOptions.GmailUser;
+            var gmailAppPassword = _mailOptions.GmailAppPassword ;  // 16-char app password
+            var contactTo = _mailOptions.MailTo ;
+
+
+            // Compose email
+            var msg = new MimeMessage();
+            msg.From.Add(new MailboxAddress($"VSA Prep Contact Form", gmailUser)); // must be the Gmail user for deliverability
+            msg.To.Add(new MailboxAddress($"VSA Prep Contact Form - {r.Guardian?.GuardianName}", MailboxAddress.Parse(contactTo).ToString()));
+            msg.ReplyTo.Add(new MailboxAddress($"{r.Guardian?.GuardianName}", MailboxAddress.Parse(r.Guardian?.GuardianEmail).ToString()));
+            msg.Subject = subject;
+
+            var builder = new BodyBuilder
+            {
+                TextBody = text,    //$"{body.Message}\n\n---\nFrom: {body.GivenName} {body.Surname} <{body.Email}>",
+                HtmlBody = html     //$"<p>{safeHtml}</p><hr><p>From: {System.Net.WebUtility.HtmlEncode(body.GivenName)} {System.Net.WebUtility.HtmlEncode(body.Surname)} &lt;{System.Net.WebUtility.HtmlEncode(body.Email)}&gt;</p>"
+            };
+            msg.Body = builder.ToMessageBody();
+
+            // Send via Gmail SMTP (SSL 465 or STARTTLS 587)
+            using var smtp = new SmtpClient();
+            await smtp.ConnectAsync("smtp.gmail.com", 465, MailKit.Security.SecureSocketOptions.SslOnConnect, ct);
+            await smtp.AuthenticateAsync(gmailUser, gmailAppPassword, ct);
+            var sentAsync = await smtp.SendAsync(msg, ct);
+            await smtp.DisconnectAsync(true, ct);
+
+            return sentAsync;
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw;
+        }
+    }
+
+    public async Task<string> SendCorrespondenceEmailAsync(CorrespondenceDto c, IEnumerable<string>? additionalTo = null, CancellationToken ct = default)
     {
         try
         {
             var (subject, html, text) = BuildForCorrespondence(c);
 
-            // Merge configured default MailTo with any additional recipients
-            // var recipients = MergeRecipients(_mailOptions.MailTo, additionalTo);
 
-            //var mail = new Domain.ValueObjects.Emails.Email
-            //{
-            //    MailFrom = _mailOptions.MailFrom,
-            //    MailFromName = _mailOptions.MailFromName,
-            //    MailTo = recipients,
-            //    Subject = subject,
-            //    HtmlBody = html,
-            //    PlainTextBody = text
-            //};
-
-            // Env config
-
-            var gmailUser = _mailOptions.GmailUser ?? Environment.GetEnvironmentVariable("GmailUser");
-            var gmailAppPassword = _mailOptions.GmailAppPassword ?? Environment.GetEnvironmentVariable("GmailAppPassword");  // 16-char app password
-            var contactTo = _mailOptions.MailTo ?? Environment.GetEnvironmentVariable("MailTo");
-
+            var gmailUser = _mailOptions.GmailUser;
+            var gmailAppPassword = _mailOptions.GmailAppPassword;  // 16-char app password
+            var contactTo = _mailOptions.MailTo ;
 
             // Compose email
             var msg = new MimeMessage();
@@ -53,8 +87,6 @@ internal class EmailService(IOptions<GmailOptions> mailOptions) : IEmailService
             msg.To.Add(new MailboxAddress($"VSA Prep Contact Form - {c.GivenName} {c.Surname}", MailboxAddress.Parse(contactTo).ToString()));
             msg.ReplyTo.Add(new MailboxAddress($"{c.GivenName} {c.Surname}", MailboxAddress.Parse(c.Email).ToString()));
             msg.Subject = subject;
-
-            var safeHtml = System.Net.WebUtility.HtmlEncode(c.Message).Replace("\n", "<br/>");
 
             var builder = new BodyBuilder
             {
@@ -137,6 +169,103 @@ internal class EmailService(IOptions<GmailOptions> mailOptions) : IEmailService
 
     }
 
+    private static (string subject, string html, string text) BuildForRegistration(ActivityRegistrationDto r)
+    {
+
+        var subject = $"[{r.ApplicationName}] {r.RegistrationType}: {r.Interest ?? "New Registration"}";
+
+        var sb = new StringBuilder();
+        // HTML
+        sb.Append("<div style=\"font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.4\">");
+        sb.Append($"<h2 style=\"margin:0 0 8px\">{Escape(subject)}</h2>");
+        sb.Append("<table style=\"border-collapse:collapse\">");
+
+        sb = Row(sb, "Type", r.RegistrationType);
+        sb = Row(sb, "Country", r.Country);
+        sb = Row(sb, "Interest", r.Interest);
+        sb = Row(sb, "ActivityId", r.ActivityId);
+        sb = Row(sb, "When", r.Timestamp.ToString("u"));
+
+        sb = Row(sb, "Given Name", r.Player.Givenname);
+        sb = Row(sb, "Surname", r.Player.Surname);
+        sb = Row(sb, "DOB", r.Player.DOB);
+        sb = Row(sb, "Phone", r.Player.Phone);
+        sb = Row(sb, "Email", r.Player.Email);
+
+        sb = Row(sb, "School", r.Player.School);
+        sb = Row(sb, "GradeOrForm", r.Player.GradeOrForm);
+
+        sb = Row(sb, "Position", r.Player.Position);
+        sb = Row(sb, "SkillLevel", r.Player.SkillLevel);
+        sb = Row(sb, "TshirtSize", r.Player.TshirtSize);
+
+        sb = Row(sb, "GuardianName", r.Guardian.GuardianName);
+        sb = Row(sb, "GuardianEmail", r.Guardian.GuardianEmail);
+        sb = Row(sb, "GuardianPhone", r.Guardian.GuardianPhone);
+        sb = Row(sb, "GuardianRelation", r.Guardian.GuardianRelation);
+
+        sb = Row(sb, "PaymentMethod", r.Payment.PaymentMethod);
+        sb = Row(sb, "PaymentAmount", $"{r.Payment.PaymentAmount}");
+        sb = Row(sb, "PaymentCurrency", r.Payment.PaymentCurrency);
+        sb = Row(sb, "PaymentStatus", r.Payment.PaymentStatus);
+        sb = Row(sb, "PaymentTransactionId", r.Payment.PaymentTransactionId);
+
+        sb = Row(sb, "Notes", r.Notes);
+
+        sb.Append("</table></div>");
+
+        var html = sb.ToString();
+
+        // Plain text
+        var lines = new List<string>
+        {
+            subject,
+            $"Type: {r.RegistrationType}",
+            $"When: {r.Timestamp:u}"
+        };
+
+
+        lines = Line(lines, "Type", r.RegistrationType);
+        lines = Line(lines, "Country", r.Country);
+        lines = Line(lines, "Interest", r.Interest);
+        lines = Line(lines, "ActivityId", r.ActivityId);
+        lines = Line(lines, "When", r.Timestamp.ToString("u"));
+
+        lines = Line(lines, "Given Name", r.Player.Givenname);
+        lines = Line(lines, "Surname", r.Player.Surname);
+        lines = Line(lines, "DOB", r.Player.DOB);
+        lines = Line(lines, "Phone", r.Player.Phone);
+        lines = Line(lines, "Email", r.Player.Email);
+
+        lines = Line(lines, "School", r.Player.School);
+        lines = Line(lines, "GradeOrForm", r.Player.GradeOrForm);
+
+        lines = Line(lines, "Position", r.Player.Position);
+        lines = Line(lines, "SkillLevel", r.Player.SkillLevel);
+        lines = Line(lines, "TshirtSize", r.Player.TshirtSize);
+
+        lines = Line(lines, "GuardianName", r.Guardian.GuardianName);
+        lines = Line(lines, "GuardianEmail", r.Guardian.GuardianEmail);
+        lines = Line(lines, "GuardianPhone", r.Guardian.GuardianPhone);
+        lines = Line(lines, "GuardianRelation", r.Guardian.GuardianRelation);
+
+        lines = Line(lines, "PaymentMethod", r.Payment.PaymentMethod);
+        lines = Line(lines, "PaymentAmount", $"{r.Payment.PaymentAmount}");
+        lines = Line(lines, "PaymentCurrency", r.Payment.PaymentCurrency);
+        lines = Line(lines, "PaymentStatus", r.Payment.PaymentStatus);
+        lines = Line(lines, "PaymentTransactionId", r.Payment.PaymentTransactionId);
+        if (!string.IsNullOrWhiteSpace(r.Notes))
+        {
+            lines.Add("");
+            lines.Add("Notes:");
+            lines.Add(r.Notes!);
+        }
+
+        var text = string.Join(Environment.NewLine, lines);
+        return (subject, html, text);
+    }
+
+
     private static string MergeRecipients(string? configured, IEnumerable<string>? extra)
     {
         var list = new List<string>();
@@ -177,6 +306,7 @@ internal class EmailService(IOptions<GmailOptions> mailOptions) : IEmailService
     // Uses your enum mapping if present; otherwise fall back to the string
     // e.g., "RequestForInformation", "RequestForConsultation", "RequestForNewsLetter"
     private static string ResolveKindDisplay(CorrespondenceDto c) => c.CorrespondenceType ?? "Correspondence";
+
 
 
 }
