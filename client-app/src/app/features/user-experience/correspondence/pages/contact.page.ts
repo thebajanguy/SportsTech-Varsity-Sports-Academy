@@ -137,32 +137,20 @@ export class ContactPage  extends BasePageComponent {
 
     this.submitting.set(true);
 
-    this.svc.CreateContactRequest(payload)
-      .pipe(
-        catchError(err => {
-          this.serverMessage.set({ type: 'error', text: err?.error?.message ?? 'Sorry, something went wrong. Please try again.' });
-          // --- TEMP success for stubbed API path (keep/remove as needed) ---
-          this.notifications.showError('Error - Contact form', this.serverMessage()?.text ?? 'Sorry, something went wrong. Please try again.');
-
-          // --- TEMP success for stubbed API path (keep/remove as needed) ---
-          //this.serverMessage.set({ type: 'success', text: 'Thanks! We will get back to you ASAP.' });
-          //this.serverSuccess.set(true);
-          //this.notifications.showSuccess('Success - Contact form', this.serverMessage()?.text ?? 'Thanks for contacting us! We will get back to you ASAP.');
-
-          //this.resetForm();
-          // ---------------------------------------------------------------
-          return of(void 0);
-        }),
-        finalize(() => this.submitting.set(false))
-      )
-      .subscribe(() => {
-        if (!this.serverMessage()) {
-          this.serverSuccess.set(true);
-          this.resetForm();
-          this.serverMessage.set({ type: 'success', text: 'Thanks! We will get back to you ASAP.' });
-          this.notifications.showSuccess('Success - Contact form', this.serverMessage()?.text ?? 'Thanks for contacting us! We will get back to you ASAP.');
-        }
-      });
+    this.svc.createContact(payload).subscribe({
+      next: (res => {
+        console.log('OK', res);
+        this.serverSuccess.set(true);
+        this.serverMessage.set({ type: 'success', text: 'Thanks! We will get back to you ASAP.' });
+        this.notifications.showSuccess('Success - Contact form', this.serverMessage()?.text ?? 'Thanks for contacting us! We will get back to you ASAP.');
+        this.resetForm();
+      }),
+      error: (err => {
+        console.error('ERR', err);
+        this.serverMessage.set({ type: 'error', text: err?.error?.message ?? 'Sorry, something went wrong. Please try again.' });
+        this.notifications.showError('Error - Contact form', this.serverMessage()?.text ?? 'Sorry, something went wrong. Please try again.');
+      })
+    });
   }
   resetForm(): void {
     this.form.reset({

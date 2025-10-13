@@ -1,6 +1,6 @@
 // src/app/services/information.service.ts
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CORRESPONDENCE_API_BASE_URL } from '../../../../core/tokens/api-config-url.tokens';
 
@@ -34,21 +34,45 @@ export class CorrespondenceApi {
   private readonly http = inject(HttpClient);
   private readonly apiBaseUrl = inject(CORRESPONDENCE_API_BASE_URL);
 
-  CreateConsultationRequest(payload: CorrespondenceDto): Observable<void> {
-    alert(`${this.apiBaseUrl}/correspondences/consultation`);
-    return this.http.post<void>(`${this.apiBaseUrl}/correspondences/consultation`, payload);
-  }
-  
-  CreateContactRequest(payload: CorrespondenceDto): Observable<void> {
-    alert(`${this.apiBaseUrl}/correspondences/contact`);
-    return this.http.post<void>(`${this.apiBaseUrl}/correspondences/contact`, payload);
-  }
+  // Raw client bypasses ALL interceptors (handy to isolate issues)
+  private rawHttp = new HttpClient(inject(HttpBackend));
 
-  CreateNewsletterSignup(payload: CorrespondenceDto): Observable<void> {
-    alert(`${this.apiBaseUrl}/correspondences/newsletter`);
-    return this.http.post<void>(`${this.apiBaseUrl}/correspondences/newsletter`, payload);
-  }
+  createConsultation(payload: any): Observable<string> {
+    const url = `${this.apiBaseUrl}/correspondences/consultation`;
+    console.log('POST', url, payload);
 
+    // Use rawHttp first. If this works, your interceptor is the culprit.
+    return this.rawHttp.post<string>(url, payload, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      // Your function may return empty body; treat as text to avoid JSON parse errors
+      responseType: 'text' as 'json'
+    });
+
+  }
+  createContact(payload: any): Observable<string> {
+    const url = `${this.apiBaseUrl}/correspondences/contact`;
+    console.log('POST', url, payload);
+
+    // Use rawHttp first. If this works, your interceptor is the culprit.
+    return this.rawHttp.post<string>(url, payload, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      // Your function may return empty body; treat as text to avoid JSON parse errors
+      responseType: 'text' as 'json'
+    });
+
+  }
+  createNewsletter(payload: any): Observable<string> {
+    const url = `${this.apiBaseUrl}/correspondences/newsletter`;
+    console.log('POST', url, payload);
+
+    // Use rawHttp first. If this works, your interceptor is the culprit.
+    return this.rawHttp.post<string>(url, payload, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      // Your function may return empty body; treat as text to avoid JSON parse errors
+      responseType: 'text' as 'json'
+    });
+
+  }
 
 }
 

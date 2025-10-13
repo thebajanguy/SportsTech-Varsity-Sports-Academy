@@ -10,7 +10,7 @@ import { CoreNotificationsModule } from './notifications/~notifications.module';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, CoreNotificationsModule, CoreInterceptorsModule],
+  imports: [CommonModule, CoreNotificationsModule],// CoreInterceptorsModule],
   providers: [
     importProvidersFrom()
   ]

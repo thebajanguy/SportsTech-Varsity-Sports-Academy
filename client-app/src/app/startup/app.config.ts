@@ -47,9 +47,10 @@ export const appConfig: ApplicationConfig = {
     provideNoopAnimations(),
     provideHttpClient(withInterceptorsFromDi(), withFetch()),
     provideAnimations(),
-    { provide: CORRESPONDENCE_API_BASE_URL, useValue: environment.correspondenceApiBaseUrl },
     { provide: REGISTRATION_API_BASE_URL, useValue: environment.registrationApiBaseUrl },
+    { provide: CORRESPONDENCE_API_BASE_URL, useValue: environment.correspondenceApiBaseUrl },
     { provide: SITE_URL, useValue: environment.appSettings.siteUrl },
-    { provide: RouteSeoService, useClass: RouteSeoService },
+    { provide: RouteSeoService, useClass: RouteSeoService }
+
   ],
 };

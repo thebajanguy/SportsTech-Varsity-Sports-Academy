@@ -1,6 +1,6 @@
 // src/app/services/information.service.ts
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { REGISTRATION_API_BASE_URL } from '../../../../core/tokens/api-config-url.tokens';
 
@@ -81,14 +81,33 @@ export class ActivityRegistrationApi {
   private readonly http = inject(HttpClient);
   private readonly apiBaseUrl = inject(REGISTRATION_API_BASE_URL);
 
-  RegisterForCamp(payload: ActivityRegistrationDto): Observable<void> {
-    alert(`${this.apiBaseUrl}/registrations/gold-camp`);
-    return this.http.post<void>(`${this.apiBaseUrl}/registrations/gold-camp`, payload);
-  }
+  // Raw client bypasses ALL interceptors (handy to isolate issues)
+  private rawHttp = new HttpClient(inject(HttpBackend));
 
-  RegisterForAfterSchool(payload: ActivityRegistrationDto): Observable<void> {
-    alert(`${this.apiBaseUrl}/registrations/gold-camp`);
-     return this.http.post<void>(`${this.apiBaseUrl}/registrations/after-school`, payload);
+  registerForCamp(payload: any): Observable<string> {
+    const url = `${this.apiBaseUrl}/registrations/gold-camp`;
+    console.log('POST', url, payload);
+
+    // Use rawHttp first. If this works, your interceptor is the culprit.
+    return this.rawHttp.post<string>(url, payload, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      // Your function may return empty body; treat as text to avoid JSON parse errors
+      responseType: 'text' as 'json'
+    });
+
   }
+  registerForAfterschool(payload: any): Observable<string> {
+    const url = `${this.apiBaseUrl}/registrations/after-school`;
+    console.log('POST', url, payload);
+
+    // Use rawHttp first. If this works, your interceptor is the culprit.
+    return this.rawHttp.post<string>(url, payload, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      // Your function may return empty body; treat as text to avoid JSON parse errors
+      responseType: 'text' as 'json'
+    });
+
+  }
+    
 }
 

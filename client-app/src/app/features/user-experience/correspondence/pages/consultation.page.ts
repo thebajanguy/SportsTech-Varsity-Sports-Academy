@@ -124,45 +124,32 @@ export class ConsultationPage  extends BasePageComponent {
     const payload: CorrespondenceDto = {
       CorrespondenceType: "Request-For-Consultation",
       ApplicationName: "VSA Prep",
-
       GivenName: this.form.value.GivenName!.trim(),
       Surname: this.form.value.Surname!.trim(),
       Email: this.form.value.Email!.trim().toLowerCase(),
       Phone: this.form.value.Phone!.trim(),
       Interest: this.form.value.Interest!.trim(),
       Message: this.form.value.Message!.trim(),
-
       Honeypot: this.form.value.honeypot!.trim()
     };
 
     this.submitting.set(true);
 
-    this.svc.CreateConsultationRequest(payload)
-      .pipe(
-        catchError(err => {
-          this.serverMessage.set({ type: 'error', text: err?.error?.message ?? 'Sorry, something went wrong. Please try again.' });
-          // --- TEMP success for stubbed API path (keep/remove as needed) ---
-          this.notifications.showError('Error - Consultation form', this.serverMessage()?.text ?? 'Sorry, something went wrong. Please try again.');
+    this.svc.createConsultation(payload).subscribe({
+      next: (res => {
+        console.log('OK', res);
+        this.serverSuccess.set(true);
+        this.serverMessage.set({ type: 'success', text: 'Thanks! We will get back to you ASAP.' });
+        this.notifications.showSuccess('Success - Consultation form', this.serverMessage()?.text ?? 'Thanks for contacting us! We will get back to you ASAP.');
+        this.resetForm();
+      }),
+      error: (err => {
+        console.error('ERR', err);
+        this.serverMessage.set({ type: 'error', text: err?.error?.message ?? 'Sorry, something went wrong. Please try again.' });
+        this.notifications.showError('Error - Consultation form', this.serverMessage()?.text ?? 'Sorry, something went wrong. Please try again.');
+      })
+    });
 
-          // --- TEMP success for stubbed API path (keep/remove as needed) ---
-          //this.serverMessage.set({ type: 'success', text: 'Thanks! We will get back to you ASAP.' });
-          //this.serverSuccess.set(true);
-          //this.notifications.showSuccess('Success - Consultation form', this.serverMessage()?.text ?? 'Thanks for contacting us! We will get back to you ASAP.');
-
-          //this.resetForm();
-          // ---------------------------------------------------------------
-          return of(void 0);
-        }),
-        finalize(() => this.submitting.set(false))
-      )
-      .subscribe(() => {
-        if (!this.serverMessage()) {
-          this.serverSuccess.set(true);
-          this.resetForm();
-          this.serverMessage.set({ type: 'success', text: 'Thanks! We will get back to you ASAP.' });
-          this.notifications.showSuccess('Success - Consultation form', this.serverMessage()?.text ?? 'Thanks for contacting us! We will get back to you ASAP.');
-        }
-      });
   }
   resetForm(): void {
     this.form.reset({
