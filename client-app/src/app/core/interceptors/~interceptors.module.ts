@@ -4,7 +4,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 //
 import { EnsureModuleLoadedOnceGuard } from '../guards/ensure-module-loaded-once.guard';
 import { environment } from '../../../environments/environment';
-import { NewsletterInterceptor } from './newsletter.interceptor';
 import { HttpErrorInterceptor } from './httperror.interceptor';
 
 @NgModule({
@@ -12,9 +11,6 @@ import { HttpErrorInterceptor } from './httperror.interceptor';
   exports: [],
   declarations: [],
   providers: [
-    ...(environment.useApiMock ? [{
-          provide: HTTP_INTERCEPTORS, useClass: NewsletterInterceptor, multi: true
-        }] : []),
     { provide: HTTP_INTERCEPTORS, useValue: HttpErrorInterceptor, multi: true }, 
   ]
 })
