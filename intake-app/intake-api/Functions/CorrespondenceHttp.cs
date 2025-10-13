@@ -43,14 +43,22 @@ internal class CorrespondenceHttp(ILogger<CorrespondenceHttp> logger, IEmailServ
                 string.IsNullOrWhiteSpace(body.Interest) ||
                 string.IsNullOrWhiteSpace(body.Message))
             {
-                return req.CreateResponse(HttpStatusCode.BadRequest, new { error = "invalid_payload" });
+                return await req.BadRequestAsync(new
+                {
+                    message = "Request body is null or invalid.",
+                    errors = new[] { "The request body could not be deserialized into a valid object." }
+                }, HttpStatusCode.BadRequest);
             }
 
             // Honeypot trap (hidden input should be empty)
             if (!string.IsNullOrEmpty(body.Honeypot))
             {
                 _logger.LogWarning("Bot submission detected.");
-                return req.CreateResponse(HttpStatusCode.BadRequest, new { error = "Bot submission detected." });
+                return await req.BadRequestAsync(new
+                {
+                    message = "Bot submission detected.",
+                    errors = new[] { "Bot submission detected." }
+                }, HttpStatusCode.BadRequest);
             }
 
             // Length guards
@@ -62,19 +70,27 @@ internal class CorrespondenceHttp(ILogger<CorrespondenceHttp> logger, IEmailServ
                 body.Interest.Length > 160 ||
                 body.Message.Length > 4000)
             {
-                return req.CreateResponse(HttpStatusCode.BadRequest, new { error = "payload_too_large" });
+                return await req.BadRequestAsync(new
+                {
+                    message = "Data to large.",
+                    errors = new[] { "large_data." }
+                }, HttpStatusCode.BadRequest);
             }
 
 
             // Send via Gmail SMTP (SSL 465 or STARTTLS 587)
             var sentAsync = await _emailService.SendCorrespondenceEmailAsync(body, null, ct);
 
-            return req.CreateResponse(HttpStatusCode.OK, new { data = sentAsync });
+            return await req.OkAsync(new { data = sentAsync });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "SendContact failed");
-            return req.CreateResponse(HttpStatusCode.InternalServerError, new { error = "email_failed" });
+            _logger.LogError(ex, "InternalServerError-SendConsultation failed");
+            return await req.BadRequestAsync(new
+            {
+                message = $"{ex.Message}",
+                errors = new[] { "InternalServerError-SendConsultation failed" }
+            }, HttpStatusCode.InternalServerError);
         }
     }
 
@@ -104,14 +120,22 @@ internal class CorrespondenceHttp(ILogger<CorrespondenceHttp> logger, IEmailServ
                 string.IsNullOrWhiteSpace(body.Interest) ||
                 string.IsNullOrWhiteSpace(body.Message))
             {
-                return req.CreateResponse(HttpStatusCode.BadRequest, new { error = "invalid_payload" });
+                return await req.BadRequestAsync(new
+                {
+                    message = "Request body is null or invalid.",
+                    errors = new[] { "The request body could not be deserialized into a valid object." }
+                }, HttpStatusCode.BadRequest);
             }
 
             // Honeypot trap (hidden input should be empty)
             if (!string.IsNullOrEmpty(body.Honeypot))
             {
                 _logger.LogWarning("Bot submission detected.");
-                return req.CreateResponse(HttpStatusCode.BadRequest, new { error = "Bot submission detected." });
+                return await req.BadRequestAsync(new
+                {
+                    message = "Bot submission detected.",
+                    errors = new[] { "Bot submission detected." }
+                }, HttpStatusCode.BadRequest);
             }
 
             // Length guards
@@ -123,19 +147,27 @@ internal class CorrespondenceHttp(ILogger<CorrespondenceHttp> logger, IEmailServ
                 body.Interest.Length > 160 ||
                 body.Message.Length > 4000)
             {
-                return req.CreateResponse(HttpStatusCode.BadRequest, new { error = "payload_too_large" });
+                return await req.BadRequestAsync(new
+                {
+                    message = "Data to large.",
+                    errors = new[] { "large_data." }
+                }, HttpStatusCode.BadRequest);
             }
 
 
             // Send via Gmail SMTP (SSL 465 or STARTTLS 587)
             var sentAsync = await _emailService.SendCorrespondenceEmailAsync(body, null, ct);
 
-            return req.CreateResponse(HttpStatusCode.NoContent);
+            return await req.OkAsync(new { data = sentAsync });
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "SendContact failed");
-            return req.CreateResponse(HttpStatusCode.InternalServerError, new { error = "email_failed" });
+            return await req.BadRequestAsync(new
+            {
+                message = $"{ex.Message}",
+                errors = new[] { "InternalServerError-SendContact failed" }
+            }, HttpStatusCode.InternalServerError);
         }
     }
 
@@ -164,14 +196,22 @@ internal class CorrespondenceHttp(ILogger<CorrespondenceHttp> logger, IEmailServ
                 string.IsNullOrWhiteSpace(body.Interest) ||
                 string.IsNullOrWhiteSpace(body.Country))
             {
-                return req.CreateResponse(HttpStatusCode.BadRequest, new { error = "invalid_payload" });
+                return await req.BadRequestAsync(new
+                {
+                    message = "Request body is null or invalid.",
+                    errors = new[] { "The request body could not be deserialized into a valid object." }
+                }, HttpStatusCode.BadRequest);
             }
 
             // Honeypot trap (hidden input should be empty)
             if (!string.IsNullOrEmpty(body.Honeypot))
             {
                 _logger.LogWarning("Bot submission detected.");
-                return req.CreateResponse(HttpStatusCode.NoContent);
+                return await req.BadRequestAsync(new
+                {
+                    message = "Bot submission detected.",
+                    errors = new[] { "Bot submission detected." }
+                }, HttpStatusCode.BadRequest);
             }
 
             // Length guards
@@ -181,18 +221,26 @@ internal class CorrespondenceHttp(ILogger<CorrespondenceHttp> logger, IEmailServ
                 body.Interest.Length > 160 ||
                 body.Country.Length > 60)
             {
-                return req.CreateResponse(HttpStatusCode.BadRequest, new { error = "payload_too_large" });
+                return await req.BadRequestAsync(new
+                {
+                    message = "Data to large.",
+                    errors = new[] { "large_data." }
+                }, HttpStatusCode.BadRequest);
             }
 
             // Send via Gmail SMTP (SSL 465 or STARTTLS 587)
             var sentAsync = await _emailService.SendCorrespondenceEmailAsync(body, null, ct);
 
-            return req.CreateResponse(HttpStatusCode.NoContent);
+            return await req.OkAsync(new { data = sentAsync });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "SendContact failed");
-            return req.CreateResponse(HttpStatusCode.InternalServerError, new { error = "email_failed" });
+            _logger.LogError(ex, "Newsletter Request failed");
+            return await req.BadRequestAsync(new
+            {
+                message = $"{ex.Message}",
+                errors = new[] { "InternalServerError-Newsletter Request failed" }
+            }, HttpStatusCode.InternalServerError);
         }
     }
 

@@ -2,17 +2,20 @@
 
 namespace IntakeAPI.Settings;
 
+
 public sealed class GmailOptions
 {
-    public const string SectionName = "Gmail";
-
+    [ConfigurationKeyName("GMAIL_USER")]
     public string GmailUser { get; init; } = string.Empty;
 
+    [ConfigurationKeyName("GMAIL_APP_PASSWORD")]
     public string GmailAppPassword { get; init; } = string.Empty;
 
+    [ConfigurationKeyName("CONTACT_TO")]
     public string MailTo { get; init; } = string.Empty;
 
-    // Convenience: split "a;b;c" into a list
     public IReadOnlyList<string> MailToList =>
-        MailTo.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+         MailTo.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
 }
+

@@ -30,230 +30,236 @@ internal class EmailService(IOptions<GmailOptions> mailOptions) : IEmailService
 
     public async Task<string> SendRegistrationEmailAsync(ActivityRegistrationDto r, IEnumerable<string>? additionalTo = null, CancellationToken ct = default)
     {
-        try
-        {
-            var (subject, html, text) = BuildForRegistration(r);
+        var (subject, html, text) = BuildForRegistration(r);
 
-            var gmailUser = _mailOptions.GmailUser;
-            var gmailAppPassword = _mailOptions.GmailAppPassword ;  // 16-char app password
-            var contactTo = _mailOptions.MailTo ;
+        string? GetSetting(string? optValue, string envKey)
+            => !string.IsNullOrWhiteSpace(optValue) ? optValue.Trim()
+               : Environment.GetEnvironmentVariable(envKey)?.Trim();
 
+        var gmailUser = GetSetting(_mailOptions?.GmailUser, "GMAIL_USER");
+        var gmailAppPass = GetSetting(_mailOptions?.GmailAppPassword, "GMAIL_APP_PASSWORD");
+        var contactToRaw = GetSetting(_mailOptions?.MailTo, "CONTACT_TO");
 
-            // Compose email
-            var msg = new MimeMessage();
-            msg.From.Add(new MailboxAddress($"VSA Prep Contact Form", gmailUser)); // must be the Gmail user for deliverability
-            msg.To.Add(new MailboxAddress($"VSA Prep Contact Form - {r.Guardian?.GuardianName}", MailboxAddress.Parse(contactTo).ToString()));
-            msg.ReplyTo.Add(new MailboxAddress($"{r.Guardian?.GuardianName}", MailboxAddress.Parse(r.Guardian?.GuardianEmail).ToString()));
-            msg.Subject = subject;
+        if (string.IsNullOrWhiteSpace(gmailUser)) throw new InvalidOperationException("Missing configuration: GMAIL_USER");
+        if (string.IsNullOrWhiteSpace(gmailAppPass)) throw new InvalidOperationException("Missing configuration: GMAIL_APP_PASSWORD");
 
-            var builder = new BodyBuilder
-            {
-                TextBody = text,    //$"{body.Message}\n\n---\nFrom: {body.GivenName} {body.Surname} <{body.Email}>",
-                HtmlBody = html     //$"<p>{safeHtml}</p><hr><p>From: {System.Net.WebUtility.HtmlEncode(body.GivenName)} {System.Net.WebUtility.HtmlEncode(body.Surname)} &lt;{System.Net.WebUtility.HtmlEncode(body.Email)}&gt;</p>"
-            };
-            msg.Body = builder.ToMessageBody();
+        // Split CONTACT_TO (supports ; or ,) + merge in additionalTo
+        var toList = SplitRecipients(contactToRaw ?? gmailUser);
+        if (additionalTo is not null) toList.AddRange(additionalTo);
+        toList = toList
+            .Select(s => s.Trim())
+            .Where(s => !string.IsNullOrWhiteSpace(s))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToList();
 
-            // Send via Gmail SMTP (SSL 465 or STARTTLS 587)
-            using var smtp = new SmtpClient();
-            await smtp.ConnectAsync("smtp.gmail.com", 465, MailKit.Security.SecureSocketOptions.SslOnConnect, ct);
-            await smtp.AuthenticateAsync(gmailUser, gmailAppPassword, ct);
-            var sentAsync = await smtp.SendAsync(msg, ct);
-            await smtp.DisconnectAsync(true, ct);
+        var msg = new MimeMessage();
+        msg.From.Add(new MailboxAddress("VSA Prep", gmailUser));
+        foreach (var addr in toList)
+            msg.To.Add(MailboxAddress.Parse(addr));
 
-            return sentAsync;
+        // Reply-To: use guardian email if present; otherwise player email
+        var replyName = r.Guardian?.GuardianName ?? $"{r.Player?.Givenname} {r.Player?.Surname}".Trim();
+        var replyEmail = FirstNonEmpty(r.Guardian?.GuardianEmail, r.Player?.Email);
+        if (!string.IsNullOrWhiteSpace(replyEmail))
+            msg.ReplyTo.Add(new MailboxAddress(replyName ?? "Sender", replyEmail));
 
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            throw;
-        }
+        msg.Subject = subject;
+        msg.Body = new BodyBuilder { TextBody = text, HtmlBody = html }.ToMessageBody();
+
+        using var smtp = new SmtpClient();
+        await smtp.ConnectAsync("smtp.gmail.com", 465, MailKit.Security.SecureSocketOptions.SslOnConnect, ct);
+        await smtp.AuthenticateAsync(gmailUser, gmailAppPass, ct);
+        var messageId = await smtp.SendAsync(msg, ct);
+        await smtp.DisconnectAsync(true, ct);
+
+        return messageId;
     }
 
     public async Task<string> SendCorrespondenceEmailAsync(CorrespondenceDto c, IEnumerable<string>? additionalTo = null, CancellationToken ct = default)
     {
-        try
+        var (subject, html, text) = BuildForCorrespondence(c);
+
+        string? GetSetting(string? optValue, string envKey)
+            => !string.IsNullOrWhiteSpace(optValue) ? optValue.Trim()
+               : Environment.GetEnvironmentVariable(envKey)?.Trim();
+
+        var gmailUser = GetSetting(_mailOptions?.GmailUser, "GMAIL_USER");
+        var gmailAppPass = GetSetting(_mailOptions?.GmailAppPassword, "GMAIL_APP_PASSWORD");
+        var contactToRaw = GetSetting(_mailOptions?.MailTo, "CONTACT_TO");
+
+        if (string.IsNullOrWhiteSpace(gmailUser)) throw new InvalidOperationException("Missing configuration: GMAIL_USER");
+        if (string.IsNullOrWhiteSpace(gmailAppPass)) throw new InvalidOperationException("Missing configuration: GMAIL_APP_PASSWORD");
+
+        var toList = SplitRecipients(contactToRaw ?? gmailUser);
+        if (additionalTo is not null) toList.AddRange(additionalTo);
+        toList = toList
+            .Select(s => s.Trim())
+            .Where(s => !string.IsNullOrWhiteSpace(s))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToList();
+
+        var msg = new MimeMessage();
+        msg.From.Add(new MailboxAddress("VSA Prep", gmailUser));
+        foreach (var addr in toList)
+            msg.To.Add(MailboxAddress.Parse(addr));
+
+        // Reply-To: visitor's email, if present
+        if (!string.IsNullOrWhiteSpace(c.Email))
         {
-            var (subject, html, text) = BuildForCorrespondence(c);
-
-
-            var gmailUser = _mailOptions.GmailUser;
-            var gmailAppPassword = _mailOptions.GmailAppPassword;  // 16-char app password
-            var contactTo = _mailOptions.MailTo ;
-
-            // Compose email
-            var msg = new MimeMessage();
-            msg.From.Add(new MailboxAddress($"VSA Prep Contact Form", gmailUser)); // must be the Gmail user for deliverability
-            msg.To.Add(new MailboxAddress($"VSA Prep Contact Form - {c.GivenName} {c.Surname}", MailboxAddress.Parse(contactTo).ToString()));
-            msg.ReplyTo.Add(new MailboxAddress($"{c.GivenName} {c.Surname}", MailboxAddress.Parse(c.Email).ToString()));
-            msg.Subject = subject;
-
-            var builder = new BodyBuilder
-            {
-                TextBody = text,    //$"{body.Message}\n\n---\nFrom: {body.GivenName} {body.Surname} <{body.Email}>",
-                HtmlBody = html     //$"<p>{safeHtml}</p><hr><p>From: {System.Net.WebUtility.HtmlEncode(body.GivenName)} {System.Net.WebUtility.HtmlEncode(body.Surname)} &lt;{System.Net.WebUtility.HtmlEncode(body.Email)}&gt;</p>"
-            };
-            msg.Body = builder.ToMessageBody();
-
-            // Send via Gmail SMTP (SSL 465 or STARTTLS 587)
-            using var smtp = new SmtpClient();
-            await smtp.ConnectAsync("smtp.gmail.com", 465, MailKit.Security.SecureSocketOptions.SslOnConnect, ct);
-            await smtp.AuthenticateAsync(gmailUser, gmailAppPassword, ct);
-            var sentAsync = await smtp.SendAsync(msg, ct);
-            await smtp.DisconnectAsync(true, ct);
-
-            return sentAsync;
-
+            var display = $"{c.GivenName} {c.Surname}".Trim();
+            msg.ReplyTo.Add(new MailboxAddress(string.IsNullOrWhiteSpace(display) ? "Sender" : display, c.Email));
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            throw;
-        }
+
+        msg.Subject = subject;
+        msg.Body = new BodyBuilder { TextBody = text, HtmlBody = html }.ToMessageBody();
+
+        using var smtp = new SmtpClient();
+        await smtp.ConnectAsync("smtp.gmail.com", 465, MailKit.Security.SecureSocketOptions.SslOnConnect, ct);
+        await smtp.AuthenticateAsync(gmailUser, gmailAppPass, ct);
+        var messageId = await smtp.SendAsync(msg, ct);
+        await smtp.DisconnectAsync(true, ct);
+
+        return messageId;
     }
+
+    // --- helpers ---
+
+    private static List<string> SplitRecipients(string csvOrSsv) =>
+        csvOrSsv.Split(new[] { ';', ',' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
+
+    private static string? FirstNonEmpty(params string?[] items) =>
+        items.FirstOrDefault(s => !string.IsNullOrWhiteSpace(s));
 
     private static (string subject, string html, string text) BuildForCorrespondence(CorrespondenceDto c)
     {
         var kind = ResolveKindDisplay(c);
-
+        var when = c.Timestamp.ToString("u");
         var subject = $"[{c.ApplicationName}] {kind}: {c.Interest ?? "New submission"}";
 
-        var sb = new StringBuilder();
-        // HTML
-        sb.Append("<div style=\"font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.4\">");
-        sb.Append($"<h2 style=\"margin:0 0 8px\">{Escape(subject)}</h2>");
-        sb.Append("<table style=\"border-collapse:collapse\">");
+        var sb = new StringBuilder()
+            .Append("<div style=\"font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.4\">")
+            .Append($"<h2 style=\"margin:0 0 8px\">{Escape(subject)}</h2>")
+            .Append("<table style=\"border-collapse:collapse\">");
 
-        sb = Row(sb, "Type", kind);
-        sb = Row(sb, "When", c.Timestamp.ToString("u"));
-        sb = Row(sb, "Given Name", c.GivenName);
-        sb = Row(sb, "Surname", c.Surname);
-        sb = Row(sb, "Phone", c.Phone);
-        sb = Row(sb, "Email", c.Email);
-        sb = Row(sb, "Country", c.Country);
-        sb = Row(sb, "Interest", c.Interest);
-        sb = Row(sb, "Day", c.Day);
-        sb = Row(sb, "Time", c.Time);
-        sb = Row(sb, "Year", c.Year);
-        sb = Row(sb, "Message", c.Message);
-
+        Row(sb, "Type", kind);
+        Row(sb, "When", when);
+        Row(sb, "Given Name", c.GivenName);
+        Row(sb, "Surname", c.Surname);
+        Row(sb, "Phone", c.Phone);
+        Row(sb, "Email", c.Email);
+        Row(sb, "Country", c.Country);
+        Row(sb, "Interest", c.Interest);
+        Row(sb, "Day", c.Day);
+        Row(sb, "Time", c.Time);
+        Row(sb, "Year", c.Year);
+        Row(sb, "Message", c.Message);
         sb.Append("</table></div>");
         var html = sb.ToString();
 
-        // Plain text
         var lines = new List<string>
         {
             subject,
             $"Type: {kind}",
-            $"When: {c.Timestamp:u}"
+            $"When: {when}"
         };
-
-        lines = Line(lines, "Email", c.Email);
-        lines = Line(lines, "Given Name", c.GivenName);
-        lines = Line(lines, "Surname", c.Surname);
-        lines = Line(lines, "Country", c.Country);
-        lines = Line(lines, "Sport", c.Interest);
-        lines = Line(lines, "Interest", c.Interest);
-        lines = Line(lines, "Day", c.Day);
-        lines = Line(lines, "Time", c.Time);
-        lines = Line(lines, "Year", c.Year);
+        Line(lines, "Given Name", c.GivenName);
+        Line(lines, "Surname", c.Surname);
+        Line(lines, "Email", c.Email);
+        Line(lines, "Phone", c.Phone);
+        Line(lines, "Country", c.Country);
+        Line(lines, "Interest", c.Interest);
+        Line(lines, "Day", c.Day);
+        Line(lines, "Time", c.Time);
+        Line(lines, "Year", c.Year);
         if (!string.IsNullOrWhiteSpace(c.Message))
         {
             lines.Add("");
             lines.Add("Message:");
             lines.Add(c.Message!);
         }
-
         var text = string.Join(Environment.NewLine, lines);
         return (subject, html, text);
-
     }
 
     private static (string subject, string html, string text) BuildForRegistration(ActivityRegistrationDto r)
     {
-
         var subject = $"[{r.ApplicationName}] {r.RegistrationType}: {r.Interest ?? "New Registration"}";
+        var when = r.Timestamp.ToString("u");
 
-        var sb = new StringBuilder();
-        // HTML
-        sb.Append("<div style=\"font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.4\">");
-        sb.Append($"<h2 style=\"margin:0 0 8px\">{Escape(subject)}</h2>");
-        sb.Append("<table style=\"border-collapse:collapse\">");
+        var sb = new StringBuilder()
+            .Append("<div style=\"font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.4\">")
+            .Append($"<h2 style=\"margin:0 0 8px\">{Escape(subject)}</h2>")
+            .Append("<table style=\"border-collapse:collapse\">");
 
-        sb = Row(sb, "Type", r.RegistrationType);
-        sb = Row(sb, "Country", r.Country);
-        sb = Row(sb, "Interest", r.Interest);
-        sb = Row(sb, "ActivityId", r.ActivityId);
-        sb = Row(sb, "When", r.Timestamp.ToString("u"));
+        Row(sb, "Type", r.RegistrationType);
+        Row(sb, "Country", r.Country);
+        Row(sb, "Interest", r.Interest);
+        Row(sb, "ActivityId", r.ActivityId);
+        Row(sb, "When", when);
 
-        sb = Row(sb, "Given Name", r.Player.Givenname);
-        sb = Row(sb, "Surname", r.Player.Surname);
-        sb = Row(sb, "DOB", r.Player.DOB);
-        sb = Row(sb, "Phone", r.Player.Phone);
-        sb = Row(sb, "Email", r.Player.Email);
+        // Player (null-safe)
+        Row(sb, "Given Name", r.Player?.Givenname);
+        Row(sb, "Surname", r.Player?.Surname);
+        Row(sb, "DOB", r.Player?.DOB);
+        Row(sb, "Phone", r.Player?.Phone);
+        Row(sb, "Email", r.Player?.Email);
 
-        sb = Row(sb, "School", r.Player.School);
-        sb = Row(sb, "GradeOrForm", r.Player.GradeOrForm);
+        Row(sb, "School", r.Player?.School);
+        Row(sb, "GradeOrForm", r.Player?.GradeOrForm);
+        Row(sb, "Position", r.Player?.Position);
+        Row(sb, "SkillLevel", r.Player?.SkillLevel);
+        Row(sb, "TshirtSize", r.Player?.TshirtSize);
 
-        sb = Row(sb, "Position", r.Player.Position);
-        sb = Row(sb, "SkillLevel", r.Player.SkillLevel);
-        sb = Row(sb, "TshirtSize", r.Player.TshirtSize);
+        // Guardian (null-safe)
+        Row(sb, "GuardianName", r.Guardian?.GuardianName);
+        Row(sb, "GuardianEmail", r.Guardian?.GuardianEmail);
+        Row(sb, "GuardianPhone", r.Guardian?.GuardianPhone);
+        Row(sb, "GuardianRelation", r.Guardian?.GuardianRelation);
 
-        sb = Row(sb, "GuardianName", r.Guardian.GuardianName);
-        sb = Row(sb, "GuardianEmail", r.Guardian.GuardianEmail);
-        sb = Row(sb, "GuardianPhone", r.Guardian.GuardianPhone);
-        sb = Row(sb, "GuardianRelation", r.Guardian.GuardianRelation);
+        // Payment (null-safe)
+        Row(sb, "PaymentMethod", r.Payment?.PaymentMethod);
+        Row(sb, "PaymentAmount", r.Payment?.PaymentAmount?.ToString());
+        Row(sb, "PaymentCurrency", r.Payment?.PaymentCurrency);
+        Row(sb, "PaymentStatus", r.Payment?.PaymentStatus);
+        Row(sb, "PaymentTransactionId", r.Payment?.PaymentTransactionId);
 
-        sb = Row(sb, "PaymentMethod", r.Payment.PaymentMethod);
-        sb = Row(sb, "PaymentAmount", $"{r.Payment.PaymentAmount}");
-        sb = Row(sb, "PaymentCurrency", r.Payment.PaymentCurrency);
-        sb = Row(sb, "PaymentStatus", r.Payment.PaymentStatus);
-        sb = Row(sb, "PaymentTransactionId", r.Payment.PaymentTransactionId);
-
-        sb = Row(sb, "Notes", r.Notes);
-
+        Row(sb, "Notes", r.Notes);
         sb.Append("</table></div>");
-
         var html = sb.ToString();
 
-        // Plain text
         var lines = new List<string>
         {
             subject,
             $"Type: {r.RegistrationType}",
-            $"When: {r.Timestamp:u}"
+            $"When: {when}"
         };
+        Line(lines, "Country", r.Country);
+        Line(lines, "Interest", r.Interest);
+        Line(lines, "ActivityId", r.ActivityId);
 
+        Line(lines, "Given Name", r.Player?.Givenname);
+        Line(lines, "Surname", r.Player?.Surname);
+        Line(lines, "DOB", r.Player?.DOB);
+        Line(lines, "Phone", r.Player?.Phone);
+        Line(lines, "Email", r.Player?.Email);
 
-        lines = Line(lines, "Type", r.RegistrationType);
-        lines = Line(lines, "Country", r.Country);
-        lines = Line(lines, "Interest", r.Interest);
-        lines = Line(lines, "ActivityId", r.ActivityId);
-        lines = Line(lines, "When", r.Timestamp.ToString("u"));
+        Line(lines, "School", r.Player?.School);
+        Line(lines, "GradeOrForm", r.Player?.GradeOrForm);
+        Line(lines, "Position", r.Player?.Position);
+        Line(lines, "SkillLevel", r.Player?.SkillLevel);
+        Line(lines, "TshirtSize", r.Player?.TshirtSize);
 
-        lines = Line(lines, "Given Name", r.Player.Givenname);
-        lines = Line(lines, "Surname", r.Player.Surname);
-        lines = Line(lines, "DOB", r.Player.DOB);
-        lines = Line(lines, "Phone", r.Player.Phone);
-        lines = Line(lines, "Email", r.Player.Email);
+        Line(lines, "GuardianName", r.Guardian?.GuardianName);
+        Line(lines, "GuardianEmail", r.Guardian?.GuardianEmail);
+        Line(lines, "GuardianPhone", r.Guardian?.GuardianPhone);
+        Line(lines, "GuardianRelation", r.Guardian?.GuardianRelation);
 
-        lines = Line(lines, "School", r.Player.School);
-        lines = Line(lines, "GradeOrForm", r.Player.GradeOrForm);
+        Line(lines, "PaymentMethod", r.Payment?.PaymentMethod);
+        Line(lines, "PaymentAmount", r.Payment?.PaymentAmount?.ToString());
+        Line(lines, "PaymentCurrency", r.Payment?.PaymentCurrency);
+        Line(lines, "PaymentStatus", r.Payment?.PaymentStatus);
+        Line(lines, "PaymentTransactionId", r.Payment?.PaymentTransactionId);
 
-        lines = Line(lines, "Position", r.Player.Position);
-        lines = Line(lines, "SkillLevel", r.Player.SkillLevel);
-        lines = Line(lines, "TshirtSize", r.Player.TshirtSize);
-
-        lines = Line(lines, "GuardianName", r.Guardian.GuardianName);
-        lines = Line(lines, "GuardianEmail", r.Guardian.GuardianEmail);
-        lines = Line(lines, "GuardianPhone", r.Guardian.GuardianPhone);
-        lines = Line(lines, "GuardianRelation", r.Guardian.GuardianRelation);
-
-        lines = Line(lines, "PaymentMethod", r.Payment.PaymentMethod);
-        lines = Line(lines, "PaymentAmount", $"{r.Payment.PaymentAmount}");
-        lines = Line(lines, "PaymentCurrency", r.Payment.PaymentCurrency);
-        lines = Line(lines, "PaymentStatus", r.Payment.PaymentStatus);
-        lines = Line(lines, "PaymentTransactionId", r.Payment.PaymentTransactionId);
         if (!string.IsNullOrWhiteSpace(r.Notes))
         {
             lines.Add("");
@@ -265,48 +271,22 @@ internal class EmailService(IOptions<GmailOptions> mailOptions) : IEmailService
         return (subject, html, text);
     }
 
-
-    private static string MergeRecipients(string? configured, IEnumerable<string>? extra)
+    private static void Row(StringBuilder sb, string label, string? value)
     {
-        var list = new List<string>();
-
-        void addCsv(string? csv)
-        {
-            if (string.IsNullOrWhiteSpace(csv)) return;
-            list.AddRange(csv.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
-        }
-
-        addCsv(configured);
-        if (extra is not null) list.AddRange(extra);
-
-        // de-dupe (case-insensitive)
-        return string.Join(",", list
-            .Select(x => x.Trim())
-            .Where(x => !string.IsNullOrWhiteSpace(x))
-            .Distinct(StringComparer.OrdinalIgnoreCase));
+        if (string.IsNullOrWhiteSpace(value)) return;
+        sb.Append("<tr>")
+          .Append($"<td style=\"padding:4px 8px;color:#666;white-space:nowrap\">{Escape(label)}:</td>")
+          .Append($"<td style=\"padding:4px 8px\">{Escape(value)}</td>")
+          .Append("</tr>");
     }
-    private static StringBuilder Row(StringBuilder sb, string label, string? value)
-    {
-        if (string.IsNullOrWhiteSpace(value)) return sb;
-        sb.Append("<tr>");
-        sb.Append($"<td style=\"padding:4px 8px;color:#666;white-space:nowrap\">{Escape(label)}:</td>");
-        sb.Append($"<td style=\"padding:4px 8px\">{Escape(value)}</td>");
-        sb.Append("</tr>");
 
-        return sb;
-    }
-    private static List<string> Line(List<string> lines, string label, string? value)
+    private static void Line(List<string> lines, string label, string? value)
     {
-        if (!string.IsNullOrWhiteSpace(value)) 
+        if (!string.IsNullOrWhiteSpace(value))
             lines.Add($"{label}: {value}");
-
-        return lines;
     }
+
     private static string Escape(string s) => System.Net.WebUtility.HtmlEncode(s);
-    // Uses your enum mapping if present; otherwise fall back to the string
-    // e.g., "RequestForInformation", "RequestForConsultation", "RequestForNewsLetter"
     private static string ResolveKindDisplay(CorrespondenceDto c) => c.CorrespondenceType ?? "Correspondence";
-
-
-
 }
+

@@ -1,48 +1,21 @@
 {
   "trailingSlash": "auto",
-
   "routes": [
-    { 
-      "route": "/student-athletes"
-    },
-  {
-    "route": "/sports-academics-prep"
-  },
-  {
-    "route": "/approach"
-  },
-  { 
-    "route": "/academic-tutoring"
-  },
-  {
-    "route": "/ncaa-compliance"
-  },
-  { 
-    "route": "/sports-development"
-  },
-  {
-    "route": "/recruitment-exposure"
-  },
-  {
-    "route": "/consultation"
-  },
-  {
-    "route": "/contact"
-  },
-
-    {
-      "route": "/api/*",
-      "methods": ["GET"]
-    },
-    {
-      "route": "/api/*",
-      "methods": ["PUT", "POST", "PATCH", "DELETE"]
-    },
-    {
-      "route": "/api/*"
-    }
+    { "route": "/student-athletes" },
+    { "route": "/sports-academics-prep" },
+    { "route": "/approach" },
+    { "route": "/academic-tutoring" },
+    { "route": "/ncaa-compliance" },
+    { "route": "/sports-development" },
+    { "route": "/recruitment-exposure" },
+    { "route": "/after-school" },
+    { "route": "/basketball-gold-camps" },
+    { "route": "/soccer-gold-camps" },
+    { "route": "/register" },
+    { "route": "/consultation" },
+    { "route": "/contact" },
+    { "route": "/api/*", "allowedRoles": ["anonymous"] }
   ],
-
   "navigationFallback": {
     "rewrite": "/index.html",
     "exclude": [

@@ -11,6 +11,7 @@ using System.Diagnostics.Metrics;
 using System.Net;
 using System.Numerics;
 using System.Text.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace IntakeAPI.Functions;
 
@@ -57,25 +58,42 @@ internal class RegistrationHttp(ILogger<RegistrationHttp> logger, IEmailService 
                 string.IsNullOrWhiteSpace(body.Guardian.GuardianRelation)
             )
             {
-                return req.CreateResponse(HttpStatusCode.BadRequest, new { error = "invalid_payload" });
+
+                return await req.BadRequestAsync(new { 
+                    message = "Request body is null or invalid.", 
+                    errors = new[] { "The request body could not be deserialized into a valid object." } 
+                }, HttpStatusCode.BadRequest);
+
             }
 
             // Honeypot trap (hidden input should be empty)
             if (!string.IsNullOrEmpty(body.Honeypot))
             {
                 _logger.LogWarning("Bot submission detected.");
-                return req.CreateResponse(HttpStatusCode.BadRequest, new { error = "Bot submission detected." });
+
+                return await req.BadRequestAsync(new
+                {
+                    message = "Bot submission detected.",
+                    errors = new[] { "Bot submission detected." }
+                }, HttpStatusCode.BadRequest);
+
             }
 
             // Send via Gmail SMTP (SSL 465 or STARTTLS 587)
             var sentAsync = await _emailService.SendRegistrationEmailAsync(body, null, ct);
 
-            return req.CreateResponse(HttpStatusCode.OK, new { data = sentAsync });
+            return await req.OkAsync(new { data = sentAsync });
+
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "SendContact failed");
-            return req.CreateResponse(HttpStatusCode.InternalServerError, new { error = "email_failed" });
+            _logger.LogError(ex, "Registration failed");
+
+            return await req.BadRequestAsync(new
+            {
+                message = $"{ex.Message}",
+                errors = new[] { "InternalServerError-Registration failed" }
+            }, HttpStatusCode.InternalServerError);
         }
     }
 
