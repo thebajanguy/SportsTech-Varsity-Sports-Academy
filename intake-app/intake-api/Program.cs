@@ -20,8 +20,8 @@ var builder = FunctionsApplication.CreateBuilder(args);
 
 // ---------------- Configuration ----------------
 builder.Configuration
-    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+   // .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+   // .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables()
     .AddJsonFile("local.settings.json", optional: true, reloadOnChange: true); // ignored in Azure
 
@@ -62,8 +62,8 @@ builder.Services.AddHttpClient("aad", c =>
 });
 
 // ---------------- Options binding --------------
-builder.Services.AddOptions<GmailOptions>().Bind(builder.Configuration.GetSection("Gmail")).ValidateDataAnnotations().ValidateOnStart();
-builder.Services.AddSingleton(sp => sp.GetRequiredService<IOptions<GmailOptions>>().Value);
+//builder.Services.AddOptions<GmailOptions>().Bind(builder.Configuration.GetSection("Gmail")).ValidateDataAnnotations().ValidateOnStart();
+//builder.Services.AddSingleton(sp => sp.GetRequiredService<IOptions<GmailOptions>>().Value);
 
 // ---------------- Middleware (ordered) ----------------
 // NOTE: Middlewares execute in the order they are registered here.
