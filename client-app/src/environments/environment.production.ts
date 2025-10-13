@@ -16,7 +16,6 @@ export const environment = {
         workspaceRoutePath: 'user-workspace',
         membershipRoutePath: 'membership',
         defaultLanguage: 'en'
-
     },
     msalConfig: {
         auth: {
