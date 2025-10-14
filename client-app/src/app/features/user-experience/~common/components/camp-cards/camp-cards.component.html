@@ -33,9 +33,9 @@
                   </ng-container>
                 </td>
                 <td>
-                  <strong>{{ camp.price }}</strong>
+                  <strong class="description-section">{{ camp.price?.weekly }}</strong><br>
                   <ng-container *ngIf="camp.earlyBird">
-                    &nbsp;<em class="text-danger">
+                    <em class="text-danger">
                       (Early Bird {{ camp.earlyBird.price }} before {{ camp.earlyBird.deadline | date:'MMM d' }})
                     </em>
                   </ng-container>

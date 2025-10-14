@@ -50,7 +50,7 @@
             <div class="fl-flex" [class.filled]="!!f.ActivityId.value"
             [class.has-error]="f.ActivityId.invalid && f.ActivityId.touched">
               <select class="form-select" id="ActivityId" formControlName="ActivityId" required>
-                <option *ngFor="let c of camps$ | async; trackBy: trackById" [value]="c.id">
+                <option *ngFor="let c of activities$ | async; trackBy: trackById" [value]="c.id">
                   {{ c.editionLabel }} — {{ c.venue }}{{ c.country ? ', ' + c.country : '' }}
                   ({{ c.dates.start | date:'MMM d' }}–{{ c.dates.end | date:'MMM d, y' }})
                 </option>
@@ -253,7 +253,15 @@
           <span>{{ submitting() ? 'Sending…' : 'Register Now' }}</span> 
         </button>
       </div>
+      <div *ngIf="serverMessage()" class="mt-2 text-center"
+        [class.text-success]="serverMessage()?.type==='success'"
+        [class.text-danger]="serverMessage()?.type==='error'"
+        role="status" aria-live="polite">
+        {{ serverMessage()?.text }}
+      </div>
     </div>
+
+
 
   </form>
 

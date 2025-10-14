@@ -64,9 +64,10 @@ const routes: Routes = [
           import('../features/user-experience/approach/pages/approach.page')
           .then(m => m.ApproachPage),
             resolve: { seo: seoResolve({
-              title: 'Our Approach | Varsity Sports Academy Prep | Academic & Athletic Training Support | Request a Meeting',
-              description: 'The h Varsity Sports Academy Prep is what drives our culture. Discuss academics, training, scholarships, and next steps for your student-athlete.',
+              title: 'Our Approach | Varsity Sports Academy Prep — Academic & Athletic Development',
+              description: 'Varsity Sports Academy Prep takes a full-cycle approach to youth development—combining academics, athletic training, data analytics, and mentorship to help student-athletes reach their full potential.',
               canonical: 'https://www.varsitysportsacademy.com/en/academics-and-sports/approach',
+              keywords: 'Varsity Sports Academy, student athletes, youth sports training, academic tutoring, sports analytics, athlete development, AI performance tracking, Barbados sports academy',
               robots: 'index,follow',
               jsonLd: {
                 '@context': 'https://schema.org',

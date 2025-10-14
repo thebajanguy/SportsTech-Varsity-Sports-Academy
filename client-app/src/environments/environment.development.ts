@@ -1,8 +1,8 @@
 export const environment = {
     production: false,
     useApiMock: true,                         // <- toggle this
-    correspondenceApiBaseUrl: '/api',  // Functions default port
-    registrationApiBaseUrl: '/api',             // Functions default port
+    correspondenceApiBaseUrl: 'http://localhost:7205/api',  // Functions default port
+    registrationApiBaseUrl: 'http://localhost:7205/api',             // Functions default port
     stripePk: 'pk_test_XXXXXXXXXXXXXXXXXXXXXXXX',   // <-- add this    
     appSettings: {
           applicationName: 'Varsity Sports Academy',

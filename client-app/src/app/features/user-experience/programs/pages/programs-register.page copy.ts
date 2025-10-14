@@ -8,7 +8,7 @@ import { SocialPluginComponent } from "../../~common/components/social-plugin/so
 import { inject, signal } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, ValidatorFn } from '@angular/forms';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
-import { Camp, CampsService } from '../../~common/apis/camp.api';
+import { Camp, CampsService } from '../../~common/apis/activity.api';
 import { RegistrationApi, CampRegistrationPayload, SKILL_LEVEL_OPTIONS, SPORT_OPTIONS, TSHIRT_SIZE_OPTIONS, SportOption } from '../../~common/apis/registration.api';
 import { map, Observable, take, tap } from 'rxjs';
 import { RegistrationIntakeComponent, CampRegistrationIntakeComponent } from "../../~common/components/camp-registration-intake/camp-registration-intake.component";

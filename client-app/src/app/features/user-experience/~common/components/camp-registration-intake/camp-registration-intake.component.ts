@@ -26,11 +26,11 @@ import {
 import { signal } from '@angular/core';
 import { CoreNotificationsService } from '../../../../../core/notifications/notifications.service';
 import { ActivityRegistrationApi, ActivityRegistrationDto, BASKETBALL_POSITION_OPTIONS, BasketballPositionOption, COUNTRY_OPTIONS, CountryOption, INTEREST_OPTIONS, InterestOption, SKILL_LEVEL_OPTIONS, SkillLevelOption, SOCCER_POSITION_OPTIONS, TSHIRT_SIZE_OPTIONS, TShirtSizeOption } from '../../apis/registration.api';
-import { Camp, CampsService } from '../../apis/camp.api';
 import { stringValidator, isoDateValidator, phoneNumberValidator, digitsOnlyValidator, isOptionValidator, alphaNumValidator } from '../../validators/validators';
 import { sqlInjectionValidator } from '../../validators/sqlinjection.validators';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest } from 'rxjs';
+import { Activity, ActivityApi } from '../../apis/activity.api';
 
 @Component({
   selector: 'app-camp-registration-intake-form',
@@ -43,15 +43,15 @@ import { combineLatest } from 'rxjs';
 })
 export class CampRegistrationIntakeComponent  {
   private readonly fb = inject(FormBuilder);
-  private readonly svc = inject(ActivityRegistrationApi);
-  private readonly campsSvc = inject(CampsService);  
+  private readonly registrationSvc = inject(ActivityRegistrationApi);
+  private readonly activitySvc = inject(ActivityApi);  
   private readonly notifications = inject(CoreNotificationsService);
 
   @Input() sport: InterestOption = 'Basketball';
   @Input() country: CountryOption = 'Barbados';
   @Input() activity: string= 'basketball-camp'
 
-  camps$!: Observable<Camp[]>;
+  activities$!: Observable<Activity[]>;
   readonly interestOptions = INTEREST_OPTIONS;
   readonly countryOptions = COUNTRY_OPTIONS;
   readonly skillOptions = SKILL_LEVEL_OPTIONS;
@@ -158,9 +158,9 @@ export class CampRegistrationIntakeComponent  {
     );
   
     // 4) Camps based on sport + country
-    this.camps$ = combineLatest([sport$, country$]).pipe(
+    this.activities$ = combineLatest([sport$, country$]).pipe(
       switchMap(([sport, country]) =>
-        this.campsSvc.getCamps$(lc(sport), lc(country))
+        this.activitySvc.getCamps$(lc(sport), lc(country))
       ),
       map(camps => camps.slice().sort(
         (a, b) => +new Date(a.dates.start) - +new Date(b.dates.start)
@@ -169,7 +169,7 @@ export class CampRegistrationIntakeComponent  {
     );
   
     // 5) Set ActivityId once (prefer id from query if present in list)
-    combineLatest([qp$, this.camps$]).pipe(take(1)).subscribe(([{ idIn }, list]) => {
+    combineLatest([qp$, this.activities$]).pipe(take(1)).subscribe(([{ idIn }, list]) => {
       if (!list?.length) return;
       const preferred = idIn && list.find(c => c.id === idIn)?.id;
       const nextId = preferred || list[0].id;
@@ -230,16 +230,19 @@ export class CampRegistrationIntakeComponent  {
 
     this.submitting.set(true);
 
-    this.svc.registerForCamp(payload).subscribe({
+    this.registrationSvc.registerForCamp(payload).subscribe({
       next: (res => {
-        console.log('OK', res);
-        this.serverSuccess.set(true);
         this.serverMessage.set({ type: 'success', text: 'Thanks for registering! We will get back to you ASAP.' });
         this.notifications.showSuccess('Success - Registration form', this.serverMessage()?.text ?? '' );
+        console.log('OK', res);
         this.resetForm();
-    }),
+        this.serverSuccess.set(true);
+        this.submitting.set(false);
+      }),
       error: (err => {
         console.error('ERR', err);
+        this.serverSuccess.set(false);
+        this.submitting.set(false);
         this.serverMessage.set({ type: 'error', text: err?.error?.message ?? 'Sorry, something went wrong. Please try again.' });
         this.notifications.showError('Error - Registration form', this.serverMessage()?.text ?? 'Sorry, something went wrong. Please try again.');
       })
@@ -284,7 +287,7 @@ export class CampRegistrationIntakeComponent  {
     const sport = (this.form.value?.Interest ?? this.sport ?? '').toString().trim().toLowerCase();
     const country = (this.form.value?.Country ?? this.country ?? '').toString().trim().toLowerCase();
 
-    this.camps$ = this.campsSvc
+    this.activities$ = this.activitySvc
       .getCamps$(sport, country)
       .pipe(
         map(camps =>
@@ -293,7 +296,7 @@ export class CampRegistrationIntakeComponent  {
       );
 
     // Set default ActivityId to first option if empty
-    this.camps$.pipe(take(1)).subscribe(list => {
+    this.activities$.pipe(take(1)).subscribe(list => {
       const current = this.form.controls['ActivityId'].value;
       if (list?.length && !current) {
         this.form.patchValue({ ActivityId: list[0].id });
@@ -302,7 +305,7 @@ export class CampRegistrationIntakeComponent  {
   }
 
   // --- Activity Dropdown handlers ---
-  trackById = (_: number, c: Camp) => c.id;
+  trackById = (_: number, c: Activity) => c.id;
 
   // Template helpers
   get f() { return this.form.controls; } // Full Form Template
