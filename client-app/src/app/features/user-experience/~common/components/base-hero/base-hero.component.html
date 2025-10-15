@@ -4,10 +4,11 @@
   [class.overlay-gold]="overlay==='gold'"
   [style.--hero-max]="maxWidth"
   [style.background-image]="backgroundUrl ? 'url('+backgroundUrl+')' : null"
-  role="banner"
+  role="banner" fetchpriority="high"
   aria-labelledby="page-hero-title">
 
-  <div class="filter filter-black" aria-hidden="true"></div>
+  <!--<div class="filter filter-black" aria-hidden="true"></div>-->
+
   <div class="content-center">
     <div class="container">
 

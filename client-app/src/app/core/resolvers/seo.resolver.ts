@@ -23,7 +23,9 @@ export function seoResolve(input: SeoInput): ResolveFn<boolean> {
     const jsonld = inject(JsonLdService);
 
     meta.updateTag({ property: 'og:type', content: 'website' });
+    meta.updateTag({ property: 'og:url', content: 'https://www.varsitysportsacademy.com/en/academics-and-sports/approach' });
 
+  
     if (input.title) {
       titleSvc.setTitle(input.title);
       meta.updateTag({ property: 'og:title', content: input.title });
@@ -35,6 +37,10 @@ export function seoResolve(input: SeoInput): ResolveFn<boolean> {
       meta.updateTag({ property: 'og:description', content: input.description });
       meta.updateTag({ name: 'twitter:description', content: input.description });
     }
+    if (input.keywords)
+    {
+      meta.updateTag({ name: 'keywords', content: input.keywords });
+    }
     if (input.robots) {
       meta.updateTag({ name: 'robots', content: input.robots });
     } else {
@@ -42,9 +48,6 @@ export function seoResolve(input: SeoInput): ResolveFn<boolean> {
     }
     if (input.canonical) canonical.setCanonical(input.canonical);
     if (input.jsonLd) jsonld.setJsonLd(input.jsonLd);
-
-    if (input.keywords)
-      meta.updateTag({ name: 'keywords', content: input.keywords });
 
     return true;
   };

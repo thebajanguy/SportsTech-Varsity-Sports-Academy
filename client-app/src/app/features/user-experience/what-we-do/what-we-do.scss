@@ -93,45 +93,6 @@ $text-muted:      #444;
   li { margin:.25rem 0; }
 }
 
-/* ===== Blocks & CTA rows ===== */
-.block { margin-top:2rem; }
-
-.cta { margin-top:2rem; }
-
-.cta-card {
-  border-radius:.75rem; padding:1rem 1.25rem; color:#fff;
-  background: linear-gradient(180deg, #0a2144 0%, #0a2144 60%, #0e2a57 100%);
-  .btn { margin-top:.5rem; }
-}
-
-/* Full-width, equal-size buttons inside .cta-row */
-.cta-row {
-  padding-top:30px; 
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* two equal columns */
-  gap:.75rem;                          /* no gap = full coverage */
-  width: 100%;
-
-  flex-wrap:wrap; 
-  justify-content:center;
-}
-
-.cta-row > a {
-  display: flex;                   /* center text nicely */
-  align-items: center;
-  justify-content: center;
-  width: 90%;
-  height: 70%;                    /* stretch to cell height */
-  padding: 14px 16px;              /* adjust as needed */
-  text-align: center;
-  /* Optional: stronger hit area */
-  min-height: 28px;                /* good touch target */
-}
-
-/* Stack on small screens but still full width */
-@media (max-width: 640px) {
-  .cta-row { grid-template-columns: 1fr; }
-}
 
 
 /* ===== Hero ===== */

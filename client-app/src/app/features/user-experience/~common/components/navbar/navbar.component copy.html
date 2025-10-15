@@ -218,66 +218,66 @@
       </ul>
 
       <!-- Right: actions / auth-aware profile area -->
-<ul class="navbar-nav ms-md-3 align-items-center">
+      <ul class="navbar-nav ms-md-3 align-items-center">
 
-  <!-- If user is logged in: show profile dropdown -->
-  <li class="nav-item dropdown dropdown-hover" ngbDropdown *ngIf="user; else guestCtas">
-    <a class="nav-link dropdown-toggle d-flex align-items-center gap-2"
-       id="navProfile"
-       ngbDropdownToggle role="button" aria-expanded="false">
-      <span class="avatar">
-        <img [src]="user.avatarUrl || 'assets/img/avatars/default.webp'" alt="" />
-      </span>
-      <span class="d-none d-lg-inline">{{ user.firstName }}</span>
-    </a>
+        <!-- If user is logged in: show profile dropdown -->
+        <li class="nav-item dropdown dropdown-hover" ngbDropdown *ngIf="user; else guestCtas">
+          <a class="nav-link dropdown-toggle d-flex align-items-center gap-2"
+            id="navProfile"
+            ngbDropdownToggle role="button" aria-expanded="false">
+            <span class="avatar">
+              <img [src]="user.avatarUrl || 'assets/img/avatars/default.webp'" alt="" />
+            </span>
+            <span class="d-none d-lg-inline">{{ user.firstName }}</span>
+          </a>
 
-    <div class="dropdown-menu dropdown-menu-end dropdown-info" ngbDropdownMenu aria-labelledby="navProfile">
-      <div class="dropdown-title">Account</div>
-      <a class="dropdown-item" [routerLink]="['/', lang, 'account']">
-        <span class="item-media"><img src="assets/img/icons/icon-profile.png" alt="" /></span>
-        <span class="item-text">
-          <span class="item-title">Dashboard</span>
-          <span class="item-desc">View profile & progress</span>
-        </span>
-      </a>
-      <a class="dropdown-item" [routerLink]="['/', lang, 'account/settings']">
-        <span class="item-media"><img src="assets/img/icons/icon-sign-in.png" alt="" /></span>
-        <span class="item-text">
-          <span class="item-title">Settings</span>
-          <span class="item-desc">Security & preferences</span>
-        </span>
-      </a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" (click)="signOut()">
-        <span class="item-media"><img src="assets/img/icons/icon-logout.png" alt="" /></span>
-        <span class="item-text">
-          <span class="item-title">Sign out</span>
-          <span class="item-desc">See you soon</span>
-        </span>
-      </a>
-    </div>
-  </li>
+          <div class="dropdown-menu dropdown-menu-end dropdown-info" ngbDropdownMenu aria-labelledby="navProfile">
+            <div class="dropdown-title">Account</div>
+            <a class="dropdown-item" [routerLink]="['/', lang, 'account']">
+              <span class="item-media"><img src="assets/img/icons/icon-profile.png" alt="" /></span>
+              <span class="item-text">
+                <span class="item-title">Dashboard</span>
+                <span class="item-desc">View profile & progress</span>
+              </span>
+            </a>
+            <a class="dropdown-item" [routerLink]="['/', lang, 'account/settings']">
+              <span class="item-media"><img src="assets/img/icons/icon-sign-in.png" alt="" /></span>
+              <span class="item-text">
+                <span class="item-title">Settings</span>
+                <span class="item-desc">Security & preferences</span>
+              </span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="signOut()">
+              <span class="item-media"><img src="assets/img/icons/icon-logout.png" alt="" /></span>
+              <span class="item-text">
+                <span class="item-title">Sign out</span>
+                <span class="item-desc">See you soon</span>
+              </span>
+            </a>
+          </div>
+        </li>
 
-  <!-- Else: show Sign in / Sign up -->
-  <ng-template #guestCtas>
-    <li class="nav-item d-none d-lg-block">
-      <button class="btn btn-outline-light btn-sm me-2" (click)="signIn()" aria-label="Sign in">
-        Sign in
-      </button>
-      <button class="btn btn-main btn-sm" (click)="signUp()" aria-label="Sign up">
-        Sign up
-      </button>
-    </li>
+        <!-- Else: show Sign in / Sign up -->
+        <ng-template #guestCtas>
+          <li class="nav-item d-none d-lg-block">
+            <button class="btn btn-outline-light btn-sm me-2" (click)="signIn()" aria-label="Sign in">
+              Sign in
+            </button>
+            <button class="btn btn-main btn-sm" (click)="signUp()" aria-label="Sign up">
+              Sign up
+            </button>
+          </li>
 
-    <!-- Mobile auth buttons -->
-    <li class="nav-item d-lg-none mt-2 w-100">
-      <div class="d-flex">
-        <button class="btn btn-outline-light flex-fill me-2" (click)="signIn()" aria-label="Sign in">Sign in</button>
-        <button class="btn btn-main flex-fill" (click)="signUp()" aria-label="Sign up">Sign up</button>
-      </div>
-    </li>
-  </ng-template>
-</ul>
+          <!-- Mobile auth buttons -->
+          <li class="nav-item d-lg-none mt-2 w-100">
+            <div class="d-flex">
+              <button class="btn btn-outline-light flex-fill me-2" (click)="signIn()" aria-label="Sign in">Sign in</button>
+              <button class="btn btn-main flex-fill" (click)="signUp()" aria-label="Sign up">Sign up</button>
+            </div>
+          </li>
+        </ng-template>
+      </ul>
 
 
     </div>

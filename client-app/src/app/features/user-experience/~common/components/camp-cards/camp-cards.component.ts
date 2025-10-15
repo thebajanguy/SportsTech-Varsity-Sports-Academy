@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core
 import { CommonModule, DatePipe, NgFor } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CampsService, Camp } from '../../apis/camp.api';
+import { ActivityApi, Activity } from '../../apis/activity.api';
 
 @Component({
   selector: 'app-camp-cards',
@@ -26,16 +26,16 @@ export class CampCardsComponent  {
   @Input() activeOnly?: boolean = false;        // NEW
   @Input({ required: true }) activity:  string = 'basketball-camp';
 
-  private campsSvc = inject(CampsService);
-  camps$!: Observable<Camp[]>;
+  private campsSvc = inject(ActivityApi);
+  camps$!: Observable<Activity[]>;
 
   ngOnInit(): void {
     //cityAndCountry = this.route.snapshot.queryParamMap.get('city') ?? undefined;
     this.camps$ = this.campsSvc.getCamps$(this.sport.trim().toLocaleLowerCase(), this.cityAndCountry.trim().toLocaleLowerCase(), this.activeOnly);
   }
 
-  trackById = (_: number, c: Camp) => c.id;
-  sameYear(c: Camp): boolean {
+  trackById = (_: number, c: Activity) => c.id;
+  sameYear(c: Activity): boolean {
     const s = new Date(c.dates.start); 
     const e = new Date(c.dates.end);
     return s.getFullYear() === e.getFullYear();

@@ -4,7 +4,6 @@
   style="background-image:url('assets/img/pages/correspondence/vsaprep-correspondence-hero-bg.png')"
   role="banner" aria-label="Varsity Sports Academy Prep Consultation Hero">
 
-  <div class="filter filter-black" aria-hidden="true"></div>
 
   <div class="content-center">
     <div class="container">
@@ -175,14 +174,13 @@
               <span>{{ submitting() ? 'Sending…' : 'Request Consultation' }}</span>
             </button>
           </div>
-          <!-- 
+
           <div *ngIf="serverMessage()" class="mt-2 text-center"
                [class.text-success]="serverMessage()?.type==='success'"
                [class.text-danger]="serverMessage()?.type==='error'"
                role="status" aria-live="polite">
             {{ serverMessage()?.text }}
           </div>
-          -->
         </form>
   
       </div>

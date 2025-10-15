@@ -11,7 +11,7 @@
   Rooted in discipline, teamwork, and our motto
   <strong>Labor Durus</strong> (<em>“hard work”</em>), we focus on developing
   not just athletes, but well-rounded leaders.'"
-  [backgroundUrl]="'assets/img/pages/who-we-are/vsaprep-hero-bg.png'"
+  [backgroundUrl]="'assets/img/pages/who-we-are/vsaprep-who-we-are-hero-bg.png'"
   [headerSize]="'none'"
   [breadcrumb]="[
       { label: 'Home', link: ['/'+urlPath+'/student-athletes'] },
@@ -181,28 +181,43 @@
 
 
     <!-- Start Maximize Potential Banner -->
-    <section class="section page-header-xs div-section-seperator" aria-labelledby="maximize-potential-heading"
-        style="padding: 0px;padding-top: 20px;padding-bottom: 40px;">
-        <div class="container overlay-content">
-            <div class="row">
-                <div class="col-md-12 ml-auto mr-auto text-center">
-                    <h2 id="maximize-potential-heading" class="text-color-white">
+    <section class="section cta-banner cta-exposure parallax-hero" aria-labelledby="sports-development-title-a">
+      <!-- decorative background image with accessible label -->
+      <div class="cta-bg sports-option-a" role="img"
+          aria-label="Coach and athlete shaking hands on a track beside a laptop playing a highlight reel.">
+      </div>
+      <div class="cta-overlay"></div>
+      <div class="container">
+          <div class="row">
+              <div class="ml-auto mr-auto text-center">
+                  <div class="container cta-content">
+  
+                      <h2 id="sports-development-title-a" class="text-white">
                         Helping Student-Athletes Maximize Their True Potential
-                    </h2>
-                    <p class="text-color-white mt-3">
+                      </h2>
+                      <h3 class="title text-color-main t-2">
+                        Our motto <strong>"Labor Durus"</strong> — the Latin translation of <strong>"Hard
+                          Work"</strong>.
+                      </h3>
+  
+                      <h5 class="cta-subhead align-center mt-3">
                         At <strong>Varsity Sports Academy Prep</strong>, we provide the perfect balance of
                         <strong>academic tutoring, elite sports training, and mentorship</strong> to prepare young
                         athletes for scholarships, competition, and lifelong success. Our approach ensures that
                         students not only improve athletic skills but also build strong minds and academic excellence.
-                    </p>
-                    <a [routerLink]="['/'+urlPath+'/consultation']" class="btn btn-main btn-lg btn-magnify"
-                        title="Learn how Varsity Sports Academy Prep can help your student-athlete succeed">
-                        &nbsp; Book a free consultation with Varsity Sports Academy Prep &nbsp;
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+                      </h5>
+  
+                      <!-- CTA -->
+                      <a [routerLink]="['/'+urlPath+'/consultation']" class="btn btn-main btn-lg btn-magnify"
+                      title="Learn how Varsity Sports Academy Prep can help your student-athlete succeed">
+                      &nbsp; Book a free consultation with Varsity Sports Academy Prep &nbsp;
+                      </a>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+      </section>
     <!-- End Maximize Potential Banner -->
 
     <!-- Start: Year-Round Sports Development Program -->

@@ -17,6 +17,22 @@
   ]">
   </app-base-hero>
 
+  <!-- vsa-welcome-modal --><!-- 
+  <vsa-timer-modal
+    [delay]="10000"
+    [rememberDays]="-1"
+    [title]="'Brains & Ballers: Start Here'"
+    [primaryHref]="'/en/academics-and-sports/register#register'"
+    (closed)="onModalClosed($event)"
+  >-->
+    <!-- Optional custom content --><!-- 
+    <p><strong>New?</strong> Book a free consultation or register for a camp today.</p>
+    <p><strong>New?</strong> Book a free consultation or register for a camp today.</p>
+    <p><strong>New?</strong> Book a free consultation or register for a camp today.</p>
+    <p><strong>New?</strong> Book a free consultation or register for a camp today.</p>
+    --><!-- 
+  </vsa-timer-modal>
+  -->
 
   <!-- Start The Problem & The Solution -->
   <section id="problem-solution" class="section problem-solution text-center py-5" aria-labelledby="problem-solution-heading">
@@ -128,7 +144,7 @@
               <!-- Copy -->
               <div class="col-md-6 col-sm-6 mr-auto ml-auto">
                   <header>
-                      <h2 id="academics-first-heading" class="h2-heading-pull-up align-left">Academics First</h2>
+                      <h2 id="academics-first-heading" class="align-left">Academics First</h2>
                       <h3 class="text-muted" style="padding: 20px;padding-left:0px;">
                           Focused tutoring, exam readiness, and NCAA guidance designed for student-athletes.
                       </h3>
@@ -161,7 +177,7 @@
               </div>
 
               <!-- Visual -->
-              <div class="col-md-6 col-sm-6 mr-auto ml-auto">
+              <div class="col-md-6 col-sm-6 mr-auto ml-auto lift-figure-section">
                   <figure class="m-0">
                       <img src="assets/img/pages/home/vsaprep-academics-first.png"
                           alt="Academics tutoring and exam preparation for student-athletes at Varsity Sports Academy Prep"
@@ -184,7 +200,7 @@
             <div class="row align-items-left">
 
                 <!-- Visual -->
-                <div class="col-md-6 col-sm-6 mr-auto ml-auto">
+                <div class="col-md-6 col-sm-6 mr-auto ml-auto lift-figure-section">
                     <figure class="m-0">
                         <img src="assets/img/pages/home/vsaprep-sports-training.png"
                             alt="Student-athletes training at Varsity Sports Academy Prep: basketball ball-handling, soccer agility, and volleyball drills"
@@ -199,7 +215,7 @@
                 <div class="col-md-6 col-sm-6 mr-auto ml-auto">
 
                     <header>
-                        <h2 id="sports-training-heading" class="h2-heading-pull-up align-left">Sports Training</h2>
+                        <h2 id="sports-training-heading" class="align-left">Sports Training</h2>
                         <h3 class="text-muted" style="padding: 20px;padding-left:0px;">
                             Elite, multi-sport development for student-athletes—building strength, speed, skills, and
                             game IQ.
@@ -247,96 +263,110 @@
     <!-- End Sports Training -->
 
     <!-- Start Recruitment and Exposure -->
-    <section id="recruitment-and-exposure" class="section section-white"
-        aria-labelledby="recruitment-and-exposure-heading">
+    <section id="academics-first" class="section section-white" aria-labelledby="academics-first-heading">
         <div class="container">
-            <div class="row align-items-center">
-
+            <div class="row align-items-left">
+  
                 <!-- Copy -->
                 <div class="col-md-6 col-sm-6 mr-auto ml-auto">
                     <header>
-                        <h2 id="recruitment-and-exposure-heading" class="h2-heading-pull-up align-left">
-                            Recruitment and Exposure
+                        <h2 id="academics-first-heading" class="align-left">  
+                          Recruitment and Exposure
                         </h2>
                         <h3 class="text-muted" style="padding: 20px;padding-left:0px;">
-                            Showcase your skills and gain visibility with college coaches, scouts, and recruiters
-                            through VSA Prep’s recruitment services.
+                          Showcase your skills and gain visibility with college coaches, scouts, and recruiters
+                          through VSA Prep’s recruitment services.
                         </h3>
                     </header>
-
+  
                     <ul class="list-unstyled mt-4 description" role="list">
-                        <li class="d-flex mb-3">
-                            <span class="text-blue-600 me-2" aria-hidden="true">🎥</span>
-                            <span><strong>Virtual Athlete Profiles & Highlight Reels</strong> — professional media to
-                                market your game</span>
-                        </li>
-                        <li class="d-flex mb-3">
-                            <span class="text-blue-600 me-2" aria-hidden="true">🏫</span>
-                            <span><strong>High School & College Guidance</strong> — direct connections with U.S. coaches
-                                and recruiters</span>
-                        </li>
-                        <li class="d-flex mb-3">
-                            <span class="text-blue-600 me-2" aria-hidden="true">🌍</span>
-                            <span><strong>International Tours & Tournaments</strong> — exposure trips to Barcelona,
-                                Dublin, Atlanta, Orlando, Dubai</span>
-                        </li>
-                        <li class="d-flex">
-                            <span class="text-blue-600 me-2" aria-hidden="true">🔥</span>
-                            <span><strong>Elite Exposure Camps</strong> — Brains & Ballers Gold Camp and Ultimate
-                                Exposure Camp</span>
-                        </li>
-                    </ul>
+                      <li class="d-flex mb-3">
+                          <span class="text-blue-600 me-2" aria-hidden="true">🎥</span>
+                          <span><strong>Virtual Athlete Profiles & Highlight Reels</strong> — professional media to
+                              market your game</span>
+                      </li>
+                      <li class="d-flex mb-3">
+                          <span class="text-blue-600 me-2" aria-hidden="true">🏫</span>
+                          <span><strong>High School & College Guidance</strong> — direct connections with U.S. coaches
+                              and recruiters</span>
+                      </li>
+                      <li class="d-flex mb-3">
+                          <span class="text-blue-600 me-2" aria-hidden="true">🌍</span>
+                          <span><strong>International Tours & Tournaments</strong> — exposure trips to Barcelona,
+                              Dublin, Atlanta, Orlando, Dubai</span>
+                      </li>
+                      <li class="d-flex">
+                          <span class="text-blue-600 me-2" aria-hidden="true">🔥</span>
+                          <span><strong>Elite Exposure Camps</strong> — Brains & Ballers Gold Camp and Ultimate
+                              Exposure Camp</span>
+                      </li>
+                  </ul>
 
-                    <a [routerLink]="['/'+urlPath+'/recruitment-exposure']" class="btn btn-main btn-lg btn-magnify mt-4"
-                        aria-label="Explore recruitment and exposure services at Varsity Sports Academy Prep">
-                        Explore Recruitment & Exposure Services
-                    </a>
-                </div>
-
+                  <a [routerLink]="['/'+urlPath+'/recruitment-exposure']" class="btn btn-main btn-lg btn-magnify mt-4"
+                  aria-label="Explore recruitment and exposure services at Varsity Sports Academy Prep">
+                  Explore Recruitment & Exposure Services
+              </a>
+          </div>
+  
                 <!-- Visual -->
-                <div class="col-md-6 col-sm-6 mr-auto ml-auto">
+                <div class="col-md-6 col-sm-6 mr-auto ml-auto lift-figure-section">
                     <figure class="m-0">
-                        <img src="assets/img/pages/home/vsaprep-recruitment-and-exposure.png"
-                            alt="Student-athlete showcase and recruitment exposure at Varsity Sports Academy Prep"
+                      <img src="assets/img/pages/home/vsaprep-recruitment-and-exposure.png"
+                      alt="Academics tutoring and exam preparation for student-athletes at Varsity Sports Academy Prep"
                             loading="lazy" decoding="async" class="img-fluid rounded shadow" width="1200"
                             height="900" />
-                        <!-- Optional caption -->
-                        <!-- <figcaption class="visually-hidden">Recruitment and college exposure services at VSA Prep.</figcaption> -->
+                        <!-- Optional caption for SEO -->
+                        <!-- <figcaption class="visually-hidden">Academic support and NCAA compliance guidance at VSA Prep.</figcaption> -->
                     </figure>
                 </div>
-
+  
             </div>
         </div>
     </section>
     <!-- End Recruitment and Exposure -->
 
+
     <!-- Start Fast-Track Banner -->
-    <section class="section page-header-xs div-section-seperator"
-        style="padding: 0px;padding-top: 20px;padding-bottom: 40px;">
-        <div class="filter filter-black"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 ml-auto mr-auto text-center">
-                    <h2 class="text-color-white">
+    <section class="section cta-banner cta-exposure parallax-hero" aria-labelledby="sports-development-title-a">
+      <!-- decorative background image with accessible label -->
+      <div class="cta-bg sports-option-a" role="img"
+          aria-label="Coach and athlete shaking hands on a track beside a laptop playing a highlight reel.">
+      </div>
+      <div class="cta-overlay"></div>
+      <div class="container">
+          <div class="row">
+              <div class="ml-auto mr-auto text-center">
+                  <div class="container cta-content">
+  
+                      <h2 id="sports-development-title-a" class="text-white">
                         Fast-Track Your Young Athlete’s Academic & Athletic Journey
-                    </h2>
-                    <h3 class="title text-color-main">
+                      </h2>
+                      <h3 class="title text-color-main t-2">
                         Do it the <strong>VSA Prep</strong> Way
-                    </h3>
-                    <p class="text-color-white mt-3">
+                      </h3>
+  
+                      <h5 class="cta-subhead align-center mt-3">
                         Our proven training programs combine <strong>elite coaching, academic support, and
-                            scholarship guidance</strong> to help student-athletes excel both on the field and in the
-                        classroom.
-                        Build confidence, improve performance, and prepare for the next level of competition.
-                    </p>
-                    <a [routerLink]="['/'+urlPath+'/contact']" class="btn btn-main btn-lg btn-magnify"
-                        title="Request Information about VSA Prep Academy Programs">
+                        scholarship guidance</strong> to help student-athletes excel both on the field and in the
+                        classroom. Build confidence, improve performance, and prepare for the next level of competition.
+                      </h5>
+  
+                      <a [routerLink]="['/'+urlPath+'/contact']" class="btn btn-main btn-lg btn-magnify"
+                          title="Request Information about VSA Prep Academy Programs">
                         &nbsp; Get Started Today &nbsp;
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+                      </a>
+
+                      
+                      <a class="btn btn-primary btn-md btn-magnify"
+                      [routerLink]="['/'+urlPath+'/contact']"
+                      aria-label="Start my training plan with Varsity Sports Academy Prep">
+                      Start My Training Plan
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </section>
     <!-- End Fast-Track Banner -->
 
     <!-- Start Brains & Ballers Gold Camp Series: Youth Sports Camps by VSA Prep -->
@@ -477,45 +507,43 @@
         </script>
     </section>
     <!-- End Brains & Ballers Gold Camp Series: Youth Sports Camps by VSA Prep-->
-
-
     
     <!-- Start Elite Banner -->
-    <section class="section page-header-xs div-section-seperator" style="padding: 20px 0 40px;"
-        aria-labelledby="elite-banner-heading">
-        <div class="filter filter-black" aria-hidden="true"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 ml-auto mr-auto text-center">
-
-                    <!-- Main Heading -->
-                    <h2 id="elite-banner-heading" class="text-color-white">
+    <section class="section cta-banner cta-exposure parallax-hero" aria-labelledby="sports-development-title-a">
+      <!-- decorative background image with accessible label -->
+      <div class="cta-bg sports-option-a" role="img"
+          aria-label="Coach and athlete shaking hands on a track beside a laptop playing a highlight reel.">
+      </div>
+      <div class="cta-overlay"></div>
+      <div class="container">
+          <div class="row">
+              <div class="ml-auto mr-auto text-center">
+                  <div class="container cta-content">
+  
+                      <h2 id="sports-development-title-a" class="text-white">
                         The Only True Secret to Becoming Elite
-                    </h2>
-
-                    <!-- Supporting Motto -->
-                    <h3 class="title text-color-main mt-3">
+                      </h2>
+                      <h3 class="title text-color-main t-2">
                         Our motto <strong>"Labor Durus"</strong> — the Latin translation of <strong>"Hard
-                            Work"</strong>.
-                    </h3>
-
-                    <h5 class="text-white-50 mt-2">
-                        At Varsity Sports Academy Prep, every practice and game builds the foundation for academic and
-                        athletic success. Making Every Minute You Train, Play, and Compete Count.
-                    </h5>
-
-                    <!-- CTA -->
-                    <a [routerLink]="['/'+urlPath+'/contact']" class="btn btn-main btn-lg btn-magnify mt-4"
-                        aria-label="Start training the VSA PREP way at Varsity Sports Academy Prep">
-                        Start Training the <strong>VSA PREP</strong> Way
-                    </a>
-
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Elite Banner -->
-
+                          Work"</strong>.
+                      </h3>
+  
+                      <h5 class="cta-subhead align-center mt-3">
+                        At Varsity Sports Academy Prep, every practice and game builds the foundation for academic and athletic success. Making Every Minute You Train, Play, and Compete Count.
+                      </h5>
+  
+                      <!-- CTA -->
+                      <a [routerLink]="['/'+urlPath+'/contact']" class="btn btn-main btn-lg btn-magnify mt-4"
+                          aria-label="Start training the VSA PREP way at Varsity Sports Academy Prep">
+                          Start Training the <strong>VSA PREP</strong> Way
+                      </a>
+  
+                  </div>
+              </div>
+          </div>
+      </div>
+      </section>
+    <!-- End Fast-Track Banner -->
 
     <!-- Youth Sports and Performance Programs-->
     <section id="youth-sports-and-performance-programs" class="section section-white" aria-labelledby="youth-sports-and-performance-programs-heading" style="padding: 3%;">
@@ -895,8 +923,6 @@
             
     </section>
       
-   
-
     <!-- Start Academics First, Sports Second -->
     <section class="section page-header-xs div-section-seperator" aria-labelledby="sports-second-heading"
         style="padding: 0px;padding-top: 20px;padding-bottom: 40px;">
@@ -926,10 +952,6 @@
         </div>
     </section>
     <!-- End Academics First, Sports Second -->
-
-
-
-
 
     <!-- Train the VSA Prep Way: Youth Sports Academies & Performance Training -->
     <section class="section section-white" aria-labelledby="train-vsa-prep-heading">
@@ -968,10 +990,10 @@
                     </div>
                     <h3 class="card-category section-title-md text-primary">Soccer Academy</h3>
                     <ul>
-                      <li><strong>Monday & Wednesday</strong></li>
-                      <li>4:00 PM – 5:30 PM</li>
+                      <li><strong>Monday - Friday</strong></li>
+                      <li>3:30 PM – 5:30 PM</li>
                       <li>Group Training</li>
-                      <li>Ages 2–14</li>
+                      <li>Ages 11–18</li>
                       <li>Local Fields</li>
                     </ul>
                     <div class="card-footer">
@@ -996,7 +1018,7 @@
                     <h3 class="card-category section-title-md text-primary">Basketball Academy</h3>
                     <ul>
                       <li><strong>Tuesday & Thursday</strong></li>
-                      <li>4:00 PM – 5:30 PM</li>
+                      <li>3:30 PM – 5:30 PM</li>
                       <li>Group Training</li>
                       <li>Ages 11–18</li>
                       <li>Local Courts</li>
@@ -1023,9 +1045,9 @@
                     <h3 class="card-category section-title-md text-primary">Private Training</h3>
                     <ul>
                       <li><strong>Daily Workouts</strong></li>
-                      <li>7:00 AM – 6:00 PM</li>
+                      <li>7:00 AM – 10:00 PM</li>
                       <li>One-on-One Workouts</li>
-                      <li>Ages 11-18</li>
+                      <li>Ages 4-18</li>
                       <li>Local Fields & Courts</li>
                     </ul>
                     <div class="card-footer">
@@ -1050,9 +1072,9 @@
                     <h3 class="card-category section-title-md text-primary">Performance</h3>
                     <ul>
                       <li><strong>Daily Workouts</strong></li>
-                      <li>7:00 AM – 6:00 PM</li>
+                      <li>7:00 AM – 10:00 PM</li>
                       <li>Strength + Performance</li>
-                      <li>Ages 11-18</li>
+                      <li>Ages 4-18</li>
                       <li>Local Fields & Courts</li>
                     </ul>
                     <div class="card-footer">

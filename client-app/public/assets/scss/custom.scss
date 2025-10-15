@@ -155,6 +155,8 @@ html {
 .toc a:hover { text-decoration: underline; color : gray; }
 .block { margin-top: 2rem; }
 .toc-lift-top-section { padding-top: 10px;margin-top: -50px;}
+/* ===== Minor utilities ===== */
+.lift-figure-section { padding-top:35px; margin-top:0px; }
 
 
 // ============================================================================
@@ -680,15 +682,19 @@ $accent: $main-color;
   .cta-content {
     position: relative;
     z-index: 1;
-    max-width: 1024px;
+    //max-width: 1200px;
+    //max-width: 98%;
+
   }
 
   .cta-head { margin: 0 0 .5rem; letter-spacing: .2px; color: $main-color; }
-  .cta-subhead { font-size: 1.1rem; margin-bottom: 1rem; max-width: 60ch; color: $white-color;}
+  .cta-subhead { font-size: 1.1rem; margin-bottom: 1rem; max-width: 60ch; color: $white-color; max-width: 100%;}
 
   .proof-points {
     list-style: none; padding: 0; margin: 0 0 1.25rem;
     display: grid; gap: .5rem;
+    //justify-content: center;
+    //align-items: center;
   }
 
   .proof-points li {
@@ -719,3 +725,23 @@ $accent: $main-color;
 }
 
 
+
+
+.btn[aria-disabled="true"],
+button.btn:disabled,
+a.btn.disabled,
+a.btn[aria-disabled="true"] {
+  pointer-events: none;
+  opacity: 0.6;
+  cursor: not-allowed;
+  text-decoration: none;
+
+}
+
+/* Works for links and buttons */
+.btn:not([aria-disabled="true"]):hover,
+button.btn:not(:disabled):hover,
+a.btn[href]:hover
+a.btn[href]:hover {
+  background: $info-color;
+}

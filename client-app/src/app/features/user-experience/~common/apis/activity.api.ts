@@ -5,12 +5,12 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, map, startWith, shareReplay } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
-export type CampStatus = 'open' | 'coming_soon' | 'closed';
-export interface Camp {
+export type ActivityStatus = 'open' | 'coming_soon' | 'closed';
+export interface Activity {
   id: string;
   country?: string,
   cityAndCountry?:string;          // country where camp is being held ... Barbados | United States | Trinidad | Abu Dabi
-  sport: 'basketball' | 'soccer' | 'other';
+  sport: 'basketball' | 'soccer'  | 'multi' | 'other';
   editionLabel: string;            // e.g. "Fall Edition 2025"
   imageUrl: string;
   imageAlt: string;
@@ -18,20 +18,42 @@ export interface Camp {
   venue: string;
   ages: string;                    // e.g. "11–18"
   schedule: string[];              // lines that form the "Days/Times" cell
-  price: string;                   // e.g. "$250" or "$250/week"
-  earlyBird?: { price: string; deadline: string }; // ISO date
+  price?: { monthly: string | null, weekly: string | null, dropin: string | null };                   // e.g. "$250" or "$250/week"
+  earlyBird?: { price: string | null; deadline: string | null }; // ISO date
   paymentMethods?: string[];       // e.g. ["1st Pay", "Cash"]
-  status: CampStatus;              // controls CTA behavior
+  status: ActivityStatus;              // controls CTA behavior
 }
 
 
 @Injectable({ providedIn: 'root' })
-export class CampsService {
+export class ActivityApi {
   private http = inject(HttpClient);
   private baseUrl = '/api'; // change if needed
 
   // --- Static fallback data (edit to your needs) ---
-  private staticCamps: Record<string, Camp[]> = {
+  private staticCamps: Record<string, Activity[]> = {
+    afterschool: [
+      {
+        id: 'as-fall-2025-bds',
+        sport: 'basketball',
+        country: 'Barbados',
+        cityAndCountry: 'Bridgetown, Barbados',
+        editionLabel: 'After-school Term-One',
+        imageUrl: 'assets/img/pages/what-we-do/vsaprep-what-we-do-ncaa-eligibility-support.png',
+        imageAlt: 'Brains & Ballers Fall After-school Program',
+        dates: { start: '2025-09-08', end: '2025-12-12' },
+        venue: 'The Deacons Resource Center',
+        ages: '11–18',
+        schedule: [
+          'Mon–Fri 3:30–5:30 PM • Study Hall • Tutoring • Study Skills',
+          'Mon–Fri 5:30–7:30 PM • Sports Lab • Film Study • Games'
+        ],
+        price: { monthly: '$400', weekly: '$125', dropin: '$50' },
+        earlyBird: { price: null, deadline: null },
+        paymentMethods: ['1st Pay', 'Cash', 'Online'],
+        status: 'open'
+      }
+    ],
     basketball: [
       {
         id: 'bb-fall-2025-bds',
@@ -45,11 +67,11 @@ export class CampsService {
         venue: 'The St. Michael School',
         ages: '11–18',
         schedule: [
-          'Wed 4–7 PM • Thu–Sat 8 AM–5 PM',
+          'Thu–Sat 8 AM–5 PM',
           'Sun 9 AM–5 PM (Live games / scrimmages)'
         ],
-        price: '$250/week',
-        earlyBird: { price: '$125/week', deadline: '2025-10-15' },
+        price: { monthly: null, weekly: '$200', dropin: '$50' },
+        earlyBird: { price: '$100', deadline: '2025-10-15' },
         paymentMethods: ['1st Pay', 'Cash', 'Online'],
         status: 'open'
       },
@@ -65,11 +87,11 @@ export class CampsService {
         venue: 'The St. Michael School',
         ages: '11–18',
         schedule: [
-          'Wed 4–7 PM • Thu–Sat 8 AM–5 PM',
-          'Sun 9 AM–5 PM (Live games / scrimmages)'
+          'Mon-Thu 8 AM–5 PM',
+          'Fri 8 AM–5 PM (Live games / scrimmages)'
         ],
-        price: '$250/week',
-        earlyBird: { price: '$125/week', deadline: '2025-11-15' },
+        price: { monthly: null, weekly: '$250', dropin: '$75' },
+        earlyBird: { price: '$150', deadline: '2025-11-15' },
         paymentMethods: ['1st Pay', 'Cash', 'Online'],
         status: 'coming_soon'
       },
@@ -85,11 +107,11 @@ export class CampsService {
         venue: 'The St. Michael School',
         ages: '11–18',
         schedule: [
-          'Wed 4–7 PM • Thu–Sat 8 AM–5 PM',
-          'Sun 9 AM–5 PM (Live games / scrimmages)'
+          'Mon-Thu 8 AM–5 PM',
+          'Fri 8 AM–5 PM (Live games / scrimmages)'
         ],
-        price: '$250/week',
-        earlyBird: { price: '$125/week', deadline: '2025-03-15' },
+        price: { monthly: null, weekly: '$250', dropin: '$75' },
+        earlyBird: { price: '$150', deadline: '2025-03-15' },
         paymentMethods: ['1st Pay', 'Cash', 'Online'],
         status: 'coming_soon'
       },
@@ -105,11 +127,11 @@ export class CampsService {
         venue: 'The St. Michael School',
         ages: '11–18',
         schedule: [
-          'Wed 4–7 PM • Thu–Sat 8 AM–5 PM',
+          'Thu–Sat 8 AM–5 PM',
           'Sun 9 AM–5 PM (Live games / scrimmages)'
         ],
-        price: '$250/week',
-        earlyBird: { price: '$125/week', deadline: '2025-07-15' },
+        price: { monthly: null, weekly: '$250', dropin: '$75' },
+        earlyBird: { price: '$150', deadline: '2025-07-15' },
         paymentMethods: ['1st Pay', 'Cash', 'Online'],
         status: 'coming_soon'
       },
@@ -127,11 +149,11 @@ export class CampsService {
         venue: 'Deacons Playing Field',
         ages: '11–18',
         schedule: [
-          'Wed 4–7 PM • Thu–Sat 8 AM–5 PM',
-          'Sun 9 AM–5 PM (Live games / scrimmages)'
+          'Mon-Thu 8 AM–5 PM',
+          'Fri 8 AM–5 PM (Live games / scrimmages)'
         ],
-        price: '$250/week',
-        earlyBird: { price: '$125/week', deadline: '2025-10-15' },
+        price: { monthly: null, weekly: '$250', dropin: '$75' },
+        earlyBird: { price: '$150', deadline: '2025-07-15' },
         paymentMethods: ['1st Pay', 'Cash', 'Online'],
         status: 'open'
       },
@@ -147,11 +169,11 @@ export class CampsService {
         venue: 'Deacons Playing Field',
         ages: '11–18',
         schedule: [
-          'Wed 4–7 PM • Thu–Sat 8 AM–5 PM',
-          'Sun 9 AM–5 PM (Live games / scrimmages)'
+          'Mon-Thu 8 AM–5 PM',
+          'Fri 8 AM–5 PM (Live games / scrimmages)'
         ],
-        price: '$250/week',
-        earlyBird: { price: '$125/week', deadline: '2025-11-15' },
+        price: { monthly: null, weekly: '$250', dropin: '$75' },
+        earlyBird: { price: '$150', deadline: '2025-07-15' },
         paymentMethods: ['1st Pay', 'Cash', 'Online'],
         status: 'coming_soon'
       },
@@ -167,11 +189,11 @@ export class CampsService {
         venue: 'Deacons Playing Field',
         ages: '11–18',
         schedule: [
-          'Wed 4–7 PM • Thu–Sat 8 AM–5 PM',
-          'Sun 9 AM–5 PM (Live games / scrimmages)'
+          'Mon-Thu 8 AM–5 PM',
+          'Fri 8 AM–5 PM (Live games / scrimmages)'
         ],
-        price: '$250/week',
-        earlyBird: { price: '$125/week', deadline: '2025-03-15' },
+        price: { monthly: null, weekly: '$250', dropin: '$75' },
+        earlyBird: { price: '$150', deadline: '2025-07-15' },
         paymentMethods: ['1st Pay', 'Cash', 'Online'],
         status: 'coming_soon'
       },
@@ -187,11 +209,11 @@ export class CampsService {
         venue: 'Deacons Playing Field',
         ages: '11–18',
         schedule: [
-          'Wed 4–7 PM • Thu–Sat 8 AM–5 PM',
-          'Sun 9 AM–5 PM (Live games / scrimmages)'
+          'Mon-Thu 8 AM–5 PM',
+          'Fri 8 AM–5 PM (Live games / scrimmages)'
         ],
-        price: '$250/week',
-        earlyBird: { price: '$125/week', deadline: '2025-07-15' },
+        price: { monthly: null, weekly: '$250', dropin: '$75' },
+        earlyBird: { price: '$150', deadline: '2025-07-15' },
         paymentMethods: ['1st Pay', 'Cash', 'Online'],
         status: 'coming_soon'
       },
@@ -199,7 +221,7 @@ export class CampsService {
   };
 
   /** Load camps with static-first strategy. Optional country filter. */
-  getCamps$(sportIn: string, countryIn?: string, activeOnly: boolean = true): Observable<Camp[]> {
+  getCamps$(sportIn: string, countryIn?: string, activeOnly: boolean = true): Observable<Activity[]> {
     // 1) Normalize sport key so it matches your staticCamps keys.
     const sport = (sportIn || '').toLowerCase().trim() as keyof typeof this.staticCamps;
   
@@ -226,12 +248,11 @@ export class CampsService {
     let params = new HttpParams().set('sport', sport);
     if (countryIn) params = params.set('cityAndCountry', countryIn);
     
-  
     // 6) Call API, but always emit fallback immediately via startWith.
-    const api$ = this.http.get<Camp[]>(`${this.baseUrl}/camps`, { params }).pipe(
+    const api$ = this.http.get<Activity[]>(`${this.baseUrl}/activities`, { params }).pipe(
       catchError((err) => {
-        console.warn('[CampsService] API error, using fallback', err);
-        return of<Camp[]>([]);
+        console.warn('[ActivityService] API error, using fallback', err);
+        return of<Activity[]>([]);
       }),
       map(api => (Array.isArray(api) && api.length ? api : fallback))
     );
@@ -246,7 +267,7 @@ export class CampsService {
       shareReplay(1)
     );
 
-    function autoStatus(c: Camp, now = new Date()): CampStatus {
+    function autoStatus(c: Activity, now = new Date()): ActivityStatus {
       // Respect explicit status if manually set
       if (c.status && ['open', 'coming_soon', 'closed'].includes(c.status))
         return c.status;

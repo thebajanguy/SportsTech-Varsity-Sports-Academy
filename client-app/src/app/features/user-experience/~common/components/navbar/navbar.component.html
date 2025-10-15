@@ -69,74 +69,41 @@
         -->
 
 
-        <!-- What We Do (standard dropdown) -->
-        <li class="nav-item dropdown dropdown-hover" ngbDropdown [routerLinkActive]="['link-active']">
+        <!-- Services (MEGA) -->
+        <li class="nav-item dropdown dropdown-mega dropdown-hover" ngbDropdown [routerLinkActive]="['link-active']">
           <a class="nav-link dropdown-toggle px-3 d-flex align-items-center"
-             id="ddWhatWeDo"
-             ngbDropdownToggle role="button"
-             aria-expanded="false" aria-haspopup="true">
-             <i class="nc-icon nc-trophy icon-warning"></i>&nbsp;<span itemprop="name">Services</span>
+             id="ddPrograms"
+             ngbDropdownToggle role="button" aria-expanded="false" aria-haspopup="true">
+             <i class="nc-icon nc-trophy icon-warning"></i>&nbsp; <span itemprop="name">Services</span>
           </a>
+          <div class="dropdown-menu dropdown-menu-end dropdown-info mega" ngbDropdownMenu aria-labelledby="ddPrograms">
+            <div class="mega-grid">
+              <a class="mega-card" itemprop="url" [routerLink]="['approach']">
+                <span><img src="/assets/img/logos/internal/icon.png" alt="" width="42" height="42" loading="lazy" decoding="async" /></span>
+                <span><span class="mega-title" itemprop="name">Our Approach</span><span class="mega-desc">Our multi-sport curriculum activates, educates, and empowers athletes to unlock their full potential.</span></span>
+              </a>
+              <a class="mega-card" itemprop="url" [routerLink]="['ncaa-compliance']">
+                <span><img src="/assets/img/logos/internal/icon.png" alt="" width="42" height="42" loading="lazy" decoding="async" /></span>
+                <span><span class="mega-title" itemprop="name">NCAA Compliance</span><span class="mega-desc">16-core mapping &amp; guidance. We ensure that every student-athlete is NCAA compliant.</span></span>
+              </a>
+              <a class="mega-card" itemprop="url" [routerLink]="['academic-tutoring']">
+                <span><img src="/assets/img/nav/vsa-prep-brains-and-ballers-gold-camps-logo.png" alt="" width="42" height="42" loading="lazy" decoding="async" /></span>
+                <span><span class="mega-title" itemprop="name">Academic Tutoring</span><span class="mega-desc">CSEC/CAPE, SAT/ACT, study hall. Elite academic tutoring, and leadership for student-athletes.</span></span>
+              </a>
+              <a class="mega-card" itemprop="url" [routerLink]="['sports-development']">
+                <span><img src="/assets/img/nav/vsa-prep-brains-and-ballers-gold-camps-logo.png" alt="" width="42" height="42" loading="lazy" decoding="async" /></span>
+                <span><span class="mega-title" itemprop="name">Sports Development</span><span class="mega-desc">Advanced sports training, fitness, and showcase experience for student-athletes.</span></span>
+              </a>
+              <a class="mega-card" itemprop="url" [routerLink]="['recruitment-exposure']">
+                <span><img src="/assets/img/nav/vsa-prep-brains-and-ballers-gold-camps-logo.png" alt="Recruitment &amp; Exposure" width="42" height="42" loading="lazy" decoding="async" /></span>
+                <span><span class="mega-title" itemprop="name">Recruitment &amp; Exposure</span><span class="mega-desc">Profiles, highlight reels, tours.</span></span>
+              </a>
 
-          <div class="dropdown-menu dropdown-menu-end dropdown-info" ngbDropdownMenu aria-labelledby="ddWhatWeDo">
-            <div class="dropdown-title">Academics</div>
 
-            <a class="dropdown-item" itemprop="url"
-               [routerLink]="['academic-tutoring']">
-              <span class="item-media">
-                <img src="/assets/img/nav/vsaprep-nav-academics.png"
-                     alt="Academic Tutoring"
-                     width="48" height="36" loading="lazy" decoding="async" />
-              </span>
-              <span class="item-text">
-                <span class="item-title" itemprop="name">Academic Tutoring</span>
-                <span class="item-desc">CSEC/CAPE, SAT/ACT, study hall</span>
-              </span>
-            </a>
-
-            <a class="dropdown-item" itemprop="url"
-               [routerLink]="['ncaa-compliance']">
-              <span class="item-media">
-                <img src="/assets/img/nav/vsaprep-nav-ncaa.png"
-                     alt="NCAA Compliance"
-                     width="48" height="36" loading="lazy" decoding="async" />
-              </span>
-              <span class="item-text">
-                <span class="item-title" itemprop="name">NCAA Compliance</span>
-                <span class="item-desc">16-core mapping &amp; guidance</span>
-              </span>
-            </a>
-
-            <div class="dropdown-divider"></div>
-            <div class="dropdown-title">Athletics</div>
-
-            <a class="dropdown-item" itemprop="url"
-               [routerLink]="['sports-development']">
-              <span class="item-media">
-                <img src="/assets/img/nav/agile-training_580x360.png"
-                     alt="Sports Development"
-                     width="48" height="36" loading="lazy" decoding="async" />
-              </span>
-              <span class="item-text">
-                <span class="item-title" itemprop="name">Sports Development</span>
-                <span class="item-desc">Basketball, soccer, volleyball</span>
-              </span>
-            </a>
-
-            <a class="dropdown-item" itemprop="url"
-               [routerLink]="['recruitment-exposure']">
-              <span class="item-media">
-                <img src="/assets/img/nav/agile-training_580x360.png"
-                     alt="Recruitment &amp; Exposure"
-                     width="48" height="36" loading="lazy" decoding="async" />
-              </span>
-              <span class="item-text">
-                <span class="item-title" itemprop="name">Recruitment &amp; Exposure</span>
-                <span class="item-desc">Profiles, highlight reels, tours</span>
-              </span>
-            </a>
+            </div>
           </div>
         </li>
+
 
         <!-- Programs (MEGA) -->
         <!--  Coming Soon  -->
@@ -148,6 +115,7 @@
           </a>
           <div class="dropdown-menu dropdown-menu-end dropdown-info mega" ngbDropdownMenu aria-labelledby="ddPrograms">
             <div class="mega-grid">
+
               <a class="mega-card" itemprop="url" [routerLink]="['after-school']">
                 <span><img src="/assets/img/logos/internal/icon.png" alt="" width="42" height="42" loading="lazy" decoding="async" /></span>
                 <span><span class="mega-title" itemprop="name">After School Program</span><span class="mega-desc">Join the Brains & Ballers After School Program at Varsity Sports Academy Prep for academic support and athletic training.</span></span>
