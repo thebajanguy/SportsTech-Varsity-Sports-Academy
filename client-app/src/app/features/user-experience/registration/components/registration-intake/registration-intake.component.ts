@@ -25,35 +25,37 @@ import {
   BehaviorSubject} from 'rxjs';
 import { signal } from '@angular/core';
 import { CoreNotificationsService } from '../../../../../core/notifications/notifications.service';
-import { ActivityRegistrationApi, ActivityRegistrationDto, BASKETBALL_POSITION_OPTIONS, BasketballPositionOption, COUNTRY_OPTIONS, CountryOption, INTEREST_OPTIONS, InterestOption, SKILL_LEVEL_OPTIONS, SkillLevelOption, SOCCER_POSITION_OPTIONS, TSHIRT_SIZE_OPTIONS, TShirtSizeOption } from '../../apis/registration.api';
-import { stringValidator, isoDateValidator, phoneNumberValidator, digitsOnlyValidator, isOptionValidator, alphaNumValidator } from '../../validators/validators';
-import { sqlInjectionValidator } from '../../validators/sqlinjection.validators';
+import { ActivityRegistrationApi, ActivityRegistrationDto, BASKETBALL_POSITION_OPTIONS, BasketballPositionOption, COUNTRY_OPTIONS, CountryOption, INTEREST_OPTIONS, InterestOption, SKILL_LEVEL_OPTIONS, SkillLevelOption, SOCCER_POSITION_OPTIONS, TSHIRT_SIZE_OPTIONS, TShirtSizeOption } from '../../../~common/apis/registration.api';
+import { stringValidator, isoDateValidator, phoneNumberValidator, digitsOnlyValidator, isOptionValidator, alphaNumValidator } from '../../../~common/validators/validators';
+import { sqlInjectionValidator } from '../../../~common/validators/sqlinjection.validators';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest } from 'rxjs';
-import { Activity, ActivityApi } from '../../apis/activity.api';
+import { Activity, ActivityApi } from '../../../~common/apis/activity.api';
 
 @Component({
-  selector: 'app-camp-registration-intake-form',
+  selector: 'app-registration-intake-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './camp-registration-intake.component.html',
-  styleUrls: ['./camp-registration-intake.component.scss'],
+  templateUrl: './registration-intake.component.html',
+  styleUrls: ['./registration-intake.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
-export class CampRegistrationIntakeComponent  {
+export class RegistrationIntakeComponent  {
   private readonly fb = inject(FormBuilder);
   private readonly registrationSvc = inject(ActivityRegistrationApi);
   private readonly activitySvc = inject(ActivityApi);  
   private readonly notifications = inject(CoreNotificationsService);
 
-  @Input() sport: InterestOption = 'Basketball';
+  @Input() interest: InterestOption = 'Basketball'; // Possible values: 'Basketball', 'Soccer', 'After-School'
   @Input() country: CountryOption = 'Barbados';
-  @Input() activity: string= 'basketball-camp'
+
+  @Input() activityType: string= 'basketball-camp'
 
   activities$!: Observable<Activity[]>;
   readonly interestOptions = INTEREST_OPTIONS;
   readonly countryOptions = COUNTRY_OPTIONS;
+
   readonly skillOptions = SKILL_LEVEL_OPTIONS;
   readonly sizeOptions = TSHIRT_SIZE_OPTIONS;
   readonly basketballPositionOptions = BASKETBALL_POSITION_OPTIONS;
@@ -114,31 +116,30 @@ export class CampRegistrationIntakeComponent  {
 
   ngOnInit() {
     const lc = (s?: string | null) => (s ?? '').trim().toLowerCase();
-
     const qp$ = this.route.queryParamMap.pipe(
       map(qp => ({
         idIn: qp.get('id') ?? '',
-        sportIn: qp.get('sport') ?? '',
+        interestIn: qp.get('interest') ?? '',
         countryIn: qp.get('country') ?? '',
-        activityIn: qp.get('activity') ?? '',
+        activityTypeIn: qp.get('activityType') ?? '',
       })),
       shareReplay({ bufferSize: 1, refCount: true })
     );
   
     // 1) Set this.activity once from query param (fallback to @Input default)
     qp$.pipe(
-      map(({ activityIn }) => activityIn?.trim().toLowerCase()),
-      map(a => lc(a) || lc(this.activity)),
+      map(({ activityTypeIn }) => activityTypeIn?.trim().toLowerCase()),
+      map(a => lc(a) || lc(this.activityType)),
       distinctUntilChanged(),
       take(1)
-    ).subscribe(a => this.activity = lc(a));
+    ).subscribe(a => this.activityType = lc(a));
   
     // 2) Sport from qp OR existing form value OR component fallback
-    const sport$ = qp$.pipe(
-      map(({ sportIn }) => {
-        const q = lc(sportIn);
+    const interest$ = qp$.pipe(
+      map(({ interestIn }) => {
+        const q = lc(interestIn);
         const match = this.interestOptions?.find(i => lc(i) === q);
-        return match || this.form.value.Interest || this.sport;
+        return match || this.form.value.Interest || this.interest;
       }),
       tap(s => this.form.patchValue({ Interest: s })),
       distinctUntilChanged(),
@@ -157,10 +158,10 @@ export class CampRegistrationIntakeComponent  {
       shareReplay({ bufferSize: 1, refCount: true })
     );
   
-    // 4) Camps based on sport + country
-    this.activities$ = combineLatest([sport$, country$]).pipe(
-      switchMap(([sport, country]) =>
-        this.activitySvc.getCamps$(lc(sport), lc(country))
+    // 4) Camps based on interest/sport + country
+    this.activities$ = combineLatest([interest$, country$]).pipe(
+      switchMap(([interest, country]) =>
+        this.activitySvc.getActivities$(lc(interest), lc(country))
       ),
       map(camps => camps.slice().sort(
         (a, b) => +new Date(a.dates.start) - +new Date(b.dates.start)
@@ -194,38 +195,38 @@ export class CampRegistrationIntakeComponent  {
     }
 
     const v = this.form.value;
+    const trimOrNull = (x: string | null | undefined) => (x?.trim() || null);
     // To do: Uncomment if need to extract the phone digits only
     // const cleanPhonePlayer = extractPhoneDigitsOnly(v.Phone);
     // Create payload
     const payload: ActivityRegistrationDto = {
-      RegistrationType: this.activity.trim().toLocaleLowerCase(),
+      RegistrationType: this.activityType.trim().toLowerCase(),
       ApplicationName: "VSA Prep",
-
-      Country: v.Country!.trim(), Interest: v.Interest!.trim(), ActivityId: v.ActivityId!.trim(),
+      Country: trimOrNull(v.Country),
+      Interest: trimOrNull(v.Interest),
+      ActivityId: trimOrNull(v.ActivityId),
+    
       Player: {
-        Givenname: v.Givenname!.trim(), Surname: v.Surname!.trim(),  DOB: v.DOB!.trim(),        
-        Email: v.Email!.trim().toLowerCase() ?? null, Phone: v.Phone!.trim() ?? null,
-        School: v.School!.trim(), GradeOrForm: v.GradeOrForm,
-        Position: v.Position!.trim(), SkillLevel: v.SkillLevel!.trim(), TshirtSize: v.TshirtSize!.trim()
+        Givenname: trimOrNull(v.Givenname),
+        Surname: trimOrNull(v.Surname),
+        DOB: trimOrNull(v.DOB),
+        Email: v.Email?.trim().toLowerCase() ?? null,
+        Phone: trimOrNull(v.Phone),
+        School: trimOrNull(v.School),
+        GradeOrForm: trimOrNull(v.GradeOrForm),
+        Position: v.Position ?? null,
+        SkillLevel: v.SkillLevel ?? null,
+        TshirtSize: v.TshirtSize ?? null,
       },
       Guardian: {
-        GuardianName: v.GuardianName, 
-        GuardianEmail: v.GuardianEmail!.trim().toLocaleLowerCase(), GuardianPhone: v.GuardianPhone!.trim(),
-        GuardianRelation: v.GuardianRelation!.trim()
+        GuardianName: trimOrNull(v.GuardianName),
+        GuardianEmail: v.GuardianEmail?.trim().toLowerCase() ?? null,
+        GuardianPhone: trimOrNull(v.GuardianPhone),
+        GuardianRelation: trimOrNull(v.GuardianRelation),
       },
-      /*
-      Payment: {
-        PaymentAmount: v.PaymentAmount!.trim(), 
-        PaymentCurrency: v.PaymentCurrency!.trim(), 
-        PaymentMethod: v.PaymentMethod!.trim(), 
-        //PaymentStatus: null, 
-        //PaymentTransactionId: null, 
-      }
-      */
-      Notes: v.Notes!.trim() ?? null,
+      Notes: trimOrNull(v.Notes),
       CreatedAt: new Date().toISOString(),
-
-      Honeypot: v.honeypot!.trim()
+      Honeypot: trimOrNull(v.honeypot) ?? '',
     };
 
     this.submitting.set(true);
@@ -269,13 +270,13 @@ export class CampRegistrationIntakeComponent  {
     // 2) Reapply query params if valid
     const qp = this.route.snapshot.queryParamMap;
     const countryIn = qp.get('country');
-    const sportIn = qp.get('sport');
+    const interestIn = qp.get('interest');
 
     if (countryIn && this.countryOptions.includes(countryIn as CountryOption)) {
       this.form.patchValue({ Country: countryIn as CountryOption });
     }
-    if (sportIn && this.interestOptions.includes(sportIn as InterestOption)) {
-      this.form.patchValue({ Interest: sportIn as InterestOption });
+    if (interestIn && this.interestOptions.includes(interestIn as InterestOption)) {
+      this.form.patchValue({ Interest: interestIn as InterestOption });
     }
 
     // 3) Reload camps (and auto-pick first if none)
@@ -284,11 +285,11 @@ export class CampRegistrationIntakeComponent  {
 
   // --- Helper: reload camps based on current form (or fallbacks) ---
   private reloadCamps(): void {
-    const sport = (this.form.value?.Interest ?? this.sport ?? '').toString().trim().toLowerCase();
+    const interest = (this.form.value?.Interest ?? this.interest ?? '').toString().trim().toLowerCase();
     const country = (this.form.value?.Country ?? this.country ?? '').toString().trim().toLowerCase();
 
     this.activities$ = this.activitySvc
-      .getCamps$(sport, country)
+      .getActivities$(interest, country)
       .pipe(
         map(camps =>
           camps.slice().sort((a, b) => +new Date(a.dates.start) - +new Date(b.dates.start))

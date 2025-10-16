@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { NewsletterPage } from '../../correspondence/pages/newsletter.page';
+import { NewsletterPage } from '../../correspondence/components/newsletter.component';
 import { FixedSocialPluginComponent } from "../../~common/components/fixed-social-plugin/fixed-social-plugin.component";
 import { BasePageComponent } from '../../../../core/directives/base-page.directive';
 import { BaseHeroComponent } from "../../~common/components/base-hero/base-hero.component";

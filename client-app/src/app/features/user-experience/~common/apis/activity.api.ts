@@ -5,12 +5,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, map, startWith, shareReplay } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
+// Put OUTSIDE the class (top of file)
 export type ActivityStatus = 'open' | 'coming_soon' | 'closed';
 export interface Activity {
   id: string;
   country?: string,
   cityAndCountry?:string;          // country where camp is being held ... Barbados | United States | Trinidad | Abu Dabi
-  sport: 'basketball' | 'soccer'  | 'multi' | 'other';
+  interest: 'Basketball' | 'Soccer' | 'After-School';
   editionLabel: string;            // e.g. "Fall Edition 2025"
   imageUrl: string;
   imageAlt: string;
@@ -23,6 +24,9 @@ export interface Activity {
   paymentMethods?: string[];       // e.g. ["1st Pay", "Cash"]
   status: ActivityStatus;              // controls CTA behavior
 }
+export const ACTIVITIES_KEYS = ['afterschool', 'basketball', 'soccer'] as const;
+export type ActivityKey = typeof ACTIVITIES_KEYS[number];
+
 
 
 @Injectable({ providedIn: 'root' })
@@ -30,12 +34,13 @@ export class ActivityApi {
   private http = inject(HttpClient);
   private baseUrl = '/api'; // change if needed
 
+
   // --- Static fallback data (edit to your needs) ---
-  private staticCamps: Record<string, Activity[]> = {
+  Activities: Record<ActivityKey, Activity[]> = {
     afterschool: [
       {
         id: 'as-fall-2025-bds',
-        sport: 'basketball',
+        interest: 'After-School',
         country: 'Barbados',
         cityAndCountry: 'Bridgetown, Barbados',
         editionLabel: 'After-school Term-One',
@@ -57,7 +62,7 @@ export class ActivityApi {
     basketball: [
       {
         id: 'bb-fall-2025-bds',
-        sport: 'basketball',
+        interest: 'Basketball',
         country: 'Barbados',
         cityAndCountry: 'Bridgetown, Barbados',
         editionLabel: 'Fall Edition 2025',
@@ -77,7 +82,7 @@ export class ActivityApi {
       },
       {
         id: 'bb-winter-2025-bds',
-        sport: 'basketball',
+        interest: 'Basketball',
         country: 'Barbados',
         cityAndCountry: 'Bridgetown, Barbados',
         editionLabel: 'Winter Edition 2025',
@@ -97,7 +102,7 @@ export class ActivityApi {
       },
       {
         id: 'bb-spring-2025-bds',
-        sport: 'basketball',
+        interest: 'Basketball',
         country: 'Barbados',
         cityAndCountry: 'Bridgetown, Barbados',
         editionLabel: 'Spring Edition 2025',
@@ -117,7 +122,7 @@ export class ActivityApi {
       },
       {
         id: 'bb-summer-2025-bds',
-        sport: 'basketball',
+        interest: 'Basketball',
         country: 'Barbados',
         cityAndCountry: 'Bridgetown, Barbados',
         editionLabel: 'Summer Edition 2025',
@@ -139,7 +144,7 @@ export class ActivityApi {
     soccer: [
       {
         id: 'sc-fall-2025-bds',
-        sport: 'soccer',
+        interest: 'Soccer',
         country: 'Barbados',
         cityAndCountry: 'Bridgetown, Barbados',
         editionLabel: 'Fall Edition 2025',
@@ -159,7 +164,7 @@ export class ActivityApi {
       },
       {
         id: 'sc-winter-2025-bds',
-        sport: 'soccer',
+        interest: 'Soccer',
         country: 'Barbados',
         cityAndCountry: 'Bridgetown, Barbados',
         editionLabel: 'Winter Edition 2025',
@@ -179,7 +184,7 @@ export class ActivityApi {
       },
       {
         id: 'sc-spring-2025-bds',
-        sport: 'soccer',
+        interest: 'Soccer',
         country: 'Barbados',
         cityAndCountry: 'Bridgetown, Barbados',
         editionLabel: 'Spring Edition 2025',
@@ -199,7 +204,7 @@ export class ActivityApi {
       },
       {
         id: 'sc-summer-2025-bds',
-        sport: 'soccer',
+        interest: 'Soccer',
         country: 'Barbados',
         cityAndCountry: 'Bridgetown, Barbados',
         editionLabel: 'Summer Edition 2025',
@@ -220,14 +225,17 @@ export class ActivityApi {
     ]
   };
 
+
+
   /** Load camps with static-first strategy. Optional country filter. */
-  getCamps$(sportIn: string, countryIn?: string, activeOnly: boolean = true): Observable<Activity[]> {
+  getActivities$(interestIn: string, countryIn?: string, activeOnly: boolean = true): Observable<Activity[]> {
     // 1) Normalize sport key so it matches your staticCamps keys.
-    const sport = (sportIn || '').toLowerCase().trim() as keyof typeof this.staticCamps;
-  
+    // From interestIn or query param
+    const key = toActivityKey(interestIn) ?? 'basketball'; // fallback you prefer
+
     // 2) Safe fallback lookup.
-    const allFallback = this.staticCamps[sport] ?? [];
-    //allFallback = allFallback[sport] ?? [];
+    const allFallback = this.Activities[key] ?? []; // fully type-safe
+    //allFallback = allFallback[interest] ?? [];
 
     // 3) Robust diacritic-insensitive "contains" (no \p{Diacritic}).
     const norm = (s: string = '') =>
@@ -245,7 +253,7 @@ export class ActivityApi {
       fallback = fallback.filter(c => contains(c.status, 'open'));
 
     // 5) Build params for API (if you have one).
-    let params = new HttpParams().set('sport', sport);
+    let params = new HttpParams().set('interest', interestIn);
     if (countryIn) params = params.set('cityAndCountry', countryIn);
     
     // 6) Call API, but always emit fallback immediately via startWith.
@@ -287,4 +295,18 @@ export class ActivityApi {
         
   }
 
+}
+
+export function toActivityKey(input: unknown): ActivityKey | null {
+  const norm = String(input ?? '')
+    .toLowerCase()
+    .replace(/[-_\s]/g, '') // drop '-', '_' and spaces
+    .trim();
+
+  switch (norm) {
+    case 'afterschool': return 'afterschool';
+    case 'basketball':  return 'basketball';
+    case 'soccer':      return 'soccer';
+    default:            return null;
+  }
 }

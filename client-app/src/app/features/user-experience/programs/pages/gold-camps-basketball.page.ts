@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { BasePageComponent } from '../../../../core/directives/base-page.directive';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { NewsletterPage } from '../../correspondence/pages/newsletter.page';
+import { NewsletterPage } from '../../correspondence/components/newsletter.component';
 import { SocialPluginComponent } from '../../~common/components/social-plugin/social-plugin.component';
 import { BaseHeroComponent } from "../../~common/components/base-hero/base-hero.component";
 import { CampCardsComponent } from "../../~common/components/camp-cards/camp-cards.component";
@@ -18,6 +18,8 @@ import { CampCardsComponent } from "../../~common/components/camp-cards/camp-car
 
 })
 export class GoldCampsBasketballPage extends BasePageComponent {
+    @Input({ required: true }) activityType:  string = 'Basketball-Camp';
+  
   override pageName = 'vsa-page';
   description = `
   Our Brains & Ballers Gold Camps deliver high-intensity basketball training focused on skill mastery, game IQ development, and leadership growth. Each camp combines advanced drills with competitive showcase games, helping student-athletes gain confidence, improve performance, and prepare for the next level of play.

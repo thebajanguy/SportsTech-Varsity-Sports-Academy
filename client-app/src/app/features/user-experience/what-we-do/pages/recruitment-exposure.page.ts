@@ -2,9 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-
-import { SocialPluginComponent } from '../../~common/components/social-plugin/social-plugin.component';
-import { NewsletterPage } from '../../correspondence/pages/newsletter.page';
+import { NewsletterPage } from '../../correspondence/components/newsletter.component';
 import { FixedSocialPluginComponent } from "../../~common/components/fixed-social-plugin/fixed-social-plugin.component";
 import { BasePageComponent } from '../../../../core/directives/base-page.directive';
 import { BaseHeroComponent } from "../../~common/components/base-hero/base-hero.component";
@@ -13,7 +11,7 @@ import { BaseHeroComponent } from "../../~common/components/base-hero/base-hero.
     selector: 'app-recruitment-and-exposure',
     standalone: true,
 
-    imports: [CommonModule, RouterLink, SocialPluginComponent, NewsletterPage, FixedSocialPluginComponent, BaseHeroComponent],
+    imports: [CommonModule, RouterLink, NewsletterPage, FixedSocialPluginComponent, BaseHeroComponent],
     templateUrl: './recruitment-exposure.page.html',
     styleUrl: './recruitment-exposure.page.scss',
     encapsulation: ViewEncapsulation.None,

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
 import { BasePageComponent } from '../../../../core/directives/base-page.directive';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { NewsletterPage } from '../../correspondence/pages/newsletter.page';
+import { NewsletterPage } from '../../correspondence/components/newsletter.component';
 import { BaseHeroComponent } from "../../~common/components/base-hero/base-hero.component";
 
 @Component({ 

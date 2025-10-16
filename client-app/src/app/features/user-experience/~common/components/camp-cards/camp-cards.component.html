@@ -2,41 +2,41 @@
   <pre class="text-mono small">{{ (camps$ | async) | json }}</pre>
 -->
 
-<div class="row mt-20" *ngIf="(camps$ | async) as camps; else loading">
-  <ng-container *ngIf="camps.length; else empty">
+<div class="row mt-20" *ngIf="(activities$ | async) as activities; else loading">
+  <ng-container *ngIf="activities.length; else empty">
     <!-- cards -->
-    <div class="col-md-3 ml-auto" *ngFor="let camp of camps; trackBy: trackById">
+    <div class="col-md-3 ml-auto" *ngFor="let activity of activities; trackBy: trackById">
       <div class="card no-transition separator-bottom-card" data-background="color" data-color="lightgray">
         <div class="card-header">
-          <h3 class="card-title section-title-md text-primary align-center">{{ camp.editionLabel }}</h3>
+          <h3 class="card-title section-title-md text-primary align-center">{{ activity.editionLabel }}</h3>
         </div>
         <div class="card-body text-left">
-          <img [src]="camp.imageUrl"
-               [alt]="camp.imageAlt"
+          <img [src]="activity.imageUrl"
+               [alt]="activity.imageAlt"
                loading="lazy" width="580" height="360" />
           <h3 class="card-category section-title-sm text-primary" style="padding-bottom:20px;">
-            {{ camp.dates.start | date:'MMMM d' }} – {{ camp.dates.end | date:(sameYear(camp) ? 'd, y' : 'MMMM d, y') }}
+            {{ activity.dates.start | date:'MMMM d' }} – {{ activity.dates.end | date:(sameYear(activity) ? 'd, y' : 'MMMM d, y') }}
           </h3>
   
-          <p class="description-section"><ng-container *ngIf="camp.cityAndCountry"><strong>City/Country:</strong> {{ camp.cityAndCountry }}</ng-container></p>
-          <p class="description-section"><strong>Venue:</strong> {{ camp.venue }}</p>
-          <p class="description-section"><strong>Ages:</strong> {{ camp.ages }}</p>
+          <p class="description-section"><ng-container *ngIf="activity.cityAndCountry"><strong>City/Country:</strong> {{ activity.cityAndCountry }}</ng-container></p>
+          <p class="description-section"><strong>Venue:</strong> {{ activity.venue }}</p>
+          <p class="description-section"><strong>Ages:</strong> {{ activity.ages }}</p>
   
-          <h4 class="sr-only" [id]="'camp-caption-' + camp.id">Camp schedule and price for {{ camp.editionLabel }}</h4>
-          <table class="table table-striped" [attr.aria-describedby]="'camp-caption-' + camp.id">
+          <h4 class="sr-only" [id]="'camp-caption-' + activity.id">Camp schedule and price for {{ activity.editionLabel }}</h4>
+          <table class="table table-striped" [attr.aria-describedby]="'camp-caption-' + activity.id">
             <thead><tr><th scope="col">Days/Times</th><th scope="col">Price</th></tr></thead>
             <tbody>
               <tr>
                 <td>
-                  <ng-container *ngFor="let line of camp.schedule; let i = index">
-                    <span>{{ line }}</span><br *ngIf="i < camp.schedule.length - 1">
+                  <ng-container *ngFor="let line of activity.schedule; let i = index">
+                    <span>{{ line }}</span><br *ngIf="i < activity.schedule.length - 1">
                   </ng-container>
                 </td>
                 <td>
-                  <strong class="description-section">{{ camp.price?.weekly }}</strong><br>
-                  <ng-container *ngIf="camp.earlyBird">
+                  <strong class="description-section">{{ activity.price?.weekly }}</strong><br>
+                  <ng-container *ngIf="activity.earlyBird">
                     <em class="text-danger">
-                      (Early Bird {{ camp.earlyBird.price }} before {{ camp.earlyBird.deadline | date:'MMM d' }})
+                      (Early Bird {{ activity.earlyBird.price }} before {{ activity.earlyBird.deadline | date:'MMM d' }})
                     </em>
                   </ng-container>
                 </td>
@@ -44,24 +44,24 @@
             </tbody>
           </table>
   
-          <p *ngIf="camp.paymentMethods?.length"><strong>Payment:</strong> {{ camp.paymentMethods?.join(' | ') ?? '' }}.</p>
+          <p *ngIf="activity.paymentMethods?.length"><strong>Payment:</strong> {{ activity.paymentMethods?.join(' | ') ?? '' }}.</p>
   
           <div class="card-footer">
 
             <a
-            [routerLink]="camp.status === 'open' ? ['/'+ urlPath+ '/register'] : null"
-            [queryParams]="camp.status === 'open' ? { id: camp.id, sport: camp.sport, country: camp.country, activity: activity } : null"
+            [routerLink]="activity.status === 'open' ? ['/'+ urlPath+ '/camp-registration'] : null"
+            [queryParams]="activity.status === 'open' ? { id: activity.id, interest: activity.interest, country: activity.country, activityType: activityType} : null"
             fragment="register"
             class="btn btn-main"
-            [class.disabled]="camp.status !== 'open'"
-            [attr.aria-disabled]="camp.status !== 'open'"
-            [attr.title]="camp.status === 'open'
-                ? 'Register for ' + camp.editionLabel
-                : 'Registration coming soon for ' + camp.editionLabel"
-            [attr.aria-label]="camp.status === 'open'
-                ? 'Register for ' + camp.editionLabel
-                : 'Registration coming soon for ' + camp.editionLabel">
-            &nbsp;{{ camp.status === 'open' ? 'Register Now' + ' | ' + camp.status : 'Registration Coming Soon' }}&nbsp;
+            [class.disabled]="activity.status !== 'open'"
+            [attr.aria-disabled]="activity.status !== 'open'"
+            [attr.title]="activity.status === 'open'
+                ? 'Register for ' + activity.editionLabel
+                : 'Registration coming soon for ' + activity.editionLabel"
+            [attr.aria-label]="activity.status === 'open'
+                ? 'Register for ' + activity.editionLabel
+                : 'Registration coming soon for ' + activity.editionLabel">
+            &nbsp;{{ activity.status === 'open' ? 'Register Now' + ' | ' + activity.status : 'Registration Coming Soon' }}&nbsp;
           </a>
 
 

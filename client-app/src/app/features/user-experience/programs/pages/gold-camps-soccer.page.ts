@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { BasePageComponent } from '../../../../core/directives/base-page.directive';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { NewsletterPage } from '../../correspondence/pages/newsletter.page';
+import { NewsletterPage } from '../../correspondence/components/newsletter.component';
 import { BaseHeroComponent } from "../../~common/components/base-hero/base-hero.component";
 import { CampCardsComponent } from "../../~common/components/camp-cards/camp-cards.component";
 
@@ -18,6 +18,8 @@ import { CampCardsComponent } from "../../~common/components/camp-cards/camp-car
 
 })
 export class GoldCampsSoccerPage extends BasePageComponent {
+  @Input({ required: true }) activityType:  string = 'Soccer-Camp';
+  
   override pageName = 'vsa-page';
 
   description = `

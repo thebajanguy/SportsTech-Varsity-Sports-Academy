@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
-import { NewsletterPage } from '../../correspondence/pages/newsletter.page';
+import { NewsletterPage } from '../../correspondence/components/newsletter.component';
 import { BasePageComponent } from '../../../../core/directives/base-page.directive';
 import { BaseHeroComponent } from "../../~common/components/base-hero/base-hero.component";
 import { TimerModalComponent } from "../../~common/components/timer-modal/timer-modal.component";
@@ -26,7 +26,7 @@ export class HomePage extends BasePageComponent {
     override pageName = 'vsa-page';
     description = `
         You have a dream — we have the game plan. At
-        <strong>Varsity Sports Academy Prep</strong>, our motto
+        <strong>Varsity Sports Academy Prep <em>"VSA Prep"</em></strong> , our motto
         <em>“Labor Durus”</em> (Hard Work Always Pays Off) guides student-athletes
         to succeed in academics and athletics. What you put into life is what
         you’ll get out — train harder, play better, achieve more.

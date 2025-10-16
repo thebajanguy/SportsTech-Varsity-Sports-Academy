@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit, OnDestroy,  AfterViewInit {
   private sidebarVisible = false;
   isMenuActive = false;
 
+ // @Input() loginDisplay: boolean = false;
   @Input() urlPath = '';
   @Input() membershipPath = '';
   @Input() shouldDisplayLogin = false;
@@ -29,6 +30,8 @@ export class NavbarComponent implements OnInit, OnDestroy,  AfterViewInit {
   @Output() signOutToParent = new EventEmitter();
   @Output() signUpToParent = new EventEmitter<any>();
   @Output() editProfileToParent = new EventEmitter();
+
+
 
   isCollapsed = true;
   searchTerm = '';
@@ -131,4 +134,35 @@ export class NavbarComponent implements OnInit, OnDestroy,  AfterViewInit {
   profileEdit() {
     this.editProfileToParent.emit();
   }
+
+/*
+  //
+  signOut(){
+    this.signOutToParent.emit();
+    //this.logout();
+  }
+  signIn() {
+    let signUpSignInFlowRequest: RedirectRequest | PopupRequest  = {
+      authority: environment.b2cPolicies.authorities.signUpSignIn.authority,
+      scopes: [],
+      prompt: PromptValue.LOGIN // force user to reauthenticate with their new password
+    };
+
+    alert('UserExperienceNavbarComponent-signIn: ' + JSON.stringify(signUpSignInFlowRequest) );
+    this.signInToParent.emit(signUpSignInFlowRequest);
+    //this.login(signUpSignInFlowRequest)
+  }
+  signUp() {
+    let signUpFlowRequest: RedirectRequest | PopupRequest  = {
+      authority: environment.b2cPolicies.authorities.signUp.authority,
+      scopes: [],
+      prompt: PromptValue.LOGIN // force user to reauthenticate with their new password
+    };
+    this.signUpToParent.emit(signUpFlowRequest);
+    //this.login(signUpFlowRequest)
+  }
+  profileEdit() {
+    this.editProfileToParent.emit();
+  }
+    */
 }

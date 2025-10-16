@@ -21,15 +21,14 @@ import {
   InterestOption,
   CountryOption
 } from '../../~common/apis/correspondence.api';
-import { UtilitiesService } from '../../../../core/services/utilities.service';
 import { BasePageComponent } from '../../../../core/directives/base-page.directive';
 
 @Component({
   selector: 'app-newsletter-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
-  templateUrl: './newsletter.page.html',
-  styleUrls: ['./newsletter.page.scss'],
+  templateUrl: './newsletter.component.html',
+  styleUrls: ['./newsletter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })

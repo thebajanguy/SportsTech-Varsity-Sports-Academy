@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { BasePageComponent } from '../../../../core/directives/base-page.directive';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { NewsletterPage } from '../../correspondence/pages/newsletter.page';
+import { NewsletterPage } from '../../correspondence/components/newsletter.component';
 import { SocialPluginComponent } from '../../~common/components/social-plugin/social-plugin.component';
 import { BaseHeroComponent } from "../../~common/components/base-hero/base-hero.component";
 
@@ -18,6 +18,16 @@ import { BaseHeroComponent } from "../../~common/components/base-hero/base-hero.
 
 })
 export class AfterSchoolPage extends BasePageComponent {
+  @Input({ required: true }) activityType:  string = 'After-school Program';
+  
+  activity = {
+    id: 'as-fall-2025-bds',
+    interest: 'After-School',
+    country: 'Barbados',
+    cityAndCountry: 'Bridgetown, Barbados',
+    status: 'open',
+    editionLabel: 'After-school Term-One'
+  }
   override pageName = 'vsa-page';
   description = `
   Brains & Ballers After-School Program helps student-athletes strengthen academic skills, build athletic fundamentals, and grow confidence on and off the field. Our balanced approach combines academic tutoring, sports training, and personal development to help young athletes reach their full potential.
