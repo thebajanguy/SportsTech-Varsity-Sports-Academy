@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { REGISTRATION_API_BASE_URL } from '../../../../core/tokens/api-config-url.tokens';
 
 // A strongly-typed union you can extend as needed
-export const INTEREST_OPTIONS = ['Basketball', 'Soccer'] as const;
+export const INTEREST_OPTIONS = ['Basketball', 'Soccer', 'After-School'] as const;
 export type InterestOption = typeof INTEREST_OPTIONS[number];
 
 export const COUNTRY_OPTIONS  = ['Barbados','United States'] as const;
@@ -35,7 +35,7 @@ export interface ActivityRegistrationDto{
   ApplicationName?: string | null;
 
   Country?: string | null;  // Barbados / United States / etc. Used to look up camp or activity.
-  Interest?: string | null; // Sport / After-School / etc. Used to look up camp or activity
+  Interest?: string | null; // Basketball / Soccer / After-School / etc. Used to look up camp or activity
 
   ActivityId?: string | null;// campId or afterSchoolId
 

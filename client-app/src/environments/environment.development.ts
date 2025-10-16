@@ -21,8 +21,9 @@ export const environment = {
         auth: {
             clientId: 'ff1655e5-419b-4c2a-acb4-565e7176f9cc',
             redirectUri: '/en/user-workspace/dashboard',
-            postLogoutRedirectUri: '/en/membership',
-            loginFailedRoute: '/login-failed',
+            postLogoutRedirectUri: '/en/academics-and-sports/membership',
+            loginFailedRoute: '/academics-and-sports/login-failed',
+            secret: 'U.s8Q~81612jF4p-UOwa8tkqHAkxEjtpIik-ra-M',
         }
     },
     apiConfig: {

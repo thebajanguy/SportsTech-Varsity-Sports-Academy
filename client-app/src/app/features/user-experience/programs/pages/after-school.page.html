@@ -18,6 +18,104 @@
 ]">
 </app-base-hero>
 
+
+<section id="schedules-and-pricing" class="section section-white" aria-labelledby="schedules-and-pricing-heading">
+  <div class="filter filter-black"></div>
+  <div class="container">
+    <!-- Headings -->
+    <div class="row">
+      <div class="ml-auto mr-auto">
+        <h2 id="schedules-and-pricing-heading" class="text-left">
+          Brains &amp; Ballers After-School Program
+        </h2>
+        <h3 class="text-muted section-subhead">
+          Find the perfect schedule for your student-athlete. Flexible weekday sessions focused on academic tutoring,
+          sports fundamentals, and personal growth. Choose monthly, weekly, or drop-in options. Spaces are limited—register early.
+        </h3>
+        <p class="description mt-3">
+          Daily homework support, CSEC/CAPE/SAT prep, and sport-specific training—built to improve grades and performance.
+        </p>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div id="schedule" class="row mt-20">
+      <!-- Schedule -->
+      <div class="col-md-6 ml-auto">
+        <div class="card no-transition separator-bottom-card" data-background="color" data-color="lightgray">
+          <div class="card-body text-left">
+            <img src="assets/img/pages/what-we-do/vsaprep-what-we-do-hero.png"
+                 alt="After-school program schedule overview"
+                 loading="lazy" width="580" height="360" />
+            <h3 class="card-category section-title-md text-primary">Schedule</h3>
+
+            <h4 class="sr-only" id="schedule-table-caption">After-School schedule</h4>
+            <table class="table table-striped" aria-describedby="schedule-table-caption">
+              <thead><tr><th scope="col">Day</th><th scope="col">Time</th><th scope="col">Focus</th></tr></thead>
+              <tbody>
+                <tr><td>Mon–Thu</td><td>3:30–7:30 PM</td><td>Tutoring + Sports Lab</td></tr>
+                <tr><td>Fri</td><td>3:30–5:30 PM</td><td>Tutoring + Study Skills &amp; Film</td></tr>
+              </tbody>
+            </table>
+
+            <div class="card-footer">
+              <a [routerLink]="['/'+urlPath+'/contact']" class="btn btn-main"
+                 title="Learn more about the Brains & Ballers After-School Program"
+                 aria-label="Learn more about the Brains & Ballers After-School Program">
+                &nbsp; Learn More &nbsp;
+              </a>
+
+              <a class="btn btn-main"
+              [routerLink]="['/'+ urlPath+ '/after-school-registration']" 
+              [queryParams]="{ id: activity.id, interest: activity.interest, country: activity.country, activityType: activityType } "
+              fragment="register"
+              
+              [class.disabled]="activity.status !== 'open'"
+              [attr.aria-disabled]="activity.status !== 'open'"
+              [attr.title]="activity.status === 'open'
+                  ? 'Register for ' + activity.editionLabel
+                  : 'Registration coming soon for ' + activity.editionLabel"
+              [attr.aria-label]="activity.status === 'open'
+                  ? 'Register for ' + activity.editionLabel
+                  : 'Registration coming soon for ' + activity.editionLabel">
+              &nbsp;{{ activity.status === 'open' ? 'Register Now' + ' | ' + activity.status : 'Registration Coming Soon' }}&nbsp;
+            </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing -->
+      <div class="col-md-6">
+        <div class="card no-transition separator-bottom-card" data-background="color" data-color="lightgray">
+          <div class="card-body text-left">
+            <img src="assets/img/pages/what-we-do/vsaprep-what-we-do-hero.png"
+                 alt="After-school program pricing"
+                 loading="lazy" width="580" height="360" />
+            <h3 class="card-category section-title-md text-primary">Pricing</h3>
+
+            <ul class="icon-list mt-4 align-left" role="list" itemprop="description">
+              <li class="d-flex mb-3"><span class="icon" aria-hidden="true"></span><strong>Monthly:</strong>&nbsp;$400.00</li>
+              <li class="d-flex mb-3"><span class="icon" aria-hidden="true"></span><strong>Weekly:</strong>&nbsp;$125.00</li>
+              <li class="d-flex mb-3"><span class="icon" aria-hidden="true"></span><strong>Drop-in:</strong>&nbsp;$50.00</li>
+              <li class="d-flex mb-3"><span class="icon" aria-hidden="true"></span>Ask about sibling discounts and team rates.</li>
+            </ul>
+
+            <div class="card-footer">
+              <a [routerLink]="['/'+urlPath+'/basketball-gold-camps']" class="btn btn-main"
+                 title="Learn more about VSA Prep Basketball Camps"
+                 aria-label="Learn more about VSA Prep Basketball Camps">
+                &nbsp; Learn More &nbsp;
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <section id="what-you-get" class="section section-white" aria-labelledby="what-you-get-heading">
   <div class="container">
     <div class="row align-items-left">
@@ -79,86 +177,6 @@
   </div>
 </section>
 
-<section id="schedules-and-pricing" class="section section-white" aria-labelledby="schedules-and-pricing-heading">
-  <div class="filter filter-black"></div>
-  <div class="container">
-    <!-- Headings -->
-    <div class="row">
-      <div class="ml-auto mr-auto">
-        <h2 id="schedules-and-pricing-heading" class="text-left">
-          Brains &amp; Ballers After-School Program
-        </h2>
-        <h3 class="text-muted section-subhead">
-          Find the perfect schedule for your student-athlete. Flexible weekday sessions focused on academic tutoring,
-          sports fundamentals, and personal growth. Choose monthly, weekly, or drop-in options. Spaces are limited—register early.
-        </h3>
-        <p class="description mt-3">
-          Daily homework support, CSEC/CAPE/SAT prep, and sport-specific training—built to improve grades and performance.
-        </p>
-      </div>
-    </div>
-
-    <!-- Cards -->
-    <div id="schedule" class="row mt-20">
-      <!-- Schedule -->
-      <div class="col-md-6 ml-auto">
-        <div class="card no-transition separator-bottom-card" data-background="color" data-color="lightgray">
-          <div class="card-body text-left">
-            <img src="assets/img/pages/what-we-do/vsaprep-what-we-do-hero.png"
-                 alt="After-school program schedule overview"
-                 loading="lazy" width="580" height="360" />
-            <h3 class="card-category section-title-md text-primary">Schedule</h3>
-
-            <h4 class="sr-only" id="schedule-table-caption">After-School schedule</h4>
-            <table class="table table-striped" aria-describedby="schedule-table-caption">
-              <thead><tr><th scope="col">Day</th><th scope="col">Time</th><th scope="col">Focus</th></tr></thead>
-              <tbody>
-                <tr><td>Mon–Thu</td><td>3:30–7:30 PM</td><td>Tutoring + Sports Lab</td></tr>
-                <tr><td>Fri</td><td>3:30–5:30 PM</td><td>Tutoring + Study Skills &amp; Film</td></tr>
-              </tbody>
-            </table>
-
-            <div class="card-footer">
-              <a [routerLink]="['/'+urlPath+'/contact']" class="btn btn-main"
-                 title="Learn more about the Brains & Ballers After-School Program"
-                 aria-label="Learn more about the Brains & Ballers After-School Program">
-                &nbsp; Learn More &nbsp;
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pricing -->
-      <div class="col-md-6">
-        <div class="card no-transition separator-bottom-card" data-background="color" data-color="lightgray">
-          <div class="card-body text-left">
-            <img src="assets/img/pages/what-we-do/vsaprep-what-we-do-hero.png"
-                 alt="After-school program pricing"
-                 loading="lazy" width="580" height="360" />
-            <h3 class="card-category section-title-md text-primary">Pricing</h3>
-
-            <ul class="icon-list mt-4 align-left" role="list" itemprop="description">
-              <li class="d-flex mb-3"><span class="icon" aria-hidden="true"></span><strong>Monthly:</strong>&nbsp;$400.00</li>
-              <li class="d-flex mb-3"><span class="icon" aria-hidden="true"></span><strong>Weekly:</strong>&nbsp;$125.00</li>
-              <li class="d-flex mb-3"><span class="icon" aria-hidden="true"></span><strong>Drop-in:</strong>&nbsp;$50.00</li>
-              <li class="d-flex mb-3"><span class="icon" aria-hidden="true"></span>Ask about sibling discounts and team rates.</li>
-            </ul>
-
-            <div class="card-footer">
-              <a [routerLink]="['/'+urlPath+'/basketball-gold-camps']" class="btn btn-main"
-                 title="Learn more about VSA Prep Basketball Camps"
-                 aria-label="Learn more about VSA Prep Basketball Camps">
-                &nbsp; Learn More &nbsp;
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <section id="ncaa" class="section section-white" aria-labelledby="ncaa-heading">
   <div class="container">

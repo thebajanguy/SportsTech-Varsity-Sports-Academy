@@ -384,15 +384,7 @@ $thumb-radius:           10px !default;
 .mega .mega-title { font-weight: 700; font-size: 1rem; color: $link-default-color;}
 .mega .mega-desc  { font-size: .85rem; opacity: .85;; color: $link-default-color; }
 
-/* ======================
-   ACCESSIBILITY POLISH
-   ====================== */
 
-.navbar .dropdown-item:focus-visible,
-.navbar .mega .mega-card:focus-visible {
-  outline: 2px solid $main-color;
-  outline-offset: 2px;
-}
 
 //.navbar .dropdown-menu[aria-label] { /* you can add aria-label on menu if needed */ }
 
@@ -473,3 +465,39 @@ $thumb-radius:           10px !default;
 }
 
 
+/* Mobile: let dropdowns flow inside the collapsed navbar */
+@media (max-width: 991.98px) {
+  .navbar .dropdown-menu {
+    position: static !important;   /* don't attempt absolute positioning */
+    float: none;
+    width: 100%;
+    margin: .25rem 0 0;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .navbar .dropdown-menu.mega {
+    max-width: none;
+    padding: .5rem .75rem;
+  }
+
+  .mega .mega-grid {
+    grid-template-columns: 1fr;    /* stack cards */
+    gap: .5rem;
+  }
+}
+
+/* Ensure it stacks above navbar content even when appended to body */
+.navbar .dropdown-menu,
+.dropdown-menu.mega {
+  z-index: 1060; /* higher than .navbar (usually 1030) */
+}
+
+/* ======================
+   ACCESSIBILITY POLISH
+   ====================== */
+.navbar .dropdown-item:focus-visible,
+.navbar .mega .mega-card:focus-visible {
+  outline: 2px solid $main-color;
+  outline-offset: 2px;
+}

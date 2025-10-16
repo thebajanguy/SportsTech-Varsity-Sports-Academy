@@ -686,6 +686,11 @@ $accent: $main-color;
     //max-width: 98%;
 
   }
+  .cta-content {
+    display: block;
+    justify-content: space-evenly; /* or: space-between / center / space-around */
+    align-items: center;           /* vertically centers the row items */
+  }
 
   .cta-head { margin: 0 0 .5rem; letter-spacing: .2px; color: $main-color; }
   .cta-subhead { font-size: 1.1rem; margin-bottom: 1rem; max-width: 60ch; color: $white-color; max-width: 100%;}

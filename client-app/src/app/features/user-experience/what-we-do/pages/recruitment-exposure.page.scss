@@ -1,1 +1,12 @@
 @import '../what-we-do.scss';
+
+.faq-list .faq {
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  padding: .75rem 0;
+}
+.faq-list summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list .answer { margin-top: .5rem; line-height: 1.6; }

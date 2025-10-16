@@ -14,12 +14,12 @@
   [ctas]="[
     { label: 'Start Your Journey', routerLink: ['/'+urlPath+'/consultation'] , variant:'primary', ariaLabel:'Start your journey with Varsity Sports Academy Prep' },
     { label: 'Explore Academic Programs', routerLink: ['/'+urlPath+'/academic-tutoring'], variant:'primary', ariaLabel:'Explore academic programs with Varsity Sports Academy Prep' },
-    { label: 'Schedule', routerLink: ['/'+urlPath+'/basketball-gold-camps'], fragment: 'camp-schedule', variant:'outline', ariaLabel:'Explore Gold Basketball Camp schedule and dates.' }
+    { label: 'Schedule', routerLink: ['/'+urlPath+'/basketball-gold-camps'], fragment: 'schedules-and-pricing', variant:'outline', ariaLabel:'Explore Gold Basketball Camp schedule and dates.' }
   ]">
 </app-base-hero>
 
 <!-- Start Brains & Ballers Gold Camp Series: Youth Sports Camps by VSA Prep -->
-<section id="camp-schedule" class="section section-white" aria-labelledby="elite-camp-series-heading">
+<section id="schedules-and-pricing" class="section section-white" aria-labelledby="elite-camp-series-heading">
   <div class="filter filter-black"></div>
   <div class="container">
     <!-- Headings -->
@@ -44,11 +44,11 @@
 
     <!-- Camp cards -->
     <app-camp-cards 
-    [sport]="'basketball'" 
+    [interest]="'basketball'" 
     [cityAndCountry]="'Barbados'" 
     [urlPath]="urlPath"
     [activeOnly]=false
-    [activity]="'basketball-camp'"
+    [activityType]="'Basketball-camp'"
     ></app-camp-cards>
 
 

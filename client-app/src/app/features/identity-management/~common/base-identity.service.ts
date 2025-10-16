@@ -242,6 +242,7 @@ export class BaseIdentityService  {
     }
     
     protected login(userFlowRequest?: RedirectRequest | PopupRequest) {
+        alert('BaseIdentityService-login(userFlowRequest?: RedirectRequest | PopupRequest')
         this.identityService.RemoveStorageItems();
 
         if (this.msalGuardConfig.interactionType === InteractionType.Popup) {

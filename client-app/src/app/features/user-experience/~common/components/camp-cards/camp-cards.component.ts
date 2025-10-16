@@ -20,18 +20,18 @@ import { ActivityApi, Activity } from '../../apis/activity.api';
   `]
 })
 export class CampCardsComponent  {
-  @Input({ required: true }) sport!: 'basketball' | 'soccer' | string;
+  @Input({ required: true }) interest!: 'basketball' | 'soccer' | string;
   @Input() urlPath: string = 'en'; // supply from parent as needed
   @Input({ required: true }) cityAndCountry: string = 'Barbados';        // NEW
   @Input() activeOnly?: boolean = false;        // NEW
-  @Input({ required: true }) activity:  string = 'basketball-camp';
+  @Input({ required: true }) activityType:  string = 'Basketball-Camp';
 
-  private campsSvc = inject(ActivityApi);
-  camps$!: Observable<Activity[]>;
+  private activitySvc = inject(ActivityApi);
+  activities$!: Observable<Activity[]>;
 
   ngOnInit(): void {
     //cityAndCountry = this.route.snapshot.queryParamMap.get('city') ?? undefined;
-    this.camps$ = this.campsSvc.getCamps$(this.sport.trim().toLocaleLowerCase(), this.cityAndCountry.trim().toLocaleLowerCase(), this.activeOnly);
+    this.activities$ = this.activitySvc.getActivities$(this.interest.trim().toLocaleLowerCase(), this.cityAndCountry.trim().toLocaleLowerCase(), this.activeOnly);
   }
 
   trackById = (_: number, c: Activity) => c.id;

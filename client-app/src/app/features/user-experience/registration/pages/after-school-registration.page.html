@@ -1,20 +1,20 @@
 <!-- Begin Hero Section -->
 <app-base-hero
   [title]="'Brains & Ballers'"
-  [subtitle]="'' + sport + ' Gold Camps'"
+  [subtitle]="'After School Program '"
   [description]="description"
   [backgroundUrl]="'assets/img/pages/correspondence/vsaprep-correspondence-hero-bg.png'"
   [headerSize]="'xs'"
   [breadcrumb]="[
-    { label: 'Home', link: ['/'+urlPath+'/student-athletes'] },
+    { label: 'Home', link: ['/'+urlPath.toLowerCase()+'/student-athletes'] },
     { label: 'Programs' },
-    { label: 'Gold Camps' },
-    { label: '' + sport +'', link: ['/'+urlPath+'/' + sport +'-gold-camps'] }
+    { label: 'After-School' },
+    { label: '' + interest +'', link: ['/'+urlPath+'/student-athletes'+'/'+interest.toLowerCase()+''] }
   ]"
   [ctas]="[
-    { label: 'Book Your Spot Now',        routerLink: ['.'], fragment: 'register', variant:'primary', ariaLabel:'Start your journey with Varsity Sports Academy Prep' },
-    { label: 'Explore Academic Programs', routerLink: ['/'+urlPath+'/academic-tutoring'], variant:'outline', ariaLabel:'Explore academic programs with Varsity Sports Academy Prep' },
-    { label: sport + ' Camp Schedule',                  routerLink: ['/'+urlPath+'/' + sport.toLowerCase() +'-gold-camps'], fragment: 'camp-schedule', variant:'outline', ariaLabel:'Explore Gold ' + sport + ' Camp schedule and dates.' }
+    { label: 'Book Your Spot Now',            routerLink: ['.'], fragment: 'register', variant:'primary', ariaLabel:'Start your journey with Varsity Sports Academy Prep' },
+    { label: 'Explore Academic Programs',     routerLink: ['/'+urlPath+'/academic-tutoring'], variant:'outline', ariaLabel:'Explore academic programs with Varsity Sports Academy Prep' },
+    { label: 'After School Program Schedule', routerLink: ['/'+urlPath+'/after-school'], fragment: 'schedules-and-pricing', variant:'outline', ariaLabel:'Explore ' + interest + ' schedule and dates.' }
   ]">
 </app-base-hero>
 <!-- End Hero Section -->
@@ -30,13 +30,13 @@
  
         <header>
           <h2 id="what-you-get-heading" class="align-left">What you get</h2>
-          <h3 class="text-white" style="padding: 20px 0 0 0;">
+          <h4 class="text-white" >
             High-intensity skill training, game IQ development, leadership sessions, and showcase games—built to move you up a level.
-          </h3>
+          </h4>
         </header>
 
-        <ul class="icon-list mt-4 description align-left text-white" role="list">
-          <li class="d-flex mb-3" *ngFor="let item of highlights">
+        <ul class="icon-list align-left text-white" role="list" aria-label="Varsity Sports Academy After School Program Highlights">
+          <li class="d-flex" *ngFor="let item of highlights">
             <span class="icon" aria-hidden="true"></span>
             <div>{{ item }}</div>
         </li>
@@ -58,7 +58,7 @@
       <!-- Right: request form -->
       <div class="col-12 col-lg-7 contact-form-right p-3">
   
-        <app-camp-registration-intake-form></app-camp-registration-intake-form>
+        <app-registration-intake-form></app-registration-intake-form>
   
       </div>
     </div>

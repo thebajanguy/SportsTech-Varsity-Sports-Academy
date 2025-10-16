@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } 
 import { BasePageComponent } from '../../../../core/directives/base-page.directive';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { NewsletterPage } from '../../correspondence/pages/newsletter.page';
+import { NewsletterPage } from '../../correspondence/components/newsletter.component';
 import { BaseHeroComponent } from "../../~common/components/base-hero/base-hero.component";
 import { SocialPluginComponent } from "../../~common/components/social-plugin/social-plugin.component";
 import { inject, signal } from '@angular/core';
@@ -11,7 +11,7 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { Camp, CampsService } from '../../~common/apis/activity.api';
 import { RegistrationApi, CampRegistrationPayload, SKILL_LEVEL_OPTIONS, SPORT_OPTIONS, TSHIRT_SIZE_OPTIONS, SportOption } from '../../~common/apis/registration.api';
 import { map, Observable, take, tap } from 'rxjs';
-import { RegistrationIntakeComponent, CampRegistrationIntakeComponent } from "../../~common/components/camp-registration-intake/camp-registration-intake.component";
+import { RegistrationIntakeComponent, CampRegistrationIntakeComponent } from "../../registration/components/registration-intake/registration-intake.component";
 
 
 

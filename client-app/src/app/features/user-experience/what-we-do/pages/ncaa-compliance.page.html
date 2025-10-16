@@ -380,30 +380,329 @@
   </div>
 </section>
 
-<!-- Start Fast-Track Banner -->
-<section class="section page-header-xs div-section-seperator"
-    style="padding: 0px;padding-top: 20px;padding-bottom: 40px;">
-    <div class="filter filter-black"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 ml-auto mr-auto text-center">
-                <h2 class="text-color-white">
-                  Get NCAA Compliance Help
-                </h2>
-                <h3 class="title text-color-main">
-                  Ready to secure your NCAA eligibility?
-                </h3>
-                <p class="text-color-white mt-3">
-                  Get a personalized compliance roadmap from Varsity Sports Academy Prep.
-                </p>
 
-                <a [routerLink]="['/'+urlPath+'/consultation']" class="btn btn-main btn-magnify" aria-label="Explore academic programs at Varsity Sports Academy Prep">Book a Consultation</a>
-  
-            </div>
+<!-- Sports Development Banner Option A -->
+<section id="ncaa-compliance-help"
+         class="section cta-banner cta-exposure parallax-hero"
+         role="region"
+         aria-labelledby="ncaa-compliance-title">
+  <!-- Decorative/illustrative background -->
+  <div class="cta-bg sports-option-a"
+       aria-hidden="true"></div>
+  <div class="cta-overlay" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="row">
+      <div class="ml-auto mr-auto align-left">
+        <div class="container cta-content">
+
+          <!-- Primary keyword in H2 -->
+          <h2 id="ncaa-compliance-title" class="text-white">
+            NCAA Compliance Help &amp; Eligibility Support
+          </h2>
+
+          <!-- Strong supporting keyword in H3 -->
+          <h3 class="title text-color-main t-2">
+            Ready to secure your NCAA eligibility?
+          </h3>
+
+          <!-- Persuasive, keyword-rich blurb -->
+          <p class="cta-subhead align-left">
+            Get a <strong>personalized NCAA compliance roadmap</strong> from
+            <a [routerLink]="['/'+urlPath+'/sports-academics-prep']" class="text-link text-color-main" >Varsity Sports Academy Prep</a>.
+            We’ll confirm your <strong>16 core courses</strong>, track your
+            <strong>GPA &amp; sliding-scale</strong> targets, and prepare you for
+            <strong>SAT/ACT</strong>—so your academics match NCAA requirements.
+          </p>
+
+          <!-- Service bullets with exact-match phrases -->
+          <ul class="icon-list" role="list" aria-label="NCAA Compliance Services">
+            <li class="d-flex">
+              <span class="icon" aria-hidden="true"></span>
+              <strong>Core-Course Evaluation</strong> &mdash; transcript audit to verify all 16 NCAA core courses qualify for eligibility.
+            </li>
+            <li class="d-flex">
+              <span class="icon" aria-hidden="true"></span>
+              <strong>GPA &amp; Sliding-Scale Guidance</strong> &mdash; customized GPA targets aligned to NCAA test-score requirements.
+            </li>
+            <li class="d-flex">
+              <span class="icon" aria-hidden="true"></span>
+              <strong>CSEC &amp; CAPE Course Mapping</strong> &mdash; expert alignment of Caribbean coursework to NCAA standards.
+            </li>
+            <li class="d-flex">
+              <span class="icon" aria-hidden="true"></span>
+              <strong>SAT / ACT Preparation</strong> &mdash; focused prep plans and scheduling to strengthen your academic profile.
+            </li>
+            <li class="d-flex">
+              <span class="icon" aria-hidden="true"></span>
+              <strong>NCAA Eligibility Center Registration</strong> &mdash; step-by-step help with your profile, amateurism, and document submissions.
+            </li>
+          </ul>
+
+          <!-- Primary CTA uses compliance language; add secondary deep-link -->
+          <div class="cta-row" style="display:flex; gap:.75rem; flex-wrap:wrap;">
+            <a class="btn btn-primary btn-md btn-magnify"
+               [routerLink]="['/'+urlPath+'/ncaa-compliance']"
+               aria-label="Get my NCAA compliance roadmap with Varsity Sports Academy Prep"
+               data-cta="ncaa-compliance-roadmap">
+              Get My NCAA Compliance Roadmap
+            </a>
+
+            <a class="btn btn-outline-light btn-md btn-magnify"
+               [routerLink]="['/'+urlPath+'/academic-tutoring']"
+               aria-label="Explore academic tutoring and test prep at Varsity Sports Academy Prep"
+               data-cta="explore-academic-tutoring">
+              Explore Tutoring &amp; Test Prep
+            </a>
+          </div>
+
         </div>
+      </div>
     </div>
+  </div>
+
+  <!-- JSON-LD for richer snippets (Service offered by your org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "NCAA Compliance Help & Eligibility Support",
+    "provider": {
+      "@type": "EducationalOrganization",
+      "name": "Varsity Sports Academy Prep"
+    },
+    "areaServed": "Caribbean",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "Student"
+    },
+    "description": "Personalized NCAA compliance roadmap: core-course evaluation, GPA & sliding-scale guidance, CSEC/CAPE mapping, SAT/ACT preparation, and NCAA Eligibility Center registration."
+  }
+  </script>
 </section>
-<!-- End Fast-Track Banner -->
+
+<section id="ncaa-faq" class="section faqs" aria-labelledby="ncaa-faq-title">
+  <div class="container">
+    <h2 id="ncaa-faq-title" class="mb-3">NCAA Compliance FAQ</h2>
+    <p class="lead">Answers for student-athletes in Barbados and the Caribbean navigating NCAA eligibility.</p>
+
+    <!-- Accessible, SEO-friendly FAQ using <details>/<summary> -->
+    <div class="faq-list" itemscope itemtype="https://schema.org/FAQPage">
+
+      <details class="faq" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">Do CAPE subjects count toward NCAA eligibility?</summary>
+        <div class="answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">
+            Yes—<strong>CAPE Unit 1 and Unit 2 courses can count</strong> toward NCAA core requirements when they appear as
+            approved core courses on your <strong>high school’s NCAA list</strong>. Final recognition depends on the
+            <em>course title, level, and content</em> that your school submitted to the NCAA. We’ll map your CAPE subjects to
+            the appropriate English, Math, Natural/Physical Science, Social Science, and additional academic categories.
+          </p>
+        </div>
+      </details>
+
+      <details class="faq" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">Do CSEC subjects count?</summary>
+        <div class="answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">
+            <strong>CSEC General Proficiency</strong> subjects typically count when they are <strong>academic (not vocational)</strong>
+            and listed as <strong>approved core courses</strong> for your school. Grades I–III are commonly recognized.
+            We’ll verify each CSEC course against your school’s NCAA-approved list and place it in the right core area.
+          </p>
+        </div>
+      </details>
+
+      <details class="faq" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">How many NCAA core courses do I need?</summary>
+        <div class="answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">
+            <strong>Division I and II require 16 core courses.</strong> For Division I, plan to complete
+            <strong>10 of the 16 before your 7th semester</strong> (start of your final school year), and at least
+            <strong>7 of those 10</strong> in English, Math, or Natural/Physical Science. We’ll build your term-by-term plan.
+          </p>
+        </div>
+      </details>
+
+      <details class="faq" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">What GPA is required for NCAA eligibility?</summary>
+        <div class="answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">
+            NCAA uses your <strong>core-course GPA</strong> (not overall GPA). As a rule of thumb:
+            <strong>Division I</strong> targets a minimum core GPA around <strong>2.3</strong>, and
+            <strong>Division II</strong> around <strong>2.2</strong>. Exact qualification depends on the NCAA
+            <strong>sliding scale</strong> and your completion of the required core subjects. We’ll calculate your
+            official core-GPA and set term targets.
+          </p>
+        </div>
+      </details>
+
+      <details class="faq" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">Do I still need SAT/ACT scores?</summary>
+        <div class="answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">
+            For <strong>NCAA Division I</strong>, standardized test scores are <strong>not required for initial eligibility</strong>.
+            However, <strong>individual colleges, admissions, or scholarships may still require or prefer scores</strong>.
+            We’ll advise based on your target schools and provide prep support if testing strengthens your profile.
+          </p>
+        </div>
+      </details>
+
+      <details class="faq" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">How do Caribbean transcripts get evaluated?</summary>
+        <div class="answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">
+            We gather your official <strong>CSEC/CAPE results</strong> and school transcripts, ensure course titles match
+            the <strong>NCAA-approved list</strong>, and submit certified documents to the <strong>NCAA Eligibility Center</strong>.
+            If needed, we include grading scales and school profiles so evaluators can interpret marks correctly.
+          </p>
+        </div>
+      </details>
+
+      <details class="faq" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">What’s the NCAA Eligibility Center and when should I register?</summary>
+        <div class="answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">
+            It’s the NCAA’s portal for academic and <strong>amateurism certification</strong>. Create a profile by Form 4/Grade 10,
+            then switch to a <strong>Certification Account</strong> when you’re being actively recruited or planning official visits.
+            We’ll walk you through fees, documents, and timelines.
+          </p>
+        </div>
+      </details>
+
+      <details class="faq" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">Can I accept prize money or play with older athletes and stay eligible?</summary>
+        <div class="answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">
+            Amateurism rules allow certain reimbursements but prohibit <strong>pay for play</strong> and professional contracts.
+            Details vary by sport and circumstance. We’ll review your competitions, team status, and any payments to keep you compliant.
+          </p>
+        </div>
+      </details>
+
+      <details class="faq" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">What if my school’s course isn’t on the NCAA list?</summary>
+        <div class="answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">
+            Only courses on the <strong>NCAA-approved core list for your school</strong> count. We’ll coordinate with your
+            guidance office to update titles/descriptions or find approved alternatives (including CAPE units) so you stay on track.
+          </p>
+        </div>
+      </details>
+
+      <details class="faq" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">How long does evaluation take and when should I start?</summary>
+        <div class="answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">
+            Start in <strong>Form 3–4 (Grades 9–10)</strong> to plan core subjects early. Document reviews can take weeks,
+            especially with international exams. We build a timeline for registrations, exam sittings, and document submissions.
+          </p>
+        </div>
+      </details>
+
+      <details class="faq" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">Can you create a personalized NCAA roadmap for me?</summary>
+        <div class="answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">
+            Yes. VSA Prep provides a <strong>custom compliance plan</strong>: core-course mapping (CSEC/CAPE), core-GPA targets,
+            test strategy (if needed), Eligibility Center milestones, and document checklists—for you and your parents/coaches.
+            <a [routerLink]="['/'+urlPath+'/ncaa-compliance']" class="text-link">Get your NCAA Compliance Roadmap</a>.
+          </p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do CAPE subjects count toward NCAA eligibility?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes—CAPE Unit 1 and Unit 2 courses can count toward NCAA core requirements when they appear as approved core courses on your high school’s NCAA list. Final recognition depends on the course title, level, and content submitted by your school. A proper mapping places each CAPE unit into the correct core area."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do CSEC subjects count?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CSEC General Proficiency subjects typically count when they are academic (not vocational) and listed as approved core courses for your school. Grades I–III are commonly recognized. Each CSEC course must be verified against the school’s NCAA-approved list and assigned to the correct core category."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many NCAA core courses do I need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Division I and II require 16 core courses. For Division I, plan to complete 10 of the 16 before your 7th semester (start of your final school year), and at least 7 of those 10 in English, Math, or Natural/Physical Science."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What GPA is required for NCAA eligibility?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "NCAA uses your core-course GPA. As a general guide, Division I targets a minimum core GPA around 2.3, and Division II around 2.2. Exact qualification depends on the NCAA sliding scale and completion of required core subjects."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I still need SAT/ACT scores?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For NCAA Division I, standardized test scores are not required for initial eligibility. However, individual colleges, admissions, or scholarships may still require or prefer test scores. Plan based on your target schools."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do Caribbean transcripts get evaluated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Submit official CSEC/CAPE results and school transcripts, ensuring course titles match the NCAA-approved list. Certified documents are sent to the NCAA Eligibility Center, often with grading scales and a school profile for proper evaluation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What’s the NCAA Eligibility Center and when should I register?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Eligibility Center handles academic and amateurism certification. Create a profile by Form 4/Grade 10, then upgrade to a Certification Account when recruitment or official visits are in play."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I accept prize money or play with older athletes and stay eligible?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Amateurism rules prohibit pay for play and professional contracts, though certain reimbursements are allowed. Review your competitions, team status, and any payments with an advisor to stay compliant."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if my school’s course isn’t on the NCAA list?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Only courses on your school’s NCAA-approved core list count. Work with the guidance office to update titles/descriptions or select approved alternatives (including CAPE units)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you create a personalized NCAA roadmap for me?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. A custom plan maps CSEC/CAPE to NCAA core areas, sets core-GPA targets, defines testing strategy where useful, outlines Eligibility Center milestones, and provides document checklists for you and your family."
+        }
+      }
+    ]
+  }
+  </script>
+  
+
 
 <!-- Newsletter & Social Plugins -->
 <app-newsletter-form></app-newsletter-form>

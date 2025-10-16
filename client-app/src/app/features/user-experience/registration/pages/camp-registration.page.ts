@@ -1,26 +1,26 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { BasePageComponent } from '../../../../core/directives/base-page.directive';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { SocialPluginComponent } from "../../~common/components/social-plugin/social-plugin.component";
-import { CampRegistrationIntakeComponent  } from '../../~common/components/camp-registration-intake/camp-registration-intake.component';
+
+import { BasePageComponent } from '../../../../core/directives/base-page.directive';
 import { BaseHeroComponent } from "../../~common/components/base-hero/base-hero.component";
-import { NewsletterPage } from '../../correspondence/pages/newsletter.page';
+import { RegistrationIntakeComponent  } from '../components/registration-intake/registration-intake.component';
+import { NewsletterPage } from '../../correspondence/components/newsletter.component';
 import { FixedSocialPluginComponent } from "../../~common/components/fixed-social-plugin/fixed-social-plugin.component";
 
 
 @Component({
-  selector: 'app-programs-register',
+  selector: 'app-camp-registration',
   standalone: true,
 
   imports: [
-    CommonModule, RouterLink, SocialPluginComponent, CampRegistrationIntakeComponent, BaseHeroComponent, NewsletterPage, FixedSocialPluginComponent
+    CommonModule, RouterLink, RegistrationIntakeComponent, BaseHeroComponent, NewsletterPage, FixedSocialPluginComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './programs-register.page.html',
-  styleUrl: './programs-register.page.scss',
+  templateUrl: './camp-registration.page.html',
+  styleUrl: './camp-registration.page.scss',
 })
-export class ProgramsRegisterPage extends BasePageComponent implements OnInit  {
+export class CampRegistrationPage extends BasePageComponent implements OnInit  {
   override pageName = 'vsa-page';
   description = `
   Our Brains & Ballers Gold Camps deliver high-intensity basketball training focused on skill mastery, game IQ development, and leadership growth. 
@@ -36,7 +36,8 @@ export class ProgramsRegisterPage extends BasePageComponent implements OnInit  {
     'Final day Live scrimmages and camp tournament'
   ];
 
-  sport: 'Basketball' | 'Soccer' = 'Basketball';
+  interest: 'Basketball' | 'Soccer' | 'After-School' = 'Basketball';
+  activityType: 'Basketball-Camp' | 'Soccer-Camp' | 'After-School-Program' = 'Basketball-Camp';
   country: 'Barbados' | 'United States' = 'Barbados';
   
 }
