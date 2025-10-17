@@ -217,6 +217,13 @@
         </li>
         -->
 
+        <!-- Membership -->
+        <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="!shouldDisplayLogin">
+          <a class="nav-link" [routerLink]="['membership']">
+            <i class="nc-icon nc-single-02 icon-warning"></i> Membership Benefits
+          </a>
+        </li>
+
         <!-- Correspondence Links-->
         <li class="nav-item" [routerLinkActive]='["link-active"]' style="padding: 0px; margin: 0px;">
           <a class="nav-link  px-3" [routerLink]="['contact']" title="Contact Varsity Sports Academy Prep">
@@ -229,14 +236,8 @@
             </a>
         </li>
 
-        <!-- Membership coming soon -->
-        <!-- 
-        <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="!shouldDisplayLogin">
-          <a class="nav-link" [routerLink]="['membership']">
-            <i class="nc-icon nc-single-02 icon-warning"></i> Membership
-          </a>
-        </li>
-    
+        <!-- Membership SUSI COMING SOON -->
+         <!--
         <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="shouldDisplayLogin">
           <a class="nav-link" href="#" title="Sign out of Varsity Sports Academy Prep">
             <img src="/assets/img/icons/icon-logout.png" class="icon-link" (click)="signOut()" />

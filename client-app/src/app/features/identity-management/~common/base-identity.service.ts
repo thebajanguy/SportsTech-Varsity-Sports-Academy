@@ -46,7 +46,7 @@ export class BaseIdentityService  {
 
     protected subscriptions: Subscription[] = [];
 
-    protected title = 'Varsity Sports Academy Prep Profiles';
+    //protected title = 'Varsity Sports Academy Prep Profiles';
     protected isIframe = false;
     protected loginDisplay = false;
     protected readonly _destroying$ = new Subject<void>();

@@ -1,45 +1,79 @@
 <!-- Begin Hero Section -->
-<header id="hero-consultation-vsaprep"
-  class="page-header page-header div-color-dark parallax-hero"
-  style="background-image:url('assets/img/pages/correspondence/vsaprep-correspondence-hero-bg.png')"
-  role="banner" aria-label="Varsity Sports Academy Prep Consultation Hero">
-
-
+<header
+  class="page-header parallax-hero hero--main div-color-dark"
+  role="banner"
+  aria-labelledby="page-hero-title"
+>
   <div class="content-center">
     <div class="container">
-      <div class="row">
-        <div class="col-12 text-left">
-          <h1 class="text-uppercase hero-title">
-            <span class="text-color-white">Book Your</span><br />
-            <span class="text-color-main">Free Consultation</span>
-          </h1>
 
-          <p class="lead text-white mt-3 hero-subtitle">
-            Speak with a VSA Prep advisor about academics, athletic training, and scholarship pathways.
-            We’ll map out a clear plan guided by our motto <em>Labor Durus</em> — “Hard Work Always Pays Off.”
-          </p>
+      <br>
+      <h1 id="page-hero-title" class="hero-title text-uppercase">
+        <span class="text-color-white">Book Your</span><br />
+        <span class="text-color-main">Free Consultation</span>
+      </h1>
 
-          <!-- CTA Buttons -->
-          <nav class="buttons mt-4" aria-label="Primary calls to action">
-            <a class="btn btn-main btn-lg btn-magnify" 
-              routerLink="." 
-              fragment="consultation"
-              aria-label="Jump to consultation request form">
-              &nbsp; Request Consultation &nbsp;
-            </a>
-            <a href="tel:+17186370566" class="btn btn-main btn-lg btn-magnify"
-              aria-label="Call Varsity Sports Academy Prep">Call (718) 637-0566</a>
-          </nav>
+      <p class="hero__description text-white mt-3">
+        Speak with a VSA Prep advisor about academics, athletic training, and scholarship pathways.
+        We’ll map out a clear plan guided by our motto <em>Labor Durus</em> — “Hard Work Always Pays Off.”
+      </p>
 
-          <div class="mt-3">
-            <app-social-plugin></app-social-plugin>
-          </div>
+      <!-- Backup breadcrumb for SR only (optional if above nav is shown) -->
+      <nav class="sr-only" aria-label="Breadcrumb">
+        <ol>
+          <li><a [routerLink]="['/'+urlPath+'/student-athletes']">Home</a></li>
+          <li aria-current="page">Consultation</li>
+        </ol>
+      </nav>
+
+      <!-- CTA Buttons -->
+      <nav class="buttons mt-4" aria-label="Primary calls to action">
+        <a class="btn btn-main btn-lg btn-magnify" 
+          routerLink="." 
+          fragment="consultation"
+          aria-label="Jump to consultation request form">
+          &nbsp; Request Consultation &nbsp;
+        </a>
+        &nbsp; &nbsp; 
+        <a href="tel:+17186370566" class="btn btn-main btn-lg btn-magnify"
+          aria-label="Call Varsity Sports Academy Prep">Call (718) 637-0566</a>
+      </nav>
+
+      <!-- Sign-in and Sign-up Information -->
+      <!-- To do: Add and finalize the SUSI section
+      <div class="row hero__cta-row" role="group" aria-label="Membership options">
+        <div class="hero__card">
+          <h2 class="title text-uppercase text-primary hero__box-title">
+            <strong>I am a member.</strong>
+          </h2>
+          <img class="avatar" src="assets/img/icons/icon-sign-in.png" alt="Member sign-in icon" />
+          <button type="button" *ngIf="!loginDisplay"
+            class="btn btn-wd btn-lg btn-primary btn-magnify text-uppercase hero__cta"
+            aria-label="Sign in to Varsity Sports Academy Prep" (click)="signIn()">
+            <i class="nc-icon nc-badge" aria-hidden="true"></i> <span>Sign In</span>
+          </button>
         </div>
+      
+        <div class="hero__card">
+          <h2 class="title text-uppercase text-danger hero__box-title">
+            <strong>I am not a member.</strong>
+          </h2>
+          <img class="avatar" src="assets/img/icons/icon-register.png" alt="Register icon" />
+          <button type="button" *ngIf="!loginDisplay"
+            class="btn btn-wd btn-lg btn-danger btn-magnify text-uppercase hero__cta"
+            aria-label="Create a Varsity Sports Academy Prep account" (click)="signUp()">
+            <i class="nc-icon nc-badge" aria-hidden="true"></i> <span>Sign Up</span>
+          </button>
+        </div>
+      </div>
+      -->
+
+      <div class="mt-3">
+        <app-social-plugin></app-social-plugin>
       </div>
     </div>
   </div>
 </header>
-<!-- End Hero Section -->
 
 <section id="consultation" class="section section-white text-center py-5" aria-labelledby="consultation-heading">
   <div class="container">
@@ -100,7 +134,7 @@
                  [class.has-error]="f.GivenName.invalid && f.GivenName.touched">
               <input id="givenName" type="text" formControlName="GivenName" required placeholder=" ">
               <label for="givenName">First Name</label>
-              <small class="error" *ngIf="f.GivenName.hasError('required') && f.GivenName.touched">Required</small>
+              <small class="error" *ngIf="f.GivenName.hasError('required') && f.GivenName.touched">Please enter your first name.</small>
               <small class="error" *ngIf="f.GivenName.hasError('name') && f.GivenName.touched">Only letters, spaces, . ' - (min 2)</small>
             </div>
 
@@ -109,7 +143,7 @@
                  [class.has-error]="f.Surname.invalid && f.Surname.touched">
               <input id="surname" type="text" formControlName="Surname" required placeholder=" ">
               <label for="surname">Last Name</label>
-              <small class="error" *ngIf="f.Surname.hasError('required') && f.Surname.touched">Required</small>
+              <small class="error" *ngIf="f.Surname.hasError('required') && f.Surname.touched">Please enter your last name.</small>
               <small class="error" *ngIf="f.Surname.hasError('name') && f.Surname.touched">Only letters, spaces, . ' - (min 2)</small>
             </div>
 
@@ -119,7 +153,7 @@
               <input id="email" type="email" formControlName="Email" required placeholder=" "
                      autocomplete="email" inputmode="email">
               <label for="email">Email Address</label>
-              <small class="error" *ngIf="f.Email.hasError('required') && f.Email.touched">Required</small>
+              <small class="error" *ngIf="f.Email.hasError('required') && f.Email.touched">Please enter a valid email address.</small>
               <small class="error" *ngIf="f.Email.hasError('email') && f.Email.touched">Enter a valid email</small>
             </div>
 
@@ -129,7 +163,7 @@
               <input id="phone" type="tel" formControlName="Phone" required placeholder=" "
                      autocomplete="tel" inputmode="tel">
               <label for="phone">Phone Number</label>
-              <small class="error" *ngIf="f.Phone.hasError('required') && f.Phone.touched">Required</small>
+              <small class="error" *ngIf="f.Phone.hasError('required') && f.Phone.touched">Please enter a valid phone number.</small>
               <small class="error" *ngIf="f.Phone.hasError('pattern') && f.Phone.touched">Enter a valid phone number</small>
             </div>
 
@@ -163,7 +197,7 @@
               <textarea id="message" formControlName="Message" rows="6" maxlength="4000" required placeholder=" "></textarea>
               <label for="message">Your Message</label>
               <small class="hint">{{ (f.Message.value.length || 0) }} / 4000</small>
-              <small class="error" *ngIf="f.Message.hasError('required') && f.Message.touched">Required</small>
+              <small class="error" *ngIf="f.Message.hasError('required') && f.Message.touched">Please enter your message.</small>
               <small class="error" *ngIf="f.Message.hasError('minlength') && f.Message.touched">Min 10 characters</small>
             </div>
           </div>
