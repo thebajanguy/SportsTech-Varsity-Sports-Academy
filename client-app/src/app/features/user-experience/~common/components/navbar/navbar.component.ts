@@ -4,7 +4,9 @@ import { Location } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Output, PLATFORM_ID, ViewChild, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { RedirectRequest, PopupRequest, PromptValue } from '@azure/msal-browser';
 import { NgbCollapseModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from '../../../../../../environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -116,12 +118,13 @@ export class NavbarComponent implements OnInit, OnDestroy,  AfterViewInit {
     // Call your auth service
     console.log('Signing out…');
   }
+
+/*
   signOut(){
     this.user = null;
     this.signOutToParent.emit();
   }
   signIn() {
-    // Emit to parent; parent handles MSAL login
     this.signInToParent.emit({
       prompt: 'login'
     });
@@ -130,6 +133,33 @@ export class NavbarComponent implements OnInit, OnDestroy,  AfterViewInit {
     this.signUpToParent.emit({
       prompt: 'login'
     });
+  }
+  profileEdit() {
+    this.editProfileToParent.emit();
+  }
+*/
+  //
+  signOut(){
+    this.user = null;
+    this.signOutToParent.emit();
+  }
+  signIn() {
+    let signUpSignInFlowRequest: RedirectRequest | PopupRequest  = {
+      authority: environment.b2cPolicies.authorities.signUpSignIn.authority,
+      scopes: [],
+      prompt: PromptValue.LOGIN // force user to reauthenticate with their new password
+    };
+
+    alert('NavbarComponent-signIn: ' + JSON.stringify(signUpSignInFlowRequest) );
+    this.signInToParent.emit(signUpSignInFlowRequest);
+  }
+  signUp() {
+    let signUpFlowRequest: RedirectRequest | PopupRequest  = {
+      authority: environment.b2cPolicies.authorities.signUp.authority,
+      scopes: [],
+      prompt: PromptValue.LOGIN // force user to reauthenticate with their new password
+    };
+    this.signUpToParent.emit(signUpFlowRequest);
   }
   profileEdit() {
     this.editProfileToParent.emit();

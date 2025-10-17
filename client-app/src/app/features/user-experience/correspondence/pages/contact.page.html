@@ -1,46 +1,84 @@
 <!-- Begin Hero Section -->
-<header id="hero-contact-vsaprep"
-  class="page-header page-header div-color-dark parallax-hero"
-  style="background-image:url('assets/img/pages/correspondence/vsaprep-correspondence-hero-bg.png')"
-  role="banner" aria-label="Contact Varsity Sports Academy Prep Hero">
-
+<header
+  class="page-header parallax-hero hero--main div-color-dark"
+  role="banner"
+  aria-labelledby="page-hero-title"
+>
   <div class="content-center">
     <div class="container">
-      <div class="row">
-        <div class="col-12 text-left">
-          <h1 class="text-uppercase hero-title">
-            <span class="text-color-white">Get in touch with</span><br />
-            <span class="text-color-main">Varsity Sports Academy Prep</span>
-          </h1>
 
-          <p class="lead text-white mt-3 hero-subtitle">
-            👉 Contact <strong>Varsity Sports Academy Prep</strong> to plan your next step in academics and athletics.
-            Guided by our motto <em>Labor Durus</em> — “Hard Work Always Pays Off” — we help student-athletes
-            turn goals into results. Tell us how we can help.
-          </p>
+      <br>
+      <h1 id="page-hero-title" class="hero-title text-uppercase">
+        <span class="text-color-white">Get in touch with</span><br />
+        <span class="text-color-main">Varsity Sports Academy Prep</span>
+      </h1>
 
-          <nav class="buttons mt-4" aria-label="Primary calls to action">
-            <a class="btn btn-main btn-lg btn-magnify" 
-              routerLink="." 
-              fragment="contact"
-              aria-label="Start your journey with Varsity Sports Academy Prep">
-              &nbsp;  Begin Your Journey Today &nbsp;
-            </a>
+      <p class="hero__description text-white mt-3">
+        👉 Contact <strong>Varsity Sports Academy Prep</strong> to plan your next step in academics and athletics.
+        Guided by our motto <em>Labor Durus</em> — “Hard Work Always Pays Off” — we help student-athletes
+        turn goals into results. Tell us how we can help.
+      </p>
 
-            <a href="tel:+17186370566" class="btn btn-main btn-lg btn-magnify"
-              aria-label="Call Varsity Sports Academy Prep">Call (718) 637-0566
-            </a>
+      <!-- Backup breadcrumb for SR only (optional if above nav is shown) -->
+      <nav class="sr-only" aria-label="Breadcrumb">
+        <ol>
+          <li><a [routerLink]="['/'+urlPath+'/student-athletes']">Home</a></li>
+          <li aria-current="page">Consultation</li>
+        </ol>
+      </nav>
 
-          </nav>
+      <!-- CTA Buttons -->
+      <nav class="buttons mt-4" aria-label="Primary calls to action">
+        <a class="btn btn-main btn-lg btn-magnify" 
+          routerLink="." 
+          fragment="contact"
+          aria-label="Start your journey with Varsity Sports Academy Prep">
+          &nbsp;  Begin Your Journey Today &nbsp;
+        </a>
+        &nbsp;&nbsp;
+        <a href="tel:+17186370566" class="btn btn-main btn-lg btn-magnify"
+          aria-label="Call Varsity Sports Academy Prep">Call (718) 637-0566
+        </a>
 
-          <div class="mt-3">
-            <app-social-plugin></app-social-plugin>
-          </div>
+      </nav>
+
+
+      <!-- Sign-in and Sign-up Information -->
+      <!-- To do: Add and finalize the SUSI section
+      <div class="row hero__cta-row" role="group" aria-label="Membership options">
+        <div class="hero__card">
+          <h2 class="title text-uppercase text-primary hero__box-title">
+            <strong>I am a member.</strong>
+          </h2>
+          <img class="avatar" src="assets/img/icons/icon-sign-in.png" alt="Member sign-in icon" />
+          <button type="button" *ngIf="!loginDisplay"
+            class="btn btn-wd btn-lg btn-primary btn-magnify text-uppercase hero__cta"
+            aria-label="Sign in to Varsity Sports Academy Prep" (click)="signIn()">
+            <i class="nc-icon nc-badge" aria-hidden="true"></i> <span>Sign In</span>
+          </button>
         </div>
+      
+        <div class="hero__card">
+          <h2 class="title text-uppercase text-danger hero__box-title">
+            <strong>I am not a member.</strong>
+          </h2>
+          <img class="avatar" src="assets/img/icons/icon-register.png" alt="Register icon" />
+          <button type="button" *ngIf="!loginDisplay"
+            class="btn btn-wd btn-lg btn-danger btn-magnify text-uppercase hero__cta"
+            aria-label="Create a Varsity Sports Academy Prep account" (click)="signUp()">
+            <i class="nc-icon nc-badge" aria-hidden="true"></i> <span>Sign Up</span>
+          </button>
+        </div>
+      </div>
+      -->
+
+      <div class="mt-3">
+        <app-social-plugin></app-social-plugin>
       </div>
     </div>
   </div>
 </header>
+
 <!-- End Hero Section -->
 
 <section id="contact" class="section section-white py-5" aria-labelledby="contact-vsaprep-title" role="region">

@@ -21,7 +21,6 @@ export class AcademicTutoringPage  extends BasePageComponent {
   override pageName = 'vsa-page';
   description = `
   One-to-one and small-group tutoring that fits training schedules—so grades rise with performance. Guided by <em>Labor Durus</em> (“Hard Work Always Pays Off”).
-  One-to-one and small-group tutoring that fits training schedules—so grades rise with performance. Guided by <em>Labor Durus</em> (“Hard Work Always Pays Off”).
   `;
 
   highlights = [
